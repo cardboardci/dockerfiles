@@ -2,15 +2,15 @@ name: pdf2htmlex-build
 on:
   push:
     paths:
-      - definitions/pdf2htmlex/provision/*
-      - definitions/pdf2htmlex/provision/*/*
-      - definitions/pdf2htmlex/provision/*/*/*
-      - definitions/pdf2htmlex/rootfs/*
-      - definitions/pdf2htmlex/rootfs/*/*
-      - definitions/pdf2htmlex/rootfs/*/*/*
-      - definitions/pdf2htmlex/tests/*
-      - definitions/pdf2htmlex/tests/*/*
-      - definitions/pdf2htmlex/Dockerfile
+      - images/pdf2htmlex/provision/*
+      - images/pdf2htmlex/provision/*/*
+      - images/pdf2htmlex/provision/*/*/*
+      - images/pdf2htmlex/rootfs/*
+      - images/pdf2htmlex/rootfs/*/*
+      - images/pdf2htmlex/rootfs/*/*/*
+      - images/pdf2htmlex/tests/*
+      - images/pdf2htmlex/tests/*/*
+      - images/pdf2htmlex/Dockerfile
       - .github/workflows/pdf2htmlex.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/pdf2htmlex
+          echo ::set-output name=docker_path::images/pdf2htmlex
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/pdf2htmlex/Dockerfile"
+          args: "hadolint images/pdf2htmlex/Dockerfile"
 
       - name: Build
         run: |
