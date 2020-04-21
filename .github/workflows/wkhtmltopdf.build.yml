@@ -2,15 +2,15 @@ name: wkhtmltopdf-build
 on:
   push:
     paths:
-      - definitions/wkhtmltopdf/provision/*
-      - definitions/wkhtmltopdf/provision/*/*
-      - definitions/wkhtmltopdf/provision/*/*/*
-      - definitions/wkhtmltopdf/rootfs/*
-      - definitions/wkhtmltopdf/rootfs/*/*
-      - definitions/wkhtmltopdf/rootfs/*/*/*
-      - definitions/wkhtmltopdf/tests/*
-      - definitions/wkhtmltopdf/tests/*/*
-      - definitions/wkhtmltopdf/Dockerfile
+      - images/wkhtmltopdf/provision/*
+      - images/wkhtmltopdf/provision/*/*
+      - images/wkhtmltopdf/provision/*/*/*
+      - images/wkhtmltopdf/rootfs/*
+      - images/wkhtmltopdf/rootfs/*/*
+      - images/wkhtmltopdf/rootfs/*/*/*
+      - images/wkhtmltopdf/tests/*
+      - images/wkhtmltopdf/tests/*/*
+      - images/wkhtmltopdf/Dockerfile
       - .github/workflows/wkhtmltopdf.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/wkhtmltopdf
+          echo ::set-output name=docker_path::images/wkhtmltopdf
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/wkhtmltopdf/Dockerfile"
+          args: "hadolint images/wkhtmltopdf/Dockerfile"
 
       - name: Build
         run: |
