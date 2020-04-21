@@ -2,15 +2,15 @@ name: dbxcli-build
 on:
   push:
     paths:
-      - definitions/dbxcli/provision/*
-      - definitions/dbxcli/provision/*/*
-      - definitions/dbxcli/provision/*/*/*
-      - definitions/dbxcli/rootfs/*
-      - definitions/dbxcli/rootfs/*/*
-      - definitions/dbxcli/rootfs/*/*/*
-      - definitions/dbxcli/tests/*
-      - definitions/dbxcli/tests/*/*
-      - definitions/dbxcli/Dockerfile
+      - images/dbxcli/provision/*
+      - images/dbxcli/provision/*/*
+      - images/dbxcli/provision/*/*/*
+      - images/dbxcli/rootfs/*
+      - images/dbxcli/rootfs/*/*
+      - images/dbxcli/rootfs/*/*/*
+      - images/dbxcli/tests/*
+      - images/dbxcli/tests/*/*
+      - images/dbxcli/Dockerfile
       - .github/workflows/dbxcli.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/dbxcli
+          echo ::set-output name=docker_path::images/dbxcli
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/dbxcli/Dockerfile"
+          args: "hadolint images/dbxcli/Dockerfile"
 
       - name: Build
         run: |
