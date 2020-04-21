@@ -2,15 +2,15 @@ name: hadolint-build
 on:
   push:
     paths:
-      - definitions/hadolint/provision/*
-      - definitions/hadolint/provision/*/*
-      - definitions/hadolint/provision/*/*/*
-      - definitions/hadolint/rootfs/*
-      - definitions/hadolint/rootfs/*/*
-      - definitions/hadolint/rootfs/*/*/*
-      - definitions/hadolint/tests/*
-      - definitions/hadolint/tests/*/*
-      - definitions/hadolint/Dockerfile
+      - images/hadolint/provision/*
+      - images/hadolint/provision/*/*
+      - images/hadolint/provision/*/*/*
+      - images/hadolint/rootfs/*
+      - images/hadolint/rootfs/*/*
+      - images/hadolint/rootfs/*/*/*
+      - images/hadolint/tests/*
+      - images/hadolint/tests/*/*
+      - images/hadolint/Dockerfile
       - .github/workflows/hadolint.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/hadolint
+          echo ::set-output name=docker_path::images/hadolint
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint --config=definitions/hadolint/.hadolint.yaml definitions/hadolint/Dockerfile"
+          args: "hadolint --config=images/hadolint/.hadolint.yaml images/hadolint/Dockerfile"
 
       - name: Build
         run: |
