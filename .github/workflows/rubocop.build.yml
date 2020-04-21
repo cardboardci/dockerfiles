@@ -2,15 +2,15 @@ name: rubocop-build
 on:
   push:
     paths:
-      - definitions/rubocop/provision/*
-      - definitions/rubocop/provision/*/*
-      - definitions/rubocop/provision/*/*/*
-      - definitions/rubocop/rootfs/*
-      - definitions/rubocop/rootfs/*/*
-      - definitions/rubocop/rootfs/*/*/*
-      - definitions/rubocop/tests/*
-      - definitions/rubocop/tests/*/*
-      - definitions/rubocop/Dockerfile
+      - images/rubocop/provision/*
+      - images/rubocop/provision/*/*
+      - images/rubocop/provision/*/*/*
+      - images/rubocop/rootfs/*
+      - images/rubocop/rootfs/*/*
+      - images/rubocop/rootfs/*/*/*
+      - images/rubocop/tests/*
+      - images/rubocop/tests/*/*
+      - images/rubocop/Dockerfile
       - .github/workflows/rubocop.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/rubocop
+          echo ::set-output name=docker_path::images/rubocop
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/rubocop/Dockerfile"
+          args: "hadolint images/rubocop/Dockerfile"
 
       - name: Build
         run: |
