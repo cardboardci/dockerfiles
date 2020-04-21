@@ -2,15 +2,15 @@ name: latex-build
 on:
   push:
     paths:
-      - definitions/latex/provision/*
-      - definitions/latex/provision/*/*
-      - definitions/latex/provision/*/*/*
-      - definitions/latex/rootfs/*
-      - definitions/latex/rootfs/*/*
-      - definitions/latex/rootfs/*/*/*
-      - definitions/latex/tests/*
-      - definitions/latex/tests/*/*
-      - definitions/latex/Dockerfile
+      - images/latex/provision/*
+      - images/latex/provision/*/*
+      - images/latex/provision/*/*/*
+      - images/latex/rootfs/*
+      - images/latex/rootfs/*/*
+      - images/latex/rootfs/*/*/*
+      - images/latex/tests/*
+      - images/latex/tests/*/*
+      - images/latex/Dockerfile
       - .github/workflows/latex.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/latex
+          echo ::set-output name=docker_path::images/latex
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/latex/Dockerfile"
+          args: "hadolint images/latex/Dockerfile"
 
       - name: Build
         run: |
