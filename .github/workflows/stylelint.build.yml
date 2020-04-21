@@ -2,15 +2,15 @@ name: stylelint-build
 on:
   push:
     paths:
-      - definitions/stylelint/provision/*
-      - definitions/stylelint/provision/*/*
-      - definitions/stylelint/provision/*/*/*
-      - definitions/stylelint/rootfs/*
-      - definitions/stylelint/rootfs/*/*
-      - definitions/stylelint/rootfs/*/*/*
-      - definitions/stylelint/tests/*
-      - definitions/stylelint/tests/*/*
-      - definitions/stylelint/Dockerfile
+      - images/stylelint/provision/*
+      - images/stylelint/provision/*/*
+      - images/stylelint/provision/*/*/*
+      - images/stylelint/rootfs/*
+      - images/stylelint/rootfs/*/*
+      - images/stylelint/rootfs/*/*/*
+      - images/stylelint/tests/*
+      - images/stylelint/tests/*/*
+      - images/stylelint/Dockerfile
       - .github/workflows/stylelint.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/stylelint
+          echo ::set-output name=docker_path::images/stylelint
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/stylelint/Dockerfile"
+          args: "hadolint images/stylelint/Dockerfile"
 
       - name: Build
         run: |
