@@ -2,15 +2,15 @@ name: rsvg-build
 on:
   push:
     paths:
-      - definitions/rsvg/provision/*
-      - definitions/rsvg/provision/*/*
-      - definitions/rsvg/provision/*/*/*
-      - definitions/rsvg/rootfs/*
-      - definitions/rsvg/rootfs/*/*
-      - definitions/rsvg/rootfs/*/*/*
-      - definitions/rsvg/tests/*
-      - definitions/rsvg/tests/*/*
-      - definitions/rsvg/Dockerfile
+      - images/rsvg/provision/*
+      - images/rsvg/provision/*/*
+      - images/rsvg/provision/*/*/*
+      - images/rsvg/rootfs/*
+      - images/rsvg/rootfs/*/*
+      - images/rsvg/rootfs/*/*/*
+      - images/rsvg/tests/*
+      - images/rsvg/tests/*/*
+      - images/rsvg/Dockerfile
       - .github/workflows/rsvg.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/rsvg
+          echo ::set-output name=docker_path::images/rsvg
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/rsvg/Dockerfile"
+          args: "hadolint images/rsvg/Dockerfile"
 
       - name: Build
         run: |
