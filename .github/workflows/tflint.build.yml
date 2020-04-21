@@ -2,15 +2,15 @@ name: tflint-build
 on:
   push:
     paths:
-      - definitions/tflint/provision/*
-      - definitions/tflint/provision/*/*
-      - definitions/tflint/provision/*/*/*
-      - definitions/tflint/rootfs/*
-      - definitions/tflint/rootfs/*/*
-      - definitions/tflint/rootfs/*/*/*
-      - definitions/tflint/tests/*
-      - definitions/tflint/tests/*/*
-      - definitions/tflint/Dockerfile
+      - images/tflint/provision/*
+      - images/tflint/provision/*/*
+      - images/tflint/provision/*/*/*
+      - images/tflint/rootfs/*
+      - images/tflint/rootfs/*/*
+      - images/tflint/rootfs/*/*/*
+      - images/tflint/tests/*
+      - images/tflint/tests/*/*
+      - images/tflint/Dockerfile
       - .github/workflows/tflint.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/tflint
+          echo ::set-output name=docker_path::images/tflint
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/tflint/Dockerfile"
+          args: "hadolint images/tflint/Dockerfile"
 
       - name: Build
         run: |
