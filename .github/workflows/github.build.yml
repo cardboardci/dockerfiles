@@ -2,15 +2,15 @@ name: github-build
 on:
   push:
     paths:
-      - definitions/github/provision/*
-      - definitions/github/provision/*/*
-      - definitions/github/provision/*/*/*
-      - definitions/github/rootfs/*
-      - definitions/github/rootfs/*/*
-      - definitions/github/rootfs/*/*/*
-      - definitions/github/tests/*
-      - definitions/github/tests/*/*
-      - definitions/github/Dockerfile
+      - images/github/provision/*
+      - images/github/provision/*/*
+      - images/github/provision/*/*/*
+      - images/github/rootfs/*
+      - images/github/rootfs/*/*
+      - images/github/rootfs/*/*/*
+      - images/github/tests/*
+      - images/github/tests/*/*
+      - images/github/Dockerfile
       - .github/workflows/github.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/github
+          echo ::set-output name=docker_path::images/github
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/github/Dockerfile"
+          args: "hadolint images/github/Dockerfile"
 
       - name: Build
         run: |
