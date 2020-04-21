@@ -2,15 +2,15 @@ name: awscli-build
 on:
   push:
     paths:
-      - definitions/awscli/provision/*
-      - definitions/awscli/provision/*/*
-      - definitions/awscli/provision/*/*/*
-      - definitions/awscli/rootfs/*
-      - definitions/awscli/rootfs/*/*
-      - definitions/awscli/rootfs/*/*/*
-      - definitions/awscli/tests/*
-      - definitions/awscli/tests/*/*
-      - definitions/awscli/Dockerfile
+      - images/awscli/provision/*
+      - images/awscli/provision/*/*
+      - images/awscli/provision/*/*/*
+      - images/awscli/rootfs/*
+      - images/awscli/rootfs/*/*
+      - images/awscli/rootfs/*/*/*
+      - images/awscli/tests/*
+      - images/awscli/tests/*/*
+      - images/awscli/Dockerfile
       - .github/workflows/awscli.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/awscli
+          echo ::set-output name=docker_path::images/awscli
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/awscli/Dockerfile"
+          args: "hadolint images/awscli/Dockerfile"
 
       - name: Build
         run: |
