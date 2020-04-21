@@ -2,15 +2,15 @@ name: bats-build
 on:
   push:
     paths:
-      - definitions/bats/provision/*
-      - definitions/bats/provision/*/*
-      - definitions/bats/provision/*/*/*
-      - definitions/bats/rootfs/*
-      - definitions/bats/rootfs/*/*
-      - definitions/bats/rootfs/*/*/*
-      - definitions/bats/tests/*
-      - definitions/bats/tests/*/*
-      - definitions/bats/Dockerfile
+      - images/bats/provision/*
+      - images/bats/provision/*/*
+      - images/bats/provision/*/*/*
+      - images/bats/rootfs/*
+      - images/bats/rootfs/*/*
+      - images/bats/rootfs/*/*/*
+      - images/bats/tests/*
+      - images/bats/tests/*/*
+      - images/bats/Dockerfile
       - .github/workflows/bats.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/bats
+          echo ::set-output name=docker_path::images/bats
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/bats/Dockerfile"
+          args: "hadolint images/bats/Dockerfile"
 
       - name: Build
         run: |
