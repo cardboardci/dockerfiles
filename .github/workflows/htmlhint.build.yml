@@ -2,15 +2,15 @@ name: htmlhint-build
 on:
   push:
     paths:
-      - definitions/htmlhint/provision/*
-      - definitions/htmlhint/provision/*/*
-      - definitions/htmlhint/provision/*/*/*
-      - definitions/htmlhint/rootfs/*
-      - definitions/htmlhint/rootfs/*/*
-      - definitions/htmlhint/rootfs/*/*/*
-      - definitions/htmlhint/tests/*
-      - definitions/htmlhint/tests/*/*
-      - definitions/htmlhint/Dockerfile
+      - images/htmlhint/provision/*
+      - images/htmlhint/provision/*/*
+      - images/htmlhint/provision/*/*/*
+      - images/htmlhint/rootfs/*
+      - images/htmlhint/rootfs/*/*
+      - images/htmlhint/rootfs/*/*/*
+      - images/htmlhint/tests/*
+      - images/htmlhint/tests/*/*
+      - images/htmlhint/Dockerfile
       - .github/workflows/htmlhint.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/htmlhint
+          echo ::set-output name=docker_path::images/htmlhint
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/htmlhint/Dockerfile"
+          args: "hadolint images/htmlhint/Dockerfile"
 
       - name: Build
         run: |
