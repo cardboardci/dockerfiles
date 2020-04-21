@@ -2,15 +2,15 @@ name: svgtools-build
 on:
   push:
     paths:
-      - definitions/svgtools/provision/*
-      - definitions/svgtools/provision/*/*
-      - definitions/svgtools/provision/*/*/*
-      - definitions/svgtools/rootfs/*
-      - definitions/svgtools/rootfs/*/*
-      - definitions/svgtools/rootfs/*/*/*
-      - definitions/svgtools/tests/*
-      - definitions/svgtools/tests/*/*
-      - definitions/svgtools/Dockerfile
+      - images/svgtools/provision/*
+      - images/svgtools/provision/*/*
+      - images/svgtools/provision/*/*/*
+      - images/svgtools/rootfs/*
+      - images/svgtools/rootfs/*/*
+      - images/svgtools/rootfs/*/*/*
+      - images/svgtools/tests/*
+      - images/svgtools/tests/*/*
+      - images/svgtools/Dockerfile
       - .github/workflows/svgtools.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/svgtools
+          echo ::set-output name=docker_path::images/svgtools
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/svgtools/Dockerfile"
+          args: "hadolint images/svgtools/Dockerfile"
 
       - name: Build
         run: |
