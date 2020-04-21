@@ -2,15 +2,15 @@ name: netlify-build
 on:
   push:
     paths:
-      - definitions/netlify/provision/*
-      - definitions/netlify/provision/*/*
-      - definitions/netlify/provision/*/*/*
-      - definitions/netlify/rootfs/*
-      - definitions/netlify/rootfs/*/*
-      - definitions/netlify/rootfs/*/*/*
-      - definitions/netlify/tests/*
-      - definitions/netlify/tests/*/*
-      - definitions/netlify/Dockerfile
+      - images/netlify/provision/*
+      - images/netlify/provision/*/*
+      - images/netlify/provision/*/*/*
+      - images/netlify/rootfs/*
+      - images/netlify/rootfs/*/*
+      - images/netlify/rootfs/*/*/*
+      - images/netlify/tests/*
+      - images/netlify/tests/*/*
+      - images/netlify/Dockerfile
       - .github/workflows/netlify.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/netlify
+          echo ::set-output name=docker_path::images/netlify
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/netlify/Dockerfile"
+          args: "hadolint images/netlify/Dockerfile"
 
       - name: Build
         run: |
