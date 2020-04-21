@@ -2,15 +2,15 @@ name: luacheck-build
 on:
   push:
     paths:
-      - definitions/luacheck/provision/*
-      - definitions/luacheck/provision/*/*
-      - definitions/luacheck/provision/*/*/*
-      - definitions/luacheck/rootfs/*
-      - definitions/luacheck/rootfs/*/*
-      - definitions/luacheck/rootfs/*/*/*
-      - definitions/luacheck/tests/*
-      - definitions/luacheck/tests/*/*
-      - definitions/luacheck/Dockerfile
+      - images/luacheck/provision/*
+      - images/luacheck/provision/*/*
+      - images/luacheck/provision/*/*/*
+      - images/luacheck/rootfs/*
+      - images/luacheck/rootfs/*/*
+      - images/luacheck/rootfs/*/*/*
+      - images/luacheck/tests/*
+      - images/luacheck/tests/*/*
+      - images/luacheck/Dockerfile
       - .github/workflows/luacheck.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/luacheck
+          echo ::set-output name=docker_path::images/luacheck
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/luacheck/Dockerfile"
+          args: "hadolint images/luacheck/Dockerfile"
 
       - name: Build
         run: |
