@@ -2,15 +2,15 @@ name: psscriptanalyzer-build
 on:
   push:
     paths:
-      - definitions/psscriptanalyzer/provision/*
-      - definitions/psscriptanalyzer/provision/*/*
-      - definitions/psscriptanalyzer/provision/*/*/*
-      - definitions/psscriptanalyzer/rootfs/*
-      - definitions/psscriptanalyzer/rootfs/*/*
-      - definitions/psscriptanalyzer/rootfs/*/*/*
-      - definitions/psscriptanalyzer/tests/*
-      - definitions/psscriptanalyzer/tests/*/*
-      - definitions/psscriptanalyzer/Dockerfile
+      - images/psscriptanalyzer/provision/*
+      - images/psscriptanalyzer/provision/*/*
+      - images/psscriptanalyzer/provision/*/*/*
+      - images/psscriptanalyzer/rootfs/*
+      - images/psscriptanalyzer/rootfs/*/*
+      - images/psscriptanalyzer/rootfs/*/*/*
+      - images/psscriptanalyzer/tests/*
+      - images/psscriptanalyzer/tests/*/*
+      - images/psscriptanalyzer/Dockerfile
       - .github/workflows/psscriptanalyzer.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/psscriptanalyzer
+          echo ::set-output name=docker_path::images/psscriptanalyzer
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint --config=definitions/psscriptanalyzer/.hadolint.yaml definitions/psscriptanalyzer/Dockerfile"
+          args: "hadolint --config=images/psscriptanalyzer/.hadolint.yaml images/psscriptanalyzer/Dockerfile"
 
       - name: Build
         run: |
