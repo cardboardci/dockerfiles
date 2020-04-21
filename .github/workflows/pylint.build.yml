@@ -2,15 +2,15 @@ name: pylint-build
 on:
   push:
     paths:
-      - definitions/pylint/provision/*
-      - definitions/pylint/provision/*/*
-      - definitions/pylint/provision/*/*/*
-      - definitions/pylint/rootfs/*
-      - definitions/pylint/rootfs/*/*
-      - definitions/pylint/rootfs/*/*/*
-      - definitions/pylint/tests/*
-      - definitions/pylint/tests/*/*
-      - definitions/pylint/Dockerfile
+      - images/pylint/provision/*
+      - images/pylint/provision/*/*
+      - images/pylint/provision/*/*/*
+      - images/pylint/rootfs/*
+      - images/pylint/rootfs/*/*
+      - images/pylint/rootfs/*/*/*
+      - images/pylint/tests/*
+      - images/pylint/tests/*/*
+      - images/pylint/Dockerfile
       - .github/workflows/pylint.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/pylint
+          echo ::set-output name=docker_path::images/pylint
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/pylint/Dockerfile"
+          args: "hadolint images/pylint/Dockerfile"
 
       - name: Build
         run: |
