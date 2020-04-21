@@ -2,15 +2,15 @@ name: pdftools-build
 on:
   push:
     paths:
-      - definitions/pdftools/provision/*
-      - definitions/pdftools/provision/*/*
-      - definitions/pdftools/provision/*/*/*
-      - definitions/pdftools/rootfs/*
-      - definitions/pdftools/rootfs/*/*
-      - definitions/pdftools/rootfs/*/*/*
-      - definitions/pdftools/tests/*
-      - definitions/pdftools/tests/*/*
-      - definitions/pdftools/Dockerfile
+      - images/pdftools/provision/*
+      - images/pdftools/provision/*/*
+      - images/pdftools/provision/*/*/*
+      - images/pdftools/rootfs/*
+      - images/pdftools/rootfs/*/*
+      - images/pdftools/rootfs/*/*/*
+      - images/pdftools/tests/*
+      - images/pdftools/tests/*/*
+      - images/pdftools/Dockerfile
       - .github/workflows/pdftools.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/pdftools
+          echo ::set-output name=docker_path::images/pdftools
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/pdftools/Dockerfile"
+          args: "hadolint images/pdftools/Dockerfile"
 
       - name: Build
         run: |
