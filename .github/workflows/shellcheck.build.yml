@@ -2,15 +2,15 @@ name: shellcheck-build
 on:
   push:
     paths:
-      - definitions/shellcheck/provision/*
-      - definitions/shellcheck/provision/*/*
-      - definitions/shellcheck/provision/*/*/*
-      - definitions/shellcheck/rootfs/*
-      - definitions/shellcheck/rootfs/*/*
-      - definitions/shellcheck/rootfs/*/*/*
-      - definitions/shellcheck/tests/*
-      - definitions/shellcheck/tests/*/*
-      - definitions/shellcheck/Dockerfile
+      - images/shellcheck/provision/*
+      - images/shellcheck/provision/*/*
+      - images/shellcheck/provision/*/*/*
+      - images/shellcheck/rootfs/*
+      - images/shellcheck/rootfs/*/*
+      - images/shellcheck/rootfs/*/*/*
+      - images/shellcheck/tests/*
+      - images/shellcheck/tests/*/*
+      - images/shellcheck/Dockerfile
       - .github/workflows/shellcheck.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/shellcheck
+          echo ::set-output name=docker_path::images/shellcheck
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/shellcheck/Dockerfile"
+          args: "hadolint images/shellcheck/Dockerfile"
 
       - name: Build
         run: |
