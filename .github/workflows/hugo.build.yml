@@ -2,15 +2,15 @@ name: hugo-build
 on:
   push:
     paths:
-      - definitions/hugo/provision/*
-      - definitions/hugo/provision/*/*
-      - definitions/hugo/provision/*/*/*
-      - definitions/hugo/rootfs/*
-      - definitions/hugo/rootfs/*/*
-      - definitions/hugo/rootfs/*/*/*
-      - definitions/hugo/tests/*
-      - definitions/hugo/tests/*/*
-      - definitions/hugo/Dockerfile
+      - images/hugo/provision/*
+      - images/hugo/provision/*/*
+      - images/hugo/provision/*/*/*
+      - images/hugo/rootfs/*
+      - images/hugo/rootfs/*/*
+      - images/hugo/rootfs/*/*/*
+      - images/hugo/tests/*
+      - images/hugo/tests/*/*
+      - images/hugo/Dockerfile
       - .github/workflows/hugo.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/hugo
+          echo ::set-output name=docker_path::images/hugo
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/hugo/Dockerfile"
+          args: "hadolint images/hugo/Dockerfile"
 
       - name: Build
         run: |
