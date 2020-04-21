@@ -3,7 +3,7 @@ set -e
 if [ "$@" == "core" ]; then
     CONTAINER="core"
 else
-    CONTAINER="definitions/$@"
+    CONTAINER="images/$@"
 fi
 
 # Update package status

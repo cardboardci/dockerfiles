@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-CONTAINER="definitions/$@"
+CONTAINER="images/$@"
 
 apt update -qq
 apt install -qq luarocks -y

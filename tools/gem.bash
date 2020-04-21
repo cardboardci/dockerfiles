@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-CONTAINER="definitions/$@"
+CONTAINER="images/$@"
 
 # Emit the current versions
 echo "Current versions"
