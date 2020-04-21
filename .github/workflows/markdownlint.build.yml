@@ -2,15 +2,15 @@ name: markdownlint-build
 on:
   push:
     paths:
-      - definitions/markdownlint/provision/*
-      - definitions/markdownlint/provision/*/*
-      - definitions/markdownlint/provision/*/*/*
-      - definitions/markdownlint/rootfs/*
-      - definitions/markdownlint/rootfs/*/*
-      - definitions/markdownlint/rootfs/*/*/*
-      - definitions/markdownlint/tests/*
-      - definitions/markdownlint/tests/*/*
-      - definitions/markdownlint/Dockerfile
+      - images/markdownlint/provision/*
+      - images/markdownlint/provision/*/*
+      - images/markdownlint/provision/*/*/*
+      - images/markdownlint/rootfs/*
+      - images/markdownlint/rootfs/*/*
+      - images/markdownlint/rootfs/*/*/*
+      - images/markdownlint/tests/*
+      - images/markdownlint/tests/*/*
+      - images/markdownlint/Dockerfile
       - .github/workflows/markdownlint.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/markdownlint
+          echo ::set-output name=docker_path::images/markdownlint
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/markdownlint/Dockerfile"
+          args: "hadolint images/markdownlint/Dockerfile"
 
       - name: Build
         run: |
