@@ -2,15 +2,15 @@ name: cppcheck-build
 on:
   push:
     paths:
-      - definitions/cppcheck/provision/*
-      - definitions/cppcheck/provision/*/*
-      - definitions/cppcheck/provision/*/*/*
-      - definitions/cppcheck/rootfs/*
-      - definitions/cppcheck/rootfs/*/*
-      - definitions/cppcheck/rootfs/*/*/*
-      - definitions/cppcheck/tests/*
-      - definitions/cppcheck/tests/*/*
-      - definitions/cppcheck/Dockerfile
+      - images/cppcheck/provision/*
+      - images/cppcheck/provision/*/*
+      - images/cppcheck/provision/*/*/*
+      - images/cppcheck/rootfs/*
+      - images/cppcheck/rootfs/*/*
+      - images/cppcheck/rootfs/*/*/*
+      - images/cppcheck/tests/*
+      - images/cppcheck/tests/*/*
+      - images/cppcheck/Dockerfile
       - .github/workflows/cppcheck.build.yml
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::definitions/cppcheck
+          echo ::set-output name=docker_path::images/cppcheck
 
       - name: Set tag var
         id: vars
@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint definitions/cppcheck/Dockerfile"
+          args: "hadolint images/cppcheck/Dockerfile"
 
       - name: Build
         run: |
