@@ -1,0 +1,54 @@
+name: pylint-build
+on:
+  push:
+    paths:
+      - images/pylint/provision/*
+      - images/pylint/provision/*/*
+      - images/pylint/provision/*/*/*
+      - images/pylint/rootfs/*
+      - images/pylint/rootfs/*/*
+      - images/pylint/rootfs/*/*/*
+      - images/pylint/tests/*
+      - images/pylint/tests/*/*
+      - images/pylint/Dockerfile
+      - .github/workflows/pylint.build.yml
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set versions
+        id: version
+        run: |
+          echo ::set-output name=docker_version::0.0.1
+          echo ::set-output name=docker_path::images/pylint
+
+      - name: Set tag var
+        id: vars
+        run: |
+          echo ::set-output name=docker_image::docker.io/cardboardci/pylint
+          echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
+
+      - name: Hadolint
+        uses: docker://docker.io/cardboardci/hadolint:latest
+        with:
+          args: "hadolint images/pylint/Dockerfile"
+
+      - name: Build
+        run: |
+          docker build ${{ steps.version.outputs.docker_path }}/. \
+            --file ${{ steps.version.outputs.docker_path }}/Dockerfile \
+            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
+
+      - name: Tests
+        uses: docker://gcr.io/gcp-runtimes/container-structure-test
+        with:
+          args: "test --config ${{ steps.version.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+
+      - name: Deploy to DockerHub
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+          docker push ${{ steps.vars.outputs.docker_image }}
