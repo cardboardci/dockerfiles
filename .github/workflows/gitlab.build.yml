@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint images/gitlab/Dockerfile"
+          args: "hadolint --config images/gitlab/.hadolint.yaml images/gitlab/Dockerfile"
 
       - name: Build
         run: |
