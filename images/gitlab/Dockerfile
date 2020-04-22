@@ -18,7 +18,7 @@ RUN mkdir -p /tmp/bin/ \
     && mv /tmp/bin/* /usr/bin/ \
     && rm -rf tmp/bin
 
-RUN curl -sSL "https://raw.githubusercontent.com/zaquestion/lab/master/install.sh" | bash
+RUN curl -sSL "https://raw.githubusercontent.com/zaquestion/lab/master/install.sh" -o /tmp/install.sh && sync && bash /tmp/install.sh
 USER cardboardci
 
 ##
