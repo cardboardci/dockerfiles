@@ -1,0 +1,39 @@
+FROM cardboardci/ci-core@sha256:b3e7917c28200c780e0e6a19057cb546fcafc4719640f6b8be459c390714f97c
+USER root
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+COPY provision/pkglist /cardboardci/pkglist
+RUN apt-get update \
+    && xargs -a /cardboardci/pkglist apt-get install --no-install-recommends -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY provision/nodelist /cardboardci/nodelist
+RUN ( xargs -a /cardboardci/nodelist npm install -g ) || true
+
+USER cardboardci
+
+##
+## Image Metadata
+##
+ARG build_date
+ARG version
+ARG vcs_ref
+LABEL maintainer="CardboardCI"
+LABEL org.label-schema.schema-version="1.0"
+LABEL org.label-schema.name="netlify"
+LABEL org.label-schema.version="${version}"
+LABEL org.label-schema.build-date="${build_date}"
+LABEL org.label-schema.release="CardboardCI version:${version} build-date:${build_date}"
+LABEL org.label-schema.vendor="cardboardci"
+LABEL org.label-schema.architecture="amd64"
+LABEL org.label-schema.summary="Netlify CLI"
+LABEL org.label-schema.description="Netlify builds, deploys and hosts your netlify services"
+LABEL org.label-schema.url="https://gitlab.com/cardboardci/images/netlify"
+LABEL org.label-schema.changelog-url="https://gitlab.com/cardboardci/images/netlify/releases"
+LABEL org.label-schema.authoritative-source-url="https://cloud.docker.com/u/cardboardci/repository/docker/cardboardci/netlify"
+LABEL org.label-schema.distribution-scope="public"
+LABEL org.label-schema.vcs-type="git"
+LABEL org.label-schema.vcs-url="https://gitlab.com/cardboardci/images/netlify"
+LABEL org.label-schema.vcs-ref="${vcs_ref}"
