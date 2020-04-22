@@ -1,0 +1,6 @@
+build-essential=12.8ubuntu1
+libpcre3-dev=2:8.39-12build1
+curl=7.68.0-1ubuntu2
+python3=3.8.2-0ubuntu2
+python-pygments=2.3.1+dfsg-1ubuntu2
+cppcheck=1.90-4build1
