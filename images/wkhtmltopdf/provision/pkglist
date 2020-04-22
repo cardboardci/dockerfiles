@@ -1,4 +1,4 @@
-openssl=1.1.1f-1ubuntu1
+openssl=1.1.1f-1ubuntu2
 build-essential=12.8ubuntu1
 curl=7.68.0-1ubuntu2
 xz-utils=5.2.4-1
