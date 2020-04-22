@@ -34,7 +34,7 @@ jobs:
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint images/dbxcli/Dockerfile"
+          args: "hadolint --config=images/dbxcli/.hadolint.yaml images/dbxcli/Dockerfile"
 
       - name: Build
         run: |
