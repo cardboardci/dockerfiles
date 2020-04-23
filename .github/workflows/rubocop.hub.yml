@@ -1,0 +1,21 @@
+name: rubocop-hub
+on:
+  push:
+    branches:
+      - master
+    paths:
+    - definitions/rubocop/README.md
+    - .github/workflows/rubocop.hub.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2.1.0
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKERHUB_REPOSITORY: cardboardci/rubocop
+          README_FILEPATH: definitions/rubocop/README.md
