@@ -3,7 +3,7 @@ set -e
 CONTAINER="images/$@"
 
 apt update -qq
-apt install -qq luarocks -y
+apt install -qq -y luarocks
 
 # Emit the current versions
 echo "Current versions"
