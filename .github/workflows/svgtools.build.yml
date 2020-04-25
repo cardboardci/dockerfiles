@@ -11,6 +11,7 @@ on:
       - images/svgtools/tests/*
       - images/svgtools/tests/*/*
       - images/svgtools/Dockerfile
+      - images/svgtools/.hadolint.yaml
       - .github/workflows/svgtools.build.yml
 
 jobs:

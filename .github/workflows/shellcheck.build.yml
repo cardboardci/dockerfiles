@@ -11,6 +11,7 @@ on:
       - images/shellcheck/tests/*
       - images/shellcheck/tests/*/*
       - images/shellcheck/Dockerfile
+      - images/shellcheck/.hadolint.yaml
       - .github/workflows/shellcheck.build.yml
 
 jobs:

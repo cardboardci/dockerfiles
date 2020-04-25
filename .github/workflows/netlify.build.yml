@@ -11,6 +11,7 @@ on:
       - images/netlify/tests/*
       - images/netlify/tests/*/*
       - images/netlify/Dockerfile
+      - images/netlify/.hadolint.yaml
       - .github/workflows/netlify.build.yml
 
 jobs:

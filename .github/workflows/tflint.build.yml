@@ -11,6 +11,7 @@ on:
       - images/tflint/tests/*
       - images/tflint/tests/*/*
       - images/tflint/Dockerfile
+      - images/tflint/.hadolint.yaml
       - .github/workflows/tflint.build.yml
 
 jobs:

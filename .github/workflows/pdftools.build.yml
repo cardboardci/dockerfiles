@@ -11,6 +11,7 @@ on:
       - images/pdftools/tests/*
       - images/pdftools/tests/*/*
       - images/pdftools/Dockerfile
+      - images/pdftools/.hadolint.yaml
       - .github/workflows/pdftools.build.yml
 
 jobs:

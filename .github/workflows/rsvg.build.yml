@@ -11,6 +11,7 @@ on:
       - images/rsvg/tests/*
       - images/rsvg/tests/*/*
       - images/rsvg/Dockerfile
+      - images/rsvg/.hadolint.yaml
       - .github/workflows/rsvg.build.yml
 
 jobs:

@@ -11,6 +11,7 @@ on:
       - images/hugo/tests/*
       - images/hugo/tests/*/*
       - images/hugo/Dockerfile
+      - images/hugo/.hadolint.yaml
       - .github/workflows/hugo.build.yml
 
 jobs:

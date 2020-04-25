@@ -11,6 +11,7 @@ on:
       - images/dbxcli/tests/*
       - images/dbxcli/tests/*/*
       - images/dbxcli/Dockerfile
+      - images/dbxcli/.hadolint.yaml
       - .github/workflows/dbxcli.build.yml
 
 jobs:

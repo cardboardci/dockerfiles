@@ -11,6 +11,7 @@ on:
       - images/cppcheck/tests/*
       - images/cppcheck/tests/*/*
       - images/cppcheck/Dockerfile
+      - images/cppcheck/.hadolint.yaml
       - .github/workflows/cppcheck.build.yml
 
 jobs:

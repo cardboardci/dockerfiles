@@ -11,6 +11,7 @@ on:
       - images/rubocop/tests/*
       - images/rubocop/tests/*/*
       - images/rubocop/Dockerfile
+      - images/rubocop/.hadolint.yaml
       - .github/workflows/rubocop.build.yml
 
 jobs:

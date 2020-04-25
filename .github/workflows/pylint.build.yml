@@ -11,6 +11,7 @@ on:
       - images/pylint/tests/*
       - images/pylint/tests/*/*
       - images/pylint/Dockerfile
+      - images/pylint/.hadolint.yaml
       - .github/workflows/pylint.build.yml
 
 jobs:

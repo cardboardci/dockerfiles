@@ -11,6 +11,7 @@ on:
       - base/tests/*
       - base/tests/*/*
       - base/Dockerfile
+      - base/Dockerfile/.hadolint.yaml
       - .github/workflows/base.build.yml
 
 jobs:

@@ -11,6 +11,7 @@ on:
       - images/wkhtmltopdf/tests/*
       - images/wkhtmltopdf/tests/*/*
       - images/wkhtmltopdf/Dockerfile
+      - images/wkhtmltopdf/.hadolint.yaml
       - .github/workflows/wkhtmltopdf.build.yml
 
 jobs:

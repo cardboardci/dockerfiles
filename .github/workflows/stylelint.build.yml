@@ -11,6 +11,7 @@ on:
       - images/stylelint/tests/*
       - images/stylelint/tests/*/*
       - images/stylelint/Dockerfile
+      - images/stylelint/.hadolint.yaml
       - .github/workflows/stylelint.build.yml
 
 jobs:

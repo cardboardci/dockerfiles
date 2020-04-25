@@ -11,6 +11,7 @@ on:
       - images/latex/tests/*
       - images/latex/tests/*/*
       - images/latex/Dockerfile
+      - images/latex/.hadolint.yaml
       - .github/workflows/latex.build.yml
 
 jobs:

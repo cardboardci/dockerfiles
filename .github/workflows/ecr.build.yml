@@ -11,6 +11,7 @@ on:
       - images/ecr/tests/*
       - images/ecr/tests/*/*
       - images/ecr/Dockerfile
+      - images/ecr/.hadolint.yaml
       - .github/workflows/ecr.build.yml
 
 jobs:

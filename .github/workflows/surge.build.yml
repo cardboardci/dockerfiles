@@ -11,6 +11,7 @@ on:
       - images/surge/tests/*
       - images/surge/tests/*/*
       - images/surge/Dockerfile
+      - images/surge/.hadolint.yaml
       - .github/workflows/surge.build.yml
 
 jobs:

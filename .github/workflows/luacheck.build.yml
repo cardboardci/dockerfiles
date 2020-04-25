@@ -11,6 +11,7 @@ on:
       - images/luacheck/tests/*
       - images/luacheck/tests/*/*
       - images/luacheck/Dockerfile
+      - images/luacheck/.hadolint.yaml
       - .github/workflows/luacheck.build.yml
 
 jobs:

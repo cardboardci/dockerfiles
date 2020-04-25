@@ -11,6 +11,7 @@ on:
       - images/htmlhint/tests/*
       - images/htmlhint/tests/*/*
       - images/htmlhint/Dockerfile
+      - images/htmlhint/.hadolint.yaml
       - .github/workflows/htmlhint.build.yml
 
 jobs:

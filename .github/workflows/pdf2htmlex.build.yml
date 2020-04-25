@@ -11,6 +11,7 @@ on:
       - images/pdf2htmlex/tests/*
       - images/pdf2htmlex/tests/*/*
       - images/pdf2htmlex/Dockerfile
+      - images/pdf2htmlex/.hadolint.yaml
       - .github/workflows/pdf2htmlex.build.yml
 
 jobs:

@@ -11,6 +11,7 @@ on:
       - images/markdownlint/tests/*
       - images/markdownlint/tests/*/*
       - images/markdownlint/Dockerfile
+      - images/markdownlint/.hadolint.yaml
       - .github/workflows/markdownlint.build.yml
 
 jobs:

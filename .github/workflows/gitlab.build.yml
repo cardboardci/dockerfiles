@@ -11,6 +11,7 @@ on:
       - images/gitlab/tests/*
       - images/gitlab/tests/*/*
       - images/gitlab/Dockerfile
+      - images/gitlab/.hadolint.yaml
       - .github/workflows/gitlab.build.yml
 
 jobs:
