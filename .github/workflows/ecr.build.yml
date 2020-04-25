@@ -19,15 +19,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set versions
-        id: version
-        run: |
-          echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::images/ecr
-
-      - name: Set tag var
+      - name: Set image variables
         id: vars
         run: |
+          echo ::set-output name=docker_path::images/ecr
+          echo ::set-output name=dockerfile::images/ecr/Dockerfile
+          echo ::set-output name=dockerdir::images/ecr/.
+          echo ::set-output name=hadolint_config::images/ecr/.hadolint.yaml
           echo ::set-output name=docker_image::docker.io/cardboardci/ecr
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

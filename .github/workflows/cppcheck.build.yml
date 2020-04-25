@@ -19,15 +19,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set versions
-        id: version
-        run: |
-          echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::images/cppcheck
-
-      - name: Set tag var
+      - name: Set image variables
         id: vars
         run: |
+          echo ::set-output name=docker_path::images/cppcheck
+          echo ::set-output name=dockerfile::images/cppcheck/Dockerfile
+          echo ::set-output name=dockerdir::images/cppcheck/.
+          echo ::set-output name=hadolint_config::images/cppcheck/.hadolint.yaml
           echo ::set-output name=docker_image::docker.io/cardboardci/cppcheck
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
