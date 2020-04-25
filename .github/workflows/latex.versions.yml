@@ -18,7 +18,6 @@ jobs:
       - name: Upgrade dependencies
         run: |
           make apt-${{ steps.version.outputs.type }}
-          make luarocks-${{ steps.version.outputs.type }}
           git status
 
       - name: Commit the dependency changes

@@ -15,6 +15,7 @@ apt-% : ; ## Upgrades the apt deps
 		--rm \
 		--user=root \
 		--entrypoint="" \
+		-e DEBIAN_FRONTEND=noninteractive \
 		-v "$(DIR)":/workspace \
 		--workdir=/workspace \
 		cardboardci/ci-core:latest bash tools/apt.bash $*
@@ -24,6 +25,7 @@ npm-% : ; ## Upgrades the npm deps
 		--rm \
 		--user=root \
 		--entrypoint="" \
+		-e DEBIAN_FRONTEND=noninteractive \
 		-v "$(DIR)":/workspace \
 		--workdir=/workspace \
 		node:latest bash tools/npm.bash $*
@@ -33,6 +35,7 @@ gem-% : ; ## Upgrades the gem deps
 		--rm \
 		--user=root \
 		--entrypoint="" \
+		-e DEBIAN_FRONTEND=noninteractive \
 		-v "$(DIR)":/workspace \
 		--workdir=/workspace \
 		ruby:latest bash tools/gem.bash $*
@@ -42,6 +45,7 @@ luarocks-% : ; ## Upgrades the lua deps
 		--rm \
 		--user=root \
 		--entrypoint="" \
+		-e DEBIAN_FRONTEND=noninteractive \
 		-v "$(DIR)":/workspace \
 		--workdir=/workspace \
 		ubuntu:latest bash tools/luarocks.bash $*
