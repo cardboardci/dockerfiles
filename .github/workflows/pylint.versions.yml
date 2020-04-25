@@ -21,7 +21,7 @@ jobs:
           git status
 
       - name: Commit the dependency changes
-        uses: cardboardci/github-actions/auto-commit@master
+        uses: .github/actions/auto-commit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: '/deps'
