@@ -11,6 +11,7 @@ on:
       - images/ecr/tests/*
       - images/ecr/tests/*/*
       - images/ecr/Dockerfile
+      - images/ecr/.hadolint.yaml
       - .github/workflows/ecr.build.yml
 
 jobs:
@@ -19,33 +20,31 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set versions
-        id: version
-        run: |
-          echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::images/ecr
-
-      - name: Set tag var
+      - name: Set image variables
         id: vars
         run: |
+          echo ::set-output name=docker_path::images/ecr
+          echo ::set-output name=dockerfile::images/ecr/Dockerfile
+          echo ::set-output name=dockerdir::images/ecr/.
+          echo ::set-output name=hadolint_config::images/ecr/.hadolint.yaml
           echo ::set-output name=docker_image::docker.io/cardboardci/ecr
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint
         uses: docker://docker.io/cardboardci/hadolint:latest
         with:
-          args: "hadolint images/ecr/Dockerfile"
+          args: "hadolint --config=${{ steps.vars.outputs.hadolint_config }} ${{ steps.vars.outputs.dockerfile }}"
 
       - name: Build
         run: |
-          docker build ${{ steps.version.outputs.docker_path }}/. \
-            --file ${{ steps.version.outputs.docker_path }}/Dockerfile \
+          docker build ${{ steps.vars.outputs.dockerdir }} \
+            --file ${{ steps.vars.outputs.dockerfile }} \
             --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
 
       - name: Tests
         uses: docker://gcr.io/gcp-runtimes/container-structure-test
         with:
-          args: "test --config ${{ steps.version.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
 
       - name: Deploy to DockerHub
         if: github.ref == 'refs/heads/master'
