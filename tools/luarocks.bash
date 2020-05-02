@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
-CONTAINER="images/$@"
+if [ "$@" == "base" ]; then
+    CONTAINER="base"
+else
+    CONTAINER="images/$@"
+fi
 
 apt update -qq
 apt install -qq -y luarocks

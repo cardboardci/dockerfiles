@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-if [ "$@" == "core" ]; then
-    CONTAINER="core"
+if [ "$@" == "base" ]; then
+    CONTAINER="base"
 else
     CONTAINER="images/$@"
 fi
