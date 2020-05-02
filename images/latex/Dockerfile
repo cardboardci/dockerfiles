@@ -1,4 +1,5 @@
-FROM cardboardci/ci-core@sha256:5b93f4c8cc1ddaa809f9c27d0a865a974ccb43e5e3d38334df1b0d77ea1843fb
+ARG DIGEST=sha256:3f5fbe4b658d8cd3b7009947d1de44ca6e7fd1d25fc6723637bf5d6ab01db0c4
+FROM cardboardci/base@${DIGEST}
 USER root
 
 ARG DEBIAN_FRONTEND=noninteractive
