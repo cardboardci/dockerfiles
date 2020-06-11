@@ -11,7 +11,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY provision/ziplist /cardboardci/ziplist
-#hadolint disable=DL3003
 RUN mkdir -p /tmp/zip \
     && cd /tmp/zip \
     && xargs -a /cardboardci/ziplist curl -sSL -O \
