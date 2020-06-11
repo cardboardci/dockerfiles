@@ -12,7 +12,8 @@ RUN apt-get update \
 
 COPY provision/ziplist /cardboardci/ziplist
 RUN mkdir -p /tmp/zip \
-    && xargs -a /cardboardci/ziplist wget --directory-prefix=/tmp/zip \
+    && cd /tmp/zip \
+    && xargs -a /cardboardci/ziplist curl -sSL -O \
     && unzip /tmp/zip/*.zip -d /usr/bin/ \
     && rm -rf /tmp/zip
 
