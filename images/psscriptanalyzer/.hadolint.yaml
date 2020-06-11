@@ -1,2 +1,3 @@
 ignored:
   - SC2016
+  - DL3003
