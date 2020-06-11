@@ -13,7 +13,7 @@ RUN apt-get update \
 COPY provision/deblist /cardboardci/deblist
 RUN mkdir -p /tmp/deb \
     && cd /tmp/deb \
-    && xargs -a /cardboardci/deblist curl -sSL -O \
+    && xargs -a /cardboardci/deblist curl -sSL \
     && dpkg -i /tmp/deb/*.deb \
     && rm -rf tmp/deb
 
