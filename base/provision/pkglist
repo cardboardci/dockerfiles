@@ -1,5 +1,5 @@
 git=1:2.25.1-1ubuntu3
 jq=1.6-1
 curl=7.68.0-1ubuntu2.1
-bash=5.0-6ubuntu1
+bash=5.0-6ubuntu1.1
 ca-certificates=20190110ubuntu1.1
