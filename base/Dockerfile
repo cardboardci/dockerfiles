@@ -19,7 +19,7 @@ RUN bash /cardboardci/user.sh ; sync ; rm -f /cardboardci/user.sh
 
 USER ${USER}
 WORKDIR /cardboardci/workspace
-ENTRYPOINT [ "/bin/bash" ]
+ENTRYPOINT [ "/bin/bash", "-l", "-c" ]
 
 ARG version=1.0.0
 LABEL maintainer="CardboardCI"
