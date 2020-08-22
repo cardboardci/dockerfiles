@@ -33,7 +33,7 @@ LABEL maintainer="CardboardCI" \
     org.label-schema.name="wkhtmltopdf" \
     org.label-schema.version=${VERSION} \
     org.label-schema.release="CardboardCI version:${version}" \
-    org.label-schema.vendor="CardboardCI" \
+    org.label-schema.vendor="cardboardci" \
     org.label-schema.architecture="amd64" \
     org.label-schema.usage="https://github.com/cardboardci/docker-wkhtmltopdf/blob/master/README.md#Usage" \
     \

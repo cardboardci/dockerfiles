@@ -1,4 +1,4 @@
-ARG DIGEST=sha256:ebe47db8fb55b76e7a45f9b2fbbf29ca3e57804add7a01989d82cdf5d7df3cbc
+ARG DIGEST=sha256:2a0ca344b220f3e922bcca6136f585697573b74bb6f69115a5b152dbfe68bad2
 FROM cardboardci/base@${DIGEST}
 USER root
 
