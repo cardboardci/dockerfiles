@@ -3,7 +3,7 @@ schemaVersion: "2.0.0"
 metadataTest:
   labels:
     - key: 'org.label-schema.vendor'
-      value: CardboardCI
+      value: cardboardci
   exposedPorts: []
   volumes: []
   cmd: []
