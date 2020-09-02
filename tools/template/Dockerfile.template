@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 COPY rootfs/ /
 RUN chmod +x /usr/local/bin/*
-{apt_get}{dpkg}{npm}{bin}{lua}{pip}{rubygems}{script}
+{apt_get}{dpkg}{npm}{bin}{lua}{pip}{rubygems}{script}{install}
 USER cardboardci
 {pwsh}
 ##

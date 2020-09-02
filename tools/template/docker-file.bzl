@@ -79,6 +79,12 @@ COPY provision/gemlist /cardboardci/gemlist
 RUN xargs -a /cardboardci/gemlist gem install
 """
 
+def _install_impl():
+    return """
+COPY provision/install.sh /tmp/install.sh
+RUN bash /tmp/install.sh ; sync ; rm /tmp/install.sh
+"""
+
 def _dockerfile_impl(ctx):
     installs = {
         "{apt_get}": _pkglist_impl() if 'apt-get' in ctx.attr.packages else '',
@@ -90,6 +96,7 @@ def _dockerfile_impl(ctx):
         "{pwsh}": _pwshlist_impl() if 'pwsh' in ctx.attr.packages else '',
         "{pip}": _piplist_impl() if 'pip' in ctx.attr.packages else '',
         "{rubygems}": _gemlist_impl() if 'rubygems' in ctx.attr.packages else '',
+        "{install}": _install_impl() if 'install' in ctx.attr.packages else '',
         "{script}": ctx.attr.script if ctx.attr.script else '',
     }
 
