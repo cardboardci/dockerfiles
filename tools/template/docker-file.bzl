@@ -11,6 +11,22 @@ ORG_LABELSCHEMA = {
     "{vcs_url}": "https://github.com/cardboardci/dockerfiles",
 }
 
+def _ziplist_impl():
+    return """COPY provision/ziplist /cardboardci/ziplist
+RUN mkdir -p /tmp/zip \
+&& cd /tmp/zip \
+&& xargs -a /cardboardci/ziplist curl -sSL -O \
+&& unzip /tmp/zip/*.zip -d /usr/bin/ \
+&& rm -rf /tmp/zip"""
+
+def _binlist_impl():
+    return """COPY provision/binlist /cardboardci/binlist
+RUN mkdir -p /tmp/bin/ \
+&& xargs -a /cardboardci/binlist -I {} bash -c 'wget $(echo "{}" | cut -d '=' -f1) -O /tmp/bin/$(echo "{}" | cut -d= -f2)' \
+&& chmod +x /tmp/bin/* \
+&& mv /tmp/bin/* /usr/bin/ \
+&& rm -rf tmp/bin"""
+
 def _pkglist_impl():
     return """COPY provision/pkglist /cardboardci/pkglist
 RUN apt-get update \
@@ -29,11 +45,34 @@ def _nodelist_impl():
     return """COPY provision/nodelist /cardboardci/nodelist
 RUN ( xargs -a /cardboardci/nodelist npm install -g ) || true"""
 
+def _lualist_impl():
+    return """COPY provision/lualist /cardboardci/lualist
+RUN  xargs -a /cardboardci/lualist luarocks install"""
+
+def _pwshlist_impl():
+    return """COPY provision/lualist /cardboardci/lualist
+RUN  xargs -a /cardboardci/lualist luarocks install"""
+
+def _piplist_impl():
+    return """COPY provision/piplist /cardboardci/piplist
+RUN xargs -a /cardboardci/piplist pip3 install"""
+
+def _gemlist_impl():
+    return """COPY provision/gemlist /cardboardci/gemlist
+RUN xargs -a /cardboardci/gemlist gem install """
+
 def _dockerfile_impl(ctx):
     installs = {
         "{apt_get}": _pkglist_impl() if 'apt-get' in ctx.attr.packages else '',
         "{dpkg}": _deblist_impl() if 'dpkg' in ctx.attr.packages else '',
         "{npm}": _nodelist_impl() if 'npm' in ctx.attr.packages else '',
+        "{bin}": _binlist_impl() if 'bin' in ctx.attr.packages else '',
+        "{zip}": _ziplist_impl() if 'zip' in ctx.attr.packages else '',
+        "{lua}": _lualist_impl() if 'lua' in ctx.attr.packages else '',
+        "{pwsh}": _pwshlist_impl() if 'pwsh' in ctx.attr.packages else '',
+        "{pip}": _piplist_impl() if 'pip' in ctx.attr.packages else '',
+        "{rubygems}": _gemlist_impl() if 'rubygems' in ctx.attr.packages else '',
+        "{script}": ctx.attr.script if ctx.attr.script else '',
     }
 
     inputs = {
@@ -57,6 +96,7 @@ dockerfile = rule(
         "image": attr.string(mandatory = True),
         "digest": attr.string(mandatory = True),
         "packages": attr.string_list(mandatory = True),
+        "script": attr.string(),
         "label_schema": attr.string_dict(mandatory = True),
         "_template": attr.label(
             default = Label(_TEMPLATE),
