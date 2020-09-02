@@ -7,6 +7,8 @@ ORG_LABELSCHEMA = {
     "{org_labelschema_architecture}": "amd64",
     "{org_labelschema_distributionscope}": "public",
     "{org_labelschema_vcs_type}": "git",
+    "{version}": "0.0.0",
+    "{vcs_url}": "https://github.com/cardboardci/dockerfiles",
 }
 
 def _pkglist_impl():
@@ -35,9 +37,7 @@ def _dockerfile_impl(ctx):
     }
 
     inputs = {
-        "{version}": ctx.attr.version,
         "{digest}": ctx.attr.digest,
-        "{vcs_url}": ctx.attr.vcs_url,
         "{org_labelschema_name}": ctx.attr.image,
     }
     arguments = dict(inputs, **installs)
@@ -56,8 +56,6 @@ dockerfile = rule(
     attrs = {
         "image": attr.string(mandatory = True),
         "digest": attr.string(mandatory = True),
-        "vcs_url": attr.string(mandatory = True),
-        "version": attr.string(mandatory = True),
         "packages": attr.string_list(mandatory = True),
         "label_schema": attr.string_dict(mandatory = True),
         "_template": attr.label(
