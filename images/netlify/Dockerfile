@@ -9,7 +9,7 @@ USER root
 ARG DEBIAN_FRONTEND=noninteractive
 
 COPY rootfs/ /
-RUN chmod +x /usr/local/bin/*
+RUN chmod +x /usr/local/bin/* || true
 
 COPY provision/pkglist /cardboardci/pkglist
 RUN apt-get update && xargs -a /cardboardci/pkglist apt-get install -y && apt-get clean && rm -rf /var/lib/apt/lists/*

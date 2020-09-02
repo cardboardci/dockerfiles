@@ -9,7 +9,7 @@ USER root
 ARG DEBIAN_FRONTEND=noninteractive
 
 COPY rootfs/ /
-RUN chmod +x /usr/local/bin/*
+RUN chmod +x /usr/local/bin/* || true
 {apt_get}{dpkg}{npm}{bin}{lua}{pip}{rubygems}{script}{install}
 USER cardboardci
 {pwsh}
