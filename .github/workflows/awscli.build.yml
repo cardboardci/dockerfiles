@@ -46,13 +46,8 @@ jobs:
         with:
           args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
 
-      - name: Deploy to DockerHub
-        if: github.ref == 'refs/heads/master'
-        run: |
-          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-          docker push ${{ steps.vars.outputs.docker_image }}
-
       - name: Push to GitHub Packages
+        if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com --username ${{ github.actor }} --password-stdin
           docker push ${{ steps.vars.outputs.docker_image }}

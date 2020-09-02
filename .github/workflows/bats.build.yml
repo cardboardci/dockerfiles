@@ -28,7 +28,7 @@ jobs:
       - name: Set tag var
         id: vars
         run: |
-          echo ::set-output name=docker_image::docker.io/cardboardci/bats
+          echo ::set-output name=docker_image::cardboardci/bats
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint
@@ -47,8 +47,8 @@ jobs:
         with:
           args: "test --config ${{ steps.version.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
 
-      - name: Deploy to DockerHub
+      - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |
-          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com --username ${{ github.actor }} --password-stdin
           docker push ${{ steps.vars.outputs.docker_image }}
