@@ -53,10 +53,6 @@ jobs:
           docker push ${{ steps.vars.outputs.docker_image }}
 
       - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: ${{ steps.vars.outputs.docker_image }}
-          tag_with_ref: true
+        run: |
+          docker login docker.pkg.github.com --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }}
+          docker push docker.pkg.github.com/${{ steps.vars.outputs.docker_image }}
