@@ -27,7 +27,7 @@ jobs:
           echo ::set-output name=dockerfile::images/awscli/Dockerfile
           echo ::set-output name=dockerdir::images/awscli/.
           echo ::set-output name=hadolint_config::images/awscli/.hadolint.yaml
-          echo ::set-output name=docker_image::docker.pkg.github.com/cardboardci/awscli
+          echo ::set-output name=docker_image::docker.pkg.github.com/cardboardci/dockerfiles/awscli
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint
