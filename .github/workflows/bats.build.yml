@@ -28,7 +28,7 @@ jobs:
       - name: Set tag var
         id: vars
         run: |
-          echo ::set-output name=docker_image::cardboardci/bats
+          echo ::set-output name=docker_image::docker.pkg.github.com/cardboardci/dockerfiles/bats
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint

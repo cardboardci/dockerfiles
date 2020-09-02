@@ -27,7 +27,7 @@ jobs:
           echo ::set-output name=dockerfile::images/github/Dockerfile
           echo ::set-output name=dockerdir::images/github/.
           echo ::set-output name=hadolint_config::images/github/.hadolint.yaml
-          echo ::set-output name=docker_image::cardboardci/github
+          echo ::set-output name=docker_image::docker.pkg.github.com/cardboardci/dockerfiles/github
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint

@@ -27,7 +27,7 @@ jobs:
           echo ::set-output name=dockerfile::images/pdf2htmlex/Dockerfile
           echo ::set-output name=dockerdir::images/pdf2htmlex/.
           echo ::set-output name=hadolint_config::images/pdf2htmlex/.hadolint.yaml
-          echo ::set-output name=docker_image::cardboardci/pdf2htmlex
+          echo ::set-output name=docker_image::docker.pkg.github.com/cardboardci/dockerfiles/pdf2htmlex
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint

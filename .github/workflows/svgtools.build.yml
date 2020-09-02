@@ -27,7 +27,7 @@ jobs:
           echo ::set-output name=dockerfile::images/svgtools/Dockerfile
           echo ::set-output name=dockerdir::images/svgtools/.
           echo ::set-output name=hadolint_config::images/svgtools/.hadolint.yaml
-          echo ::set-output name=docker_image::cardboardci/svgtools
+          echo ::set-output name=docker_image::docker.pkg.github.com/cardboardci/dockerfiles/svgtools
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint

@@ -27,7 +27,7 @@ jobs:
           echo ::set-output name=dockerfile::images/cppcheck/Dockerfile
           echo ::set-output name=dockerdir::images/cppcheck/.
           echo ::set-output name=hadolint_config::images/cppcheck/.hadolint.yaml
-          echo ::set-output name=docker_image::cardboardci/cppcheck
+          echo ::set-output name=docker_image::docker.pkg.github.com/cardboardci/dockerfiles/cppcheck
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint
