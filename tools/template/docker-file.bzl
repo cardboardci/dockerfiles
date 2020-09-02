@@ -12,54 +12,72 @@ ORG_LABELSCHEMA = {
 }
 
 def _ziplist_impl():
-    return """COPY provision/ziplist /cardboardci/ziplist
+    return """
+COPY provision/ziplist /cardboardci/ziplist
 RUN mkdir -p /tmp/zip \
 && cd /tmp/zip \
 && xargs -a /cardboardci/ziplist curl -sSL -O \
 && unzip /tmp/zip/*.zip -d /usr/bin/ \
-&& rm -rf /tmp/zip"""
+&& rm -rf /tmp/zip
+"""
 
 def _binlist_impl():
-    return """COPY provision/binlist /cardboardci/binlist
+    return """
+COPY provision/binlist /cardboardci/binlist
 RUN mkdir -p /tmp/bin/ \
 && xargs -a /cardboardci/binlist -I {} bash -c 'wget $(echo "{}" | cut -d '=' -f1) -O /tmp/bin/$(echo "{}" | cut -d= -f2)' \
 && chmod +x /tmp/bin/* \
 && mv /tmp/bin/* /usr/bin/ \
-&& rm -rf tmp/bin"""
+&& rm -rf tmp/bin
+"""
 
 def _pkglist_impl():
-    return """COPY provision/pkglist /cardboardci/pkglist
+    return """
+COPY provision/pkglist /cardboardci/pkglist
 RUN apt-get update \
 && xargs -a /cardboardci/pkglist apt-get install -y \
 && apt-get clean \
-&& rm -rf /var/lib/apt/lists/*"""
+&& rm -rf /var/lib/apt/lists/*
+"""
 
 def _deblist_impl():
-    return """COPY provision/deblist /cardboardci/deblist
+    return """
+COPY provision/deblist /cardboardci/deblist
 RUN mkdir -p /tmp/deb \
 && xargs -a /cardboardci/deblist wget --directory-prefix=/tmp/deb \
 && dpkg -i /tmp/deb/*.deb \
-&& rm -rf tmp/deb"""
+&& rm -rf tmp/deb
+"""
 
 def _nodelist_impl():
-    return """COPY provision/nodelist /cardboardci/nodelist
-RUN ( xargs -a /cardboardci/nodelist npm install -g ) || true"""
+    return """
+COPY provision/nodelist /cardboardci/nodelist
+RUN ( xargs -a /cardboardci/nodelist npm install -g ) || true
+"""
 
 def _lualist_impl():
-    return """COPY provision/lualist /cardboardci/lualist
-RUN  xargs -a /cardboardci/lualist luarocks install"""
+    return """
+COPY provision/lualist /cardboardci/lualist
+RUN  xargs -a /cardboardci/lualist luarocks install
+"""
 
 def _pwshlist_impl():
-    return """COPY provision/lualist /cardboardci/lualist
-RUN  xargs -a /cardboardci/lualist luarocks install"""
+    return """
+COPY provision/lualist /cardboardci/lualist
+RUN  xargs -a /cardboardci/lualist luarocks install
+"""
 
 def _piplist_impl():
-    return """COPY provision/piplist /cardboardci/piplist
-RUN xargs -a /cardboardci/piplist pip3 install"""
+    return """
+COPY provision/piplist /cardboardci/piplist
+RUN xargs -a /cardboardci/piplist pip3 install
+"""
 
 def _gemlist_impl():
-    return """COPY provision/gemlist /cardboardci/gemlist
-RUN xargs -a /cardboardci/gemlist gem install """
+    return """
+COPY provision/gemlist /cardboardci/gemlist
+RUN xargs -a /cardboardci/gemlist gem install
+"""
 
 def _dockerfile_impl(ctx):
     installs = {
@@ -103,5 +121,5 @@ dockerfile = rule(
             allow_single_file = True,
         ),
     },
-    outputs = {"source_file": "%{name}.dockerfile"},
+    outputs = {"source_file": "Dockerfile"},
 )
