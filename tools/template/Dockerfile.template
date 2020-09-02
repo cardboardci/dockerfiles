@@ -1,17 +1,10 @@
 FROM cardboardci/base@{digest}
+
 USER root
 
-COPY provision/pkglist /cardboardci/pkglist
-RUN apt-get update \
-    && xargs -a /cardboardci/pkglist apt-get install -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+{apt_get}
 
-COPY provision/deblist /cardboardci/deblist
-RUN mkdir -p /tmp/deb \
-    && xargs -a /cardboardci/deblist wget --directory-prefix=/tmp/deb \
-    && dpkg -i /tmp/deb/*.deb \
-    && rm -rf tmp/deb
+{dpkg}
 
 USER cardboardci
 
@@ -19,21 +12,20 @@ USER cardboardci
 ## Image Metadata
 ##
 ARG vcs_ref
-LABEL org.label-schema.summary="{summary}"
-LABEL org.label-schema.description=" {description}"
-
-LABEL org.label-schema.name="{org_labelschema_name}"
-LABEL org.label-schema.version="{version}"
-LABEL org.label-schema.url="{vcs_url}"
-LABEL org.label-schema.changelog-url="{vcs_url}"
-LABEL org.label-schema.authoritative-source-url="{vcs_url}"
-
-LABEL maintainer="{org_labelschema_maintainer}"
-LABEL org.label-schema.release="CardboardCI version:{version}"
-LABEL org.label-schema.schema-version="{org_labelschema_schemaversion}"
-LABEL org.label-schema.vendor="{org_labelschema_vendor}"
-LABEL org.label-schema.architecture="{org_labelschema_architecture}"
-LABEL org.label-schema.distribution-scope="{org_labelschema_distributionscope}"
-LABEL org.label-schema.vcs-type="{org_labelschema_vcs_type}"
-LABEL org.label-schema.vcs-url="{vcs_url}"
-LABEL org.label-schema.vcs-ref="${vcs_ref}"
+LABEL \
+    org.label-schema.summary="{summary}" \
+    org.label-schema.description=" {description}" \
+    org.label-schema.name="{org_labelschema_name}" \
+    org.label-schema.version="{version}" \
+    org.label-schema.url="{vcs_url}" \
+    org.label-schema.changelog-url="{vcs_url}" \
+    org.label-schema.authoritative-source-url="{vcs_url}" \
+    maintainer="{org_labelschema_maintainer}" \
+    org.label-schema.release="CardboardCI version:{version}" \
+    org.label-schema.schema-version="{org_labelschema_schemaversion}" \
+    org.label-schema.vendor="{org_labelschema_vendor}" \
+    org.label-schema.architecture="{org_labelschema_architecture}" \
+    org.label-schema.distribution-scope="{org_labelschema_distributionscope}" \
+    org.label-schema.vcs-type="{org_labelschema_vcs_type}" \
+    org.label-schema.vcs-url="{vcs_url}" \
+    org.label-schema.vcs-ref="${vcs_ref}"
