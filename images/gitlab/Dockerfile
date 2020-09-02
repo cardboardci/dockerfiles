@@ -16,7 +16,9 @@ RUN apt-get update && xargs -a /cardboardci/pkglist apt-get install -y && apt-ge
 
 COPY provision/binlist /cardboardci/binlist
 RUN mkdir -p /tmp/bin/ && xargs -a /cardboardci/binlist -I {} bash -c 'wget $(echo "{}" | cut -d '=' -f1) -O /tmp/bin/$(echo "{}" | cut -d= -f2)' && chmod +x /tmp/bin/* && mv /tmp/bin/* /usr/bin/ && rm -rf tmp/bin
-curl -sSL 'https://raw.githubusercontent.com/zaquestion/lab/master/install.sh' -o /tmp/install.sh && sync && bash /tmp/install.sh
+
+RUN curl -sSL 'https://raw.githubusercontent.com/zaquestion/lab/master/install.sh' -o /tmp/install.sh && sync && bash /tmp/install.sh
+
 USER cardboardci
 
 ##

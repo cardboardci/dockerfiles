@@ -16,7 +16,9 @@ RUN apt-get update && xargs -a /cardboardci/pkglist apt-get install -y && apt-ge
 
 COPY provision/deblist /cardboardci/deblist
 RUN mkdir -p /tmp/deb && xargs -a /cardboardci/deblist wget --directory-prefix=/tmp/deb && dpkg -i /tmp/deb/*.deb && rm -rf tmp/deb
-mkdir -p /home/cardboardci/.local/share/powershell/ && chown -R cardboardci:cardboardci /home/cardboardci/ /opt/microsoft/
+
+RUN mkdir -p /home/cardboardci/.local/share/powershell/ && chown -R cardboardci:cardboardci /home/cardboardci/ /opt/microsoft/
+
 USER cardboardci
 
 ##
