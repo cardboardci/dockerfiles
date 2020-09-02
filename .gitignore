@@ -13,3 +13,6 @@ tmp/
 
 # Log files
 *.log
+
+# Bazel
+bazel-*
