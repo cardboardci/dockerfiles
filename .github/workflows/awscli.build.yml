@@ -27,7 +27,7 @@ jobs:
           echo ::set-output name=dockerfile::images/awscli/Dockerfile
           echo ::set-output name=dockerdir::images/awscli/.
           echo ::set-output name=hadolint_config::images/awscli/.hadolint.yaml
-          echo ::set-output name=docker_image::docker.io/cardboardci/awscli
+          echo ::set-output name=docker_image::cardboardci/awscli
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint
@@ -51,3 +51,12 @@ jobs:
         run: |
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
           docker push ${{ steps.vars.outputs.docker_image }}
+
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: ${{ steps.vars.outputs.docker_image }}
+          tag_with_ref: true
