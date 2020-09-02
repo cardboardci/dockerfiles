@@ -6,6 +6,8 @@ USER root
 
 {dpkg}
 
+{npm}
+
 USER cardboardci
 
 ##
