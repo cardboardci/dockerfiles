@@ -13,13 +13,11 @@ USER cardboardci
 ##
 ## Image Metadata
 ##
-ARG version
 ARG vcs_ref
 LABEL \
     maintainer="{org_labelschema_maintainer}" \
     org.label-schema.schema-version="{org_labelschema_schemaversion}" \
     org.label-schema.name="{org_labelschema_name}" \
-    org.label-schema.version="{version}" \
     org.label-schema.release="CardboardCI version:{version}" \
     org.label-schema.vendor="{org_labelschema_vendor}" \
     org.label-schema.architecture="{org_labelschema_architecture}" \
