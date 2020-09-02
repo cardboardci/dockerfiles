@@ -11,14 +11,15 @@ ORG_LABELSCHEMA = {
 
 def _dockerfile_impl(ctx):
     inputs = {
-        "{builddate}": ctx.attr.digest,
-        "{version}": ctx.attr.digest,
-        "{vcs_ref}": ctx.attr.digest,
+        "{summary}": ctx.attr.summary,
+        "{description}": ctx.attr.description,
+        "{version}": ctx.attr.version,
         "{digest}": ctx.attr.digest,
         "{vcs_url}": ctx.attr.vcs_url,
         "{org_labelschema_name}": ctx.attr.name,
     }
-    subs = dict(ORG_LABELSCHEMA, **inputs)
+    schema = dict(ORG_LABELSCHEMA, **ctx.attr.label_schema)
+    subs = dict(schema, **inputs)
     ctx.actions.expand_template(
         template = ctx.file._template,
         output = ctx.outputs.source_file,
@@ -32,6 +33,7 @@ dockerfile = rule(
         "vcs_url": attr.string(mandatory = True),
         "summary": attr.string(mandatory = True),
         "description": attr.string(mandatory = True),
+        "version": attr.string(mandatory = True),
         "label_schema": attr.string_dict(mandatory = True),
         "_template": attr.label(
             default = Label(_TEMPLATE),

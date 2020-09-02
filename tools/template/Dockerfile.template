@@ -1,4 +1,4 @@
-FROM cardboardci/base@{DIGEST}
+FROM cardboardci/base@{digest}
 USER root
 
 COPY provision/pkglist /cardboardci/pkglist
@@ -18,21 +18,22 @@ USER cardboardci
 ##
 ## Image Metadata
 ##
-LABEL org.label-schema.summary="Hugo static site generator"
-LABEL org.label-schema.description=" Hugo is an open-source static site generator"
+ARG vcs_ref
+LABEL org.label-schema.summary="{summary}"
+LABEL org.label-schema.description=" {description}"
 
 LABEL org.label-schema.name="{org_labelschema_name}"
 LABEL org.label-schema.version="{version}"
-LABEL org.label-schema.build-date="{build_date}"
 LABEL org.label-schema.url="{vcs_url}"
 LABEL org.label-schema.changelog-url="{vcs_url}"
 LABEL org.label-schema.authoritative-source-url="{vcs_url}"
+
 LABEL maintainer="{org_labelschema_maintainer}"
-LABEL org.label-schema.release="CardboardCI version:{version} build-date:{build_date}"
+LABEL org.label-schema.release="CardboardCI version:{version}"
 LABEL org.label-schema.schema-version="{org_labelschema_schemaversion}"
 LABEL org.label-schema.vendor="{org_labelschema_vendor}"
 LABEL org.label-schema.architecture="{org_labelschema_architecture}"
 LABEL org.label-schema.distribution-scope="{org_labelschema_distributionscope}"
 LABEL org.label-schema.vcs-type="{org_labelschema_vcs_type}"
-LABEL org.label-schema.vcs-url="https://gitlab.com/cardboardci/images/hugo"
+LABEL org.label-schema.vcs-url="{vcs_url}"
 LABEL org.label-schema.vcs-ref="${vcs_ref}"
