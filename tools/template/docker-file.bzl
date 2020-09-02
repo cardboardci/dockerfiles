@@ -38,7 +38,7 @@ def _dockerfile_impl(ctx):
         "{version}": ctx.attr.version,
         "{digest}": ctx.attr.digest,
         "{vcs_url}": ctx.attr.vcs_url,
-        "{org_labelschema_name}": ctx.attr.name,
+        "{org_labelschema_name}": ctx.attr.image,
     }
     arguments = dict(inputs, **installs)
 
@@ -54,6 +54,7 @@ def _dockerfile_impl(ctx):
 dockerfile = rule(
     implementation = _dockerfile_impl,
     attrs = {
+        "image": attr.string(mandatory = True),
         "digest": attr.string(mandatory = True),
         "vcs_url": attr.string(mandatory = True),
         "version": attr.string(mandatory = True),
