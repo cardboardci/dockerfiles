@@ -12,28 +12,12 @@ fi
 # fi
 
 # Emit the current versions
-for image in images/*
+for directory in images/*
 do
+	image=${directory#"images/"}
 	(
-		cd $image
-		ls
-
-		# echo "Current versions"
-		# cat ${CONTAINER}/provision/nodelist
-
-		# mv ${CONTAINER}/provision/nodelist ${CONTAINER}/provision/nodelist.bak
-		# touch ${CONTAINER}/provision/nodelist
-		# while read line; do
-		# 	echo "Working with ${line}"
-		# 	input=(${line//@/ })
-		# 	echo "Determining version for ${input}"
-		# 	version=$(npm show ${input} version)
-		# 	echo "Found version as ${version}"
-		# 	echo "${input}@${version}" >> ${CONTAINER}/provision/nodelist
-		# done <${CONTAINER}/provision/nodelist.bak
-
-		# #
-		# rm ${CONTAINER}/provision/nodelist.bak
-		# cat ${CONTAINER}/provision/nodelist
+		echo "Current image: $image"
+		
+		make apt-${image}
 	)
 done

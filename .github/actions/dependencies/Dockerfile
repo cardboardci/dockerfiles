@@ -9,9 +9,11 @@ LABEL "com.github.actions.description"="Upgrade dependencies of a series of Dock
 LABEL "com.github.actions.icon"="git"
 LABEL "com.github.actions.color"="purple"
 
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y git jq curl ca-certificates wget make
 # Temporary ignore the deps for this
 # RUN apt-get update \
-#     && apt-get install --no-install-recommends -y git jq curl ca-certificates wget \
+#     && apt-get install --no-install-recommends -y git jq curl ca-certificates wget make \
 #     # luarocks
 #     && apt-get install --no-install-recommends -y luarocks lua-sec gcc \ 
 #     # npm
