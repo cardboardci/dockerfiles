@@ -6,10 +6,10 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 	exit 1
 fi
 
-if [ -z "$(git status --porcelain)" ]; then 
-	echo "The working directory is clean. Nothing to do."
-	exit
-fi
+# if [ -z "$(git status --porcelain)" ]; then 
+# 	echo "The working directory is clean. Nothing to do."
+# 	exit
+# fi
 
 # Emit the current versions
 for image in images/*
