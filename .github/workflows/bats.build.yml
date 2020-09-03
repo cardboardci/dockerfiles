@@ -28,7 +28,7 @@ jobs:
       - name: Set tag var
         id: vars
         run: |
-          echo ::set-output name=docker_image::docker.pkg.github.com/cardboardci/dockerfiles/bats
+          echo ::set-output name=docker_image::ghcr.io/cardboardci/bats
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Hadolint
@@ -50,5 +50,5 @@ jobs:
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com --username ${{ github.actor }} --password-stdin
+          echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
           docker push ${{ steps.vars.outputs.docker_image }}
