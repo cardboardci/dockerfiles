@@ -47,7 +47,7 @@ jobs:
           args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
 
       - name: Push to GitHub Packages
-        # if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
           docker push ${{ steps.vars.outputs.docker_image }}
