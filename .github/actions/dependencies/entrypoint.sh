@@ -11,6 +11,8 @@ fi
 # 	exit
 # fi
 
+apt-get update -y
+
 # Emit the current versions
 for directory in images/*
 do
