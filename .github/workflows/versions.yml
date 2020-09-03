@@ -18,3 +18,15 @@ jobs:
         uses: ./.github/actions/dependencies
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Changes to the environment
+        run: |
+          git status
+
+      - name: Commit all of the dependencies
+        uses: ./.github/actions/auto-commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: '/deps'
+          MESSAGE: 'Upgrade packages to latest dependencies'
+          PULL_REQUEST_TITLE: 'Bump image dependencies to latest'
