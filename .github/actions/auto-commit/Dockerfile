@@ -1,4 +1,5 @@
-FROM ubuntu:focal-20191030
+# tag: ubuntu:focal-20200319
+FROM ubuntu@sha256:8e1c1ee12a539d652c371ee2f4ee66909f4f5fd8002936d8011d958f05faf989
 
 LABEL "name"="auto-commit"
 LABEL "maintainer"="Jonathan Beverly <jonathan@jrbeverly.me>"

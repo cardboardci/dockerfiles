@@ -1,8 +1,12 @@
-name: markdownlint-deps
+name: dependabump
 
 on:
   schedule:
-  - cron: "30 4 * * *"
+    - cron: "30 4 * * 0"
+  push:
+    paths:
+      - .github/workflows/versions.yml
+      - .github/actions/dependencies/*
 
 jobs:
   apt-get:
@@ -10,18 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set versions
-        id: version
-        run: |
-          echo ::set-output name=type::markdownlint
+      - name: Upgrade the dependencies
+        uses: ./.github/actions/dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upgrade dependencies
+      - name: Changes to the environment
         run: |
-          make apt-${{ steps.version.outputs.type }}
-          make npm-${{ steps.version.outputs.type }}
           git status
 
-      - name: Commit the dependency changes
+      - name: Commit all of the dependencies
         uses: ./.github/actions/auto-commit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
