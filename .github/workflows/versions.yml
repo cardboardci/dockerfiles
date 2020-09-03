@@ -1,8 +1,8 @@
 name: dependabump
 
 on:
-  # schedule:
-  # - cron: "30 4 * * *"
+  schedule:
+    - cron: "30 4 * * *"
   push:
     paths:
       - .github/workflows/versions.yml
