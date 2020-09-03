@@ -49,5 +49,5 @@ jobs:
       - name: Push to GitHub Packages
         # if: github.ref == 'refs/heads/master'
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+          echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
           docker push ${{ steps.vars.outputs.docker_image }}
