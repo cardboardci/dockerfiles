@@ -6,9 +6,6 @@ else
     CONTAINER="images/$@"
 fi
 
-# Update package status
-apt-get update
-
 # Emit the current versions
 echo "Current versions"
 cat ${CONTAINER}/provision/pkglist

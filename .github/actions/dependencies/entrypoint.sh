@@ -18,6 +18,6 @@ do
 	(
 		echo "Current image: $image"
 		
-		make apt-${image}
+		bash tools/apt.bash ${image}
 	)
 done
