@@ -10,6 +10,8 @@ LABEL "com.github.actions.description"="Upgrade dependencies of a series of Dock
 LABEL "com.github.actions.icon"="git"
 LABEL "com.github.actions.color"="purple"
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update \
     && apt-get install --no-install-recommends -y git jq curl ca-certificates wget make \
     # luarocks
