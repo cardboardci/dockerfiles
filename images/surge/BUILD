@@ -1,9 +1,9 @@
-load("//tools/template:docker-file.bzl", "dockerfile")
+load("//tools/template:docker-file.bzl", "dockerfile", "COMMON_DIGEST")
 
 dockerfile(
     name = "dockerfile",
     image = "surge",
-    digest = "sha256:2a0ca344b220f3e922bcca6136f585697573b74bb6f69115a5b152dbfe68bad2",
+    digest = COMMON_DIGEST,
     packages = ['apt-get', 'npm'],
     label_schema = {
         "{summary}" : "Static web publishing",

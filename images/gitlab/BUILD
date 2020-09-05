@@ -1,9 +1,9 @@
-load("//tools/template:docker-file.bzl", "dockerfile")
+load("//tools/template:docker-file.bzl", "dockerfile", "COMMON_DIGEST")
 
 dockerfile(
     name = "dockerfile",
     image = "gitlab",
-    digest = "sha256:2a0ca344b220f3e922bcca6136f585697573b74bb6f69115a5b152dbfe68bad2",
+    digest = COMMON_DIGEST,
     packages = ['apt-get', 'bin'],
     script = "curl -sSL 'https://raw.githubusercontent.com/zaquestion/lab/master/install.sh' -o /tmp/install.sh && sync && bash /tmp/install.sh",
     label_schema = {
