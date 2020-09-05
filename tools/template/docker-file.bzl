@@ -11,7 +11,9 @@ ORG_LABELSCHEMA = {
     "{vcs_url}": "https://github.com/cardboardci/dockerfiles",
 }
 
-COMMON_DIGEST = "sha256:2a0ca344b220f3e922bcca6136f585697573b74bb6f69115a5b152dbfe68bad2"
+# Temporarily use a tag instead of a digest, as ghcr.io does not support digests at this time
+COMMON_DIGEST = "sha256:5d7351ea2789b130c4bee518731b51bd7c83bd03bc93d5818d6750835a842a94"
+# COMMON_DIGEST = "20200903"
 
 def _ziplist_impl():
     return """
