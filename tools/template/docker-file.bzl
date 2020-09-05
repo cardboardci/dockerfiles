@@ -11,6 +11,8 @@ ORG_LABELSCHEMA = {
     "{vcs_url}": "https://github.com/cardboardci/dockerfiles",
 }
 
+COMMON_DIGEST = "sha256:2a0ca344b220f3e922bcca6136f585697573b74bb6f69115a5b152dbfe68bad2"
+
 def _ziplist_impl():
     return """
 COPY provision/ziplist /cardboardci/ziplist
