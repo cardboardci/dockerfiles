@@ -141,17 +141,25 @@ dockerfile = rule(
     outputs = {"source_file": "Dockerfile"},
 )
 
-def _compose_script(image):
+def _compose_script(image, dockerfile):
     return """
-echo $(location :dockerfile)
-docker build -t {image} `dirname $(location BUILD)` < $(location dockerfile)
+docker build -t {image} `dirname $(location BUILD)` < $(location {file})
 docker inspect {image} > $(location image.json)
-""".format(image = image)
+""".format(image = image, file = dockerfile)
 
-def docker_container(name, srcs, rule):
-  native.genrule(
-    name = name,
-    srcs = ["BUILD", ":dockerfile"] + srcs,
-    outs = ["image.json"],
-    cmd = _compose_script(rule),
-  )
+def docker_container(name, srcs, image, digest, packages, label_schema):
+    template_rule = "%s/dockerfile" % image 
+    dockerfile(
+        name = template_rule,
+        image = image,
+        digest = digest,
+        packages = packages,
+        label_schema = label_schema,
+    )
+
+    native.genrule(
+        name = name,
+        srcs = ["BUILD", ":%s" % template_rule] + srcs,
+        outs = ["image.json"],
+        cmd = _compose_script(image, template_rule),
+    )
