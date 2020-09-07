@@ -1,4 +1,5 @@
 _TEMPLATE = "//tools/template:Dockerfile.template"
+_SCRIPT_TEMPLATE = "//tools/template:docker.in.template"
 
 ORG_LABELSCHEMA = {
     "{org_labelschema_maintainer}": "CardboardCI",
@@ -121,6 +122,8 @@ def _dockerfile_impl(ctx):
         output = ctx.outputs.source_file,
         substitutions = subs,
     )
+    my_runfiles = ctx.runfiles(files = [ctx.outputs.source_file])
+    return DefaultInfo(files = depset([ctx.outputs.source_file]), runfiles = my_runfiles)
 
 dockerfile = rule(
     implementation = _dockerfile_impl,
@@ -137,3 +140,26 @@ dockerfile = rule(
     },
     outputs = {"source_file": "Dockerfile"},
 )
+
+def _compose_script(image, dockerfile):
+    return """
+docker build -t {image} `dirname $(location BUILD)` < $(location {file})
+docker inspect {image} > $(location image.json)
+""".format(image = image, file = dockerfile)
+
+def docker_container(name, srcs, image, digest, packages, label_schema):
+    template_rule = "%s/dockerfile" % image 
+    dockerfile(
+        name = template_rule,
+        image = image,
+        digest = digest,
+        packages = packages,
+        label_schema = label_schema,
+    )
+
+    native.genrule(
+        name = name,
+        srcs = ["BUILD", ":%s" % template_rule] + srcs,
+        outs = ["image.json"],
+        cmd = _compose_script(image, template_rule),
+    )

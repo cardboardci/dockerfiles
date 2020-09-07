@@ -1,7 +1,11 @@
-load("//tools/template:docker-file.bzl", "dockerfile", "COMMON_DIGEST")
+load("//tools/template:docker-file.bzl", "COMMON_DIGEST", "docker_container")
 
-dockerfile(
-    name = "dockerfile",
+docker_container(
+    name = "image",
+    srcs = glob([
+        "provision/*",
+        "rootfs/*",
+    ]) + [".dockerignore"],
     image = "awscli",
     digest = COMMON_DIGEST,
     packages = ['apt-get'],
