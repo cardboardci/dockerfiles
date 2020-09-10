@@ -1,0 +1,26 @@
+schemaVersion: 2.0.0
+
+fileExistenceTests:
+  - name: "python3_test"
+    path: "/usr/bin/python3"
+    shouldExist: true
+  - name: "pip3_test"
+    path: "/usr/bin/pip3"
+    shouldExist: true
+  - name: "grep_test"
+    path: "/usr/bin/grep"
+    shouldExist: true
+
+commandTests:
+  - name: "python3_test"
+    command: "python3"
+    args: ["-V"]
+    expectedOutput: ["Python 3\\..*"]
+  - name: "pip3_test"
+    command: "pip3"
+    args: ["-V"]
+    expectedOutput: ["pip \\d+\\..*"]
+  - name: "awscli_test"
+    command: "aws"
+    args: ["--version"]
+    expectedError: ["aws-cli\\/\\d+\\..*"]
