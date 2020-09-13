@@ -1,0 +1,39 @@
+name: bazel-build
+on:
+  push:
+    paths:
+      - bazel/image_data/*
+      - bazel/image_data/*/*
+      - bazel/image_data/*/*/*
+      - bazel/test_configs/*
+      - bazel/test_configs/*/*
+      - bazel/BUILD
+      - .github/workflows/bazel.build.yml
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set tag var
+        id: vars
+        run: |
+          echo ::set-output name=docker_image::ghcr.io/cardboardci/bats
+          echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
+      - name: Setup Bazel
+        uses: abhinavsingh/setup-bazel@v3
+      - name: Build
+        run: |
+          bazel build //bazel:awscli
+      - name: Tests
+        run: |
+          bazel test //bazel:awscli_test
+      - name: Tests
+        run: |
+          bazel run //bazel:awscli
+          docker tag bazel/bazel/awscli ${{ steps.vars.outputs.docker_image }}
+      - name: Push to GitHub Packages
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+          # docker push ${{ steps.vars.outputs.docker_image }}
