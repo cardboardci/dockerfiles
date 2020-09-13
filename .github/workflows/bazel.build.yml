@@ -33,13 +33,13 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
       - name: Build
         run: |
-          bazel build //bazel:awscli
+          bazel build //bazel:image
       - name: Tests
         run: |
-          bazel test //bazel:awscli_test
+          bazel test //bazel:test
       - name: Load & Tag Image
         run: |
-          bazel run //bazel:awscli
+          bazel run //bazel:image
           docker tag bazel/bazel:awscli ${{ steps.vars.outputs.docker_image }}
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'

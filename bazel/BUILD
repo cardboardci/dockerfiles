@@ -42,7 +42,7 @@ container_run_and_commit(
 )
 
 container_image(
-    name = "awscli",
+    name = "image",
     base = ":awscli_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
@@ -76,10 +76,10 @@ container_image(
 # Tests
 
 container_test(
-    name = "awscli_test",
+    name = "test",
     configs = [
         "//bazel/test_configs:command.yaml",
         "//bazel/test_configs:metadata.yaml",
     ],
-    image = ":awscli",
+    image = ":image",
 )
