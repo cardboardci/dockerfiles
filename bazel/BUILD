@@ -77,6 +77,9 @@ container_image(
 
 container_test(
     name = "awscli_test",
-    configs = ["//bazel/test_configs:command.yaml", "//bazel/test_configs:metadata.yaml"],
+    configs = [
+        "//bazel/test_configs:command.yaml",
+        "//bazel/test_configs:metadata.yaml",
+    ],
     image = ":awscli",
 )
