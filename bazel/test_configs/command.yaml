@@ -23,4 +23,4 @@ commandTests:
   - name: "awscli_test"
     command: "aws"
     args: ["--version"]
-    expectedError: ["aws-cli\\/\\d+\\..*"]
+    expectedOutput: ["aws-cli\\/\\d+\\..*"]
