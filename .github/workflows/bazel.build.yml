@@ -20,20 +20,27 @@ jobs:
         run: |
           echo ::set-output name=docker_image::ghcr.io/cardboardci/bats
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
-      - name: Setup Bazel
-        uses: abhinavsingh/setup-bazel@v3
+      - name: Mount bazel cache
+        uses: actions/cache@v2
         with:
-          version: 3.5.0
+          path: "/home/runner/.cache/bazel"
+          key: bazel
+      - name: Install bazelisk
+        run: |
+          curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.6.1/bazelisk-linux-amd64"
+          mkdir -p "${GITHUB_WORKSPACE}/bin/"
+          mv bazelisk-linux-amd64 "${GITHUB_WORKSPACE}/bin/bazel"
+          chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
       - name: Build
         run: |
           bazel build //bazel:awscli
       - name: Tests
         run: |
           bazel test //bazel:awscli_test
-      - name: Tests
+      - name: Load & Tag Image
         run: |
           bazel run //bazel:awscli
-          docker tag bazel/bazel/awscli ${{ steps.vars.outputs.docker_image }}
+          docker tag bazel/bazel:awscli ${{ steps.vars.outputs.docker_image }}
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |
