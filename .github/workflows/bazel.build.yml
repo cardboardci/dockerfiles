@@ -40,9 +40,9 @@ jobs:
       - name: Load & Tag Image
         run: |
           bazel run //bazel:image
-          docker tag bazel/bazel:awscli ${{ steps.vars.outputs.docker_image }}
-      - name: Push to GitHub Packages
-        if: github.ref == 'refs/heads/master'
-        run: |
-          echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-          # docker push ${{ steps.vars.outputs.docker_image }}
+          docker tag bazel/bazel:image ${{ steps.vars.outputs.docker_image }}
+      # - name: Push to GitHub Packages
+      #   if: github.ref == 'refs/heads/master'
+      #   run: |
+      #     echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+      #     docker push ${{ steps.vars.outputs.docker_image }}
