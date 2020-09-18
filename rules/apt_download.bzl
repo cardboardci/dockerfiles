@@ -180,7 +180,7 @@ _attrs = {
         allow_files = True,
     ),
     "_run_download_tpl": attr.label(
-        default = Label("//rules:run_download.sh.tpl"),
+        default = Label("@io_bazel_rules_docker//docker/package_managers:run_download.sh.tpl"),
         allow_single_file = True,
     ),
 }
