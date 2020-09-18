@@ -44,12 +44,12 @@ items=$(ls /tmp/install/*.deb)
 if [ $items = ""]; then
     echo "Did not find the .deb files for debian packages {package} in /tmp/install. Did apt-get actually succeed?" && false
 fi
-# Generate csv listing the name & versions of the debian packages.
-# Example contents of a metadata CSV with debian packages gcc 8.1 & clang 9.1:
-# Name,Version
-# gcc,7.1
-# clang,9.1
+
+echo "Generating metadata CSV file {installables}_metadata.csv"
+echo Name,Version > {installables}_metadata.csv
+
 dpkg_deb_path=$(which dpkg-deb)
+sha256_sum_path=$(which sha256sum)
 for item in $items; do
     echo "Adding information about $item to metadata CSV"
     pkg_name=$($dpkg_deb_path -f $item Package)
@@ -60,7 +60,13 @@ for item in $items; do
     if [ $pkg_version = ""]; then
         echo "Failed to get the version of the package for $item" && false
     fi
-    echo "Package $pkg_name, Version $pkg_version"
+    pkg_sum=$($sha256_sum_path $item)
+    if [ $pkg_sum = ""]; then
+        echo "Failed to get the sum of the package for $item" && false
+    fi
+    echo "Package $pkg_name, Version $pkg_version, Sum $pkg_sum"
+    echo -n "$pkg_name," >> {installables}_metadata.csv
+    echo $pkg_version >> {installables}_metadata.csv
 done;
 # Tar command to only include all the *.deb files and ignore other directories placed in the cache dir.
 tar -cpf {installables}_packages.tar --mtime='1970-01-01' --directory /tmp/install/. `cd /tmp/install/. && ls *.deb`""".format(
@@ -69,7 +75,7 @@ tar -cpf {installables}_packages.tar --mtime='1970-01-01' --directory /tmp/insta
         add_additional_repo_commands = _generate_add_additional_repo_commands(ctx, additional_repos),
     )
 
-def _impl(ctx, image_tar = None, package = None, additional_repos = None, output_executable = None, output_tar = None, output_script = None):
+def _impl(ctx, image_tar = None, package = None, additional_repos = None, output_executable = None, output_tar = None, output_script = None, output_metadata = None):
     """Implementation for the download_pkgs rule.
 
     Args:
@@ -80,13 +86,15 @@ def _impl(ctx, image_tar = None, package = None, additional_repos = None, output
         output_executable: File, overrides ctx.outputs.executable
         output_tar: File, overrides ctx.outputs.pkg_tar
         output_script: File, overrides ctx.outputs.build_script
+        output_metadata: File, overrides ctx.outputs.metadata_csv
     """
     image_tar = image_tar or ctx.file.image_tar
-    package = depset([package or ctx.attr.package])
+    package = package or ctx.attr.package
     additional_repos = depset(additional_repos or ctx.attr.additional_repos)
     output_executable = output_executable or ctx.outputs.executable
     output_tar = output_tar or ctx.outputs.pkg_tar
     output_script = output_script or ctx.outputs.build_script
+    output_metadata = output_metadata or ctx.outputs.metadata_csv
 
     if not package:
         fail("attribute 'package' given to download_pkgs rule by {} was empty.".format(attr.label))
@@ -105,13 +113,14 @@ def _impl(ctx, image_tar = None, package = None, additional_repos = None, output
             "%{image_id_extractor_path}": ctx.executable._extract_image_id.path,
             "%{image_tar}": image_tar.path,
             "%{installables}": ctx.attr.name,
+            "%{output_metadata}": output_metadata.path,
             "%{output}": output_tar.path,
         },
         is_executable = True,
     )
 
     ctx.actions.run(
-        outputs = [output_tar],
+        outputs = [output_tar, output_metadata],
         executable = output_script,
         inputs = [image_tar],
         tools = [ctx.executable._extract_image_id],
@@ -130,6 +139,7 @@ def _impl(ctx, image_tar = None, package = None, additional_repos = None, output
             "%{image_id_extractor_path}": "${RUNFILES}/%s" % runfile(ctx, ctx.executable._extract_image_id),
             "%{image_tar}": image_tar.short_path,
             "%{installables}": ctx.attr.name,
+            "%{output_metadata}": output_metadata.short_path,
             "%{output}": output_tar.short_path,
         },
         is_executable = True,
@@ -143,6 +153,7 @@ def _impl(ctx, image_tar = None, package = None, additional_repos = None, output
                 files = [
                     image_tar,
                     output_script,
+                    output_metadata,
                     ctx.executable._extract_image_id,
                 ],
                 transitive_files = ctx.attr._extract_image_id[DefaultInfo].default_runfiles.files,
@@ -186,6 +197,7 @@ _attrs = {
 
 _outputs = {
     "build_script": "%{name}.sh",
+    "metadata_csv": "%{name}_metadata.csv",
     "pkg_tar": "%{name}.tar",
 }
 

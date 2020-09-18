@@ -16,20 +16,20 @@ download_pkgs(
     ],
 )
 
-# TODO: Revise this in the following concept:
-
-# We will define all of the packages and output a command for
-# downloading and packaging the item
-#
-# Then we will supply this to a downloader action
-# download = packages=[:a, :b, :c, :d]
-
 download_apt_pkg(
     name = "apt_get_python3",
     image_tar = "@ubuntu//image",
     package = "python3",
     version = "1.2.3",
     sum = "asdfasdf",
+)
+
+install_pkgs(
+    name = "install_pkgs",
+    image_tar = "@ubuntu//image",
+    installables_tar = ":apt_get_python3.tar",
+    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
+    output_image_name = "test_pkgs",
 )
 
 install_pkgs(
