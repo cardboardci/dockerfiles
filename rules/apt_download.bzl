@@ -27,7 +27,7 @@ def _generate_add_additional_repo_commands(ctx, additional_repos):
         repos = "\n".join(additional_repos.to_list()),
     )
 
-def _generate_download_commands(ctx, packages, additional_repos):
+def _generate_download_commands(ctx, package, additional_repos):
     return """#!/bin/bash
 set -ex
 {add_additional_repo_commands}
@@ -38,19 +38,17 @@ apt-get update -y
 # Make partial dir
 mkdir -p /tmp/install/./partial
 # Install command
-apt-get install --no-install-recommends -y -q -o Dir::Cache="/tmp/install" -o Dir::Cache::archives="." {packages} --download-only
+apt-get install --no-install-recommends -y -q -o Dir::Cache="/tmp/install" -o Dir::Cache::archives="." {package} --download-only
 
 items=$(ls /tmp/install/*.deb)
 if [ $items = ""]; then
-    echo "Did not find the .deb files for debian packages {packages} in /tmp/install. Did apt-get actually succeed?" && false
+    echo "Did not find the .deb files for debian packages {package} in /tmp/install. Did apt-get actually succeed?" && false
 fi
 # Generate csv listing the name & versions of the debian packages.
 # Example contents of a metadata CSV with debian packages gcc 8.1 & clang 9.1:
 # Name,Version
 # gcc,7.1
 # clang,9.1
-echo "Generating metadata CSV file {installables}_metadata.csv"
-echo Name,Version > {installables}_metadata.csv
 dpkg_deb_path=$(which dpkg-deb)
 for item in $items; do
     echo "Adding information about $item to metadata CSV"
@@ -63,39 +61,35 @@ for item in $items; do
         echo "Failed to get the version of the package for $item" && false
     fi
     echo "Package $pkg_name, Version $pkg_version"
-    echo -n "$pkg_name," >> {installables}_metadata.csv
-    echo $pkg_version >> {installables}_metadata.csv
 done;
 # Tar command to only include all the *.deb files and ignore other directories placed in the cache dir.
 tar -cpf {installables}_packages.tar --mtime='1970-01-01' --directory /tmp/install/. `cd /tmp/install/. && ls *.deb`""".format(
         installables = ctx.attr.name,
-        packages = " ".join(packages.to_list()),
+        package = package,
         add_additional_repo_commands = _generate_add_additional_repo_commands(ctx, additional_repos),
     )
 
-def _impl(ctx, image_tar = None, packages = None, additional_repos = None, output_executable = None, output_tar = None, output_script = None, output_metadata = None):
+def _impl(ctx, image_tar = None, package = None, additional_repos = None, output_executable = None, output_tar = None, output_script = None):
     """Implementation for the download_pkgs rule.
 
     Args:
         ctx: The bazel rule context
         image_tar: File, overrides ctx.file.image_tar
-        packages: str List, overrides ctx.attr.packages
+        package: str List, overrides ctx.attr.packages
         additional_repos: str List, overrides ctx.attr.additional_repos
         output_executable: File, overrides ctx.outputs.executable
         output_tar: File, overrides ctx.outputs.pkg_tar
         output_script: File, overrides ctx.outputs.build_script
-        output_metadata: File, overrides ctx.outputs.metadata_csv
     """
     image_tar = image_tar or ctx.file.image_tar
-    packages = depset(packages or ctx.attr.packages)
+    package = depset([package or ctx.attr.package])
     additional_repos = depset(additional_repos or ctx.attr.additional_repos)
     output_executable = output_executable or ctx.outputs.executable
     output_tar = output_tar or ctx.outputs.pkg_tar
     output_script = output_script or ctx.outputs.build_script
-    output_metadata = output_metadata or ctx.outputs.metadata_csv
 
-    if not packages:
-        fail("attribute 'packages' given to download_pkgs rule by {} was empty.".format(attr.label))
+    if not package:
+        fail("attribute 'package' given to download_pkgs rule by {} was empty.".format(attr.label))
 
     toolchain_info = ctx.toolchains["@io_bazel_rules_docker//toolchains/docker:toolchain_type"].info
 
@@ -107,18 +101,17 @@ def _impl(ctx, image_tar = None, packages = None, additional_repos = None, outpu
         substitutions = {
             "%{docker_flags}": " ".join(toolchain_info.docker_flags),
             "%{docker_tool_path}": toolchain_info.tool_path,
-            "%{download_commands}": _generate_download_commands(ctx, packages, additional_repos),
+            "%{download_commands}": _generate_download_commands(ctx, package, additional_repos),
             "%{image_id_extractor_path}": ctx.executable._extract_image_id.path,
             "%{image_tar}": image_tar.path,
             "%{installables}": ctx.attr.name,
-            "%{output_metadata}": output_metadata.path,
             "%{output}": output_tar.path,
         },
         is_executable = True,
     )
 
     ctx.actions.run(
-        outputs = [output_tar, output_metadata],
+        outputs = [output_tar],
         executable = output_script,
         inputs = [image_tar],
         tools = [ctx.executable._extract_image_id],
@@ -133,11 +126,10 @@ def _impl(ctx, image_tar = None, packages = None, additional_repos = None, outpu
         substitutions = {
             "%{docker_flags}": " ".join(toolchain_info.docker_flags),
             "%{docker_tool_path}": toolchain_info.tool_path,
-            "%{download_commands}": _generate_download_commands(ctx, packages, additional_repos),
+            "%{download_commands}": _generate_download_commands(ctx, package, additional_repos),
             "%{image_id_extractor_path}": "${RUNFILES}/%s" % runfile(ctx, ctx.executable._extract_image_id),
             "%{image_tar}": image_tar.short_path,
             "%{installables}": ctx.attr.name,
-            "%{output_metadata}": output_metadata.short_path,
             "%{output}": output_tar.short_path,
         },
         is_executable = True,
@@ -151,7 +143,6 @@ def _impl(ctx, image_tar = None, packages = None, additional_repos = None, outpu
                 files = [
                     image_tar,
                     output_script,
-                    output_metadata,
                     ctx.executable._extract_image_id,
                 ],
                 transitive_files = ctx.attr._extract_image_id[DefaultInfo].default_runfiles.files,
@@ -169,7 +160,15 @@ _attrs = {
         allow_single_file = True,
         mandatory = True,
     ),
-    "packages": attr.string_list(
+    "package": attr.string(
+        doc = "list of packages to download. e.g. ['curl', 'netbase']",
+        mandatory = True,
+    ),
+    "version": attr.string(
+        doc = "list of packages to download. e.g. ['curl', 'netbase']",
+        mandatory = True,
+    ),
+    "sum": attr.string(
         doc = "list of packages to download. e.g. ['curl', 'netbase']",
         mandatory = True,
     ),
@@ -187,7 +186,6 @@ _attrs = {
 
 _outputs = {
     "build_script": "%{name}.sh",
-    "metadata_csv": "%{name}_metadata.csv",
     "pkg_tar": "%{name}.tar",
 }
 

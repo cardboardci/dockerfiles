@@ -1,27 +1,35 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
-# load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
+load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("//rules:apt_download.bzl", "download_apt_pkg")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 
 ## Packages
 
-# download_pkgs(
-#     name = "pkgs_dwnld",
-#     image_tar = "@ubuntu//image",
-#     packages = [
-#         "python3",
-#         "python3-pip",
-#     ],
-# )
-download_apt_pkg(
+download_pkgs(
     name = "pkgs_dwnld",
     image_tar = "@ubuntu//image",
     packages = [
         "python3",
         "python3-pip",
     ],
+)
+
+# TODO: Revise this in the following concept:
+
+# We will define all of the packages and output a command for
+# downloading and packaging the item
+#
+# Then we will supply this to a downloader action
+# download = packages=[:a, :b, :c, :d]
+
+download_apt_pkg(
+    name = "apt_get_python3",
+    image_tar = "@ubuntu//image",
+    package = "python3",
+    version = "1.2.3",
+    sum = "asdfasdf",
 )
 
 install_pkgs(
