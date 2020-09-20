@@ -38,7 +38,11 @@ apt-get update -y
 # Make partial dir
 mkdir -p /tmp/install/./partial
 # Install command
-apt-get install --no-install-recommends -y -q -o Dir::Cache="/tmp/install" -o Dir::Cache::archives="." {package} --download-only
+#apt-get install --no-install-recommends -y -q -o Dir::Cache="/tmp/install" -o Dir::Cache::archives="." {package} --download-only
+(
+    cd /tmp/install
+    apt-get download -y -q -o Dir::Cache="/tmp/install" -o Dir::Cache::archives="." {package}
+)
 
 items=$(ls /tmp/install/*.deb)
 if [ $items = ""]; then
