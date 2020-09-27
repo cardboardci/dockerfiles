@@ -17,7 +17,7 @@ jobs:
       - name: Upgrade the dependencies
         uses: ./.github/actions/dependencies
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
 
       - name: Changes to the environment
         run: |
@@ -26,7 +26,7 @@ jobs:
       - name: Commit all of the dependencies
         uses: ./.github/actions/auto-commit
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
           BRANCH: '/deps'
           MESSAGE: 'Upgrade packages to latest dependencies'
           PULL_REQUEST_TITLE: 'Bump image dependencies to latest'
