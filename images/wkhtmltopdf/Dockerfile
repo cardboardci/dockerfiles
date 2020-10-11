@@ -15,7 +15,7 @@ COPY provision/pkglist /cardboardci/pkglist
 RUN apt-get update && xargs -a /cardboardci/pkglist apt-get install -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY provision/deblist /cardboardci/deblist
-RUN mkdir -p /tmp/deb && xargs -a /cardboardci/deblist wget --directory-prefix=/tmp/deb && dpkg -i /tmp/deb/*.deb && rm -rf tmp/deb
+RUN mkdir -p /tmp/deb && xargs -a /cardboardci/deblist wget --directory-prefix=/tmp/deb && dpkg -i /tmp/deb/*.deb && rm -rf /tmp/deb
 
 USER cardboardci
 
