@@ -27,4 +27,4 @@ git remote add github "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITH
 git push -u github HEAD
 
 ## Create a pull request
-hub pull-request -m "${PULL_REQUEST_TITLE}" $PULL_REQUEST_OPTIONS
+hub pull-request -m "${PULL_REQUEST_TITLE}" $PULL_REQUEST_OPTIONS --assign jrbeverly
