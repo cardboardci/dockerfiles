@@ -1,4 +1,4 @@
-openssl=1.1.1f-1ubuntu2
+openssl=1.1.1f-1ubuntu2.1
 build-essential=12.8ubuntu1.1
 xz-utils=5.2.4-1ubuntu1
 xfonts-100dpi=1:1.0.4+nmu1
