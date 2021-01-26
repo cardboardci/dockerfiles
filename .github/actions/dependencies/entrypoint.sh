@@ -28,9 +28,9 @@ do
 			bash tools/gem.bash ${image}
 		fi
 
-		if [ -f "${directory}/provision/lualist" ]; then
-			bash tools/luarocks.bash ${image}
-		fi
+		# if [ -f "${directory}/provision/lualist" ]; then
+		#	 bash tools/luarocks.bash ${image}
+		# fi
 
 		if [ -f "${directory}/provision/nodelist" ]; then
 			bash tools/npm.bash ${image}
