@@ -1,5 +1,5 @@
-# tag: ubuntu:focal-20200319
-FROM ubuntu@sha256:8e1c1ee12a539d652c371ee2f4ee66909f4f5fd8002936d8011d958f05faf989
+# tag: ubuntu:xenial-20210114
+FROM ubuntu@sha256:edf232ee7dc18c57c063bc83533ef2c03c6dfae55a0124f7d372aed51cd1d9c8
 
 LABEL "name"="dependencies"
 LABEL "maintainer"="Jonathan Beverly <jonathan@jrbeverly.me>"
