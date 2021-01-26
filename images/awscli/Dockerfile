@@ -22,17 +22,17 @@ USER cardboardci
 ARG vcs_ref
 LABEL \
     maintainer="CardboardCI" \
-    org.label-schema.schema-version="1.0" \
-    org.label-schema.name="awscli" \
-    org.label-schema.release="CardboardCI version:0.0.0" \
-    org.label-schema.vendor="cardboardci" \
-    org.label-schema.architecture="amd64" \
-    org.label-schema.summary="AWS CLI" \
-    org.label-schema.description=" The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services" \
-    org.label-schema.url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.changelog-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.distribution-scope="public" \
-    org.label-schema.vcs-type="git" \
-    org.label-schema.vcs-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.vcs-ref="${vcs_ref}"
+    org.opencontainers.image.schema-version="1.0" \
+    org.opencontainers.image.name="awscli" \
+    org.opencontainers.image.release="CardboardCI version:0.0.0" \
+    org.opencontainers.image.vendor="cardboardci" \
+    org.opencontainers.image.architecture="amd64" \
+    org.opencontainers.image.summary="AWS CLI" \
+    org.opencontainers.image.description=" The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services" \
+    org.opencontainers.image.url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.changelog-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.distribution-scope="public" \
+    org.opencontainers.image.vcs-type="git" \
+    org.opencontainers.image.vcs-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.vcs-ref="${vcs_ref}"

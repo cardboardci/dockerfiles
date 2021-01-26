@@ -27,17 +27,17 @@ USER cardboardci
 ARG vcs_ref
 LABEL \
     maintainer="CardboardCI" \
-    org.label-schema.schema-version="1.0" \
-    org.label-schema.name="gitlab" \
-    org.label-schema.release="CardboardCI version:0.0.0" \
-    org.label-schema.vendor="cardboardci" \
-    org.label-schema.architecture="amd64" \
-    org.label-schema.summary="GitLab CLI" \
-    org.label-schema.description=" Lab wraps Git or Hub, making it simple to clone, fork, and interact with repositories on GitLab" \
-    org.label-schema.url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.changelog-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.distribution-scope="public" \
-    org.label-schema.vcs-type="git" \
-    org.label-schema.vcs-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.vcs-ref="${vcs_ref}"
+    org.opencontainers.image.schema-version="1.0" \
+    org.opencontainers.image.name="gitlab" \
+    org.opencontainers.image.release="CardboardCI version:0.0.0" \
+    org.opencontainers.image.vendor="cardboardci" \
+    org.opencontainers.image.architecture="amd64" \
+    org.opencontainers.image.summary="GitLab CLI" \
+    org.opencontainers.image.description=" Lab wraps Git or Hub, making it simple to clone, fork, and interact with repositories on GitLab" \
+    org.opencontainers.image.url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.changelog-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.distribution-scope="public" \
+    org.opencontainers.image.vcs-type="git" \
+    org.opencontainers.image.vcs-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.vcs-ref="${vcs_ref}"
