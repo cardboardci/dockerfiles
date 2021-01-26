@@ -25,8 +25,7 @@ USER cardboardci
 ARG vcs_ref
 LABEL \
     maintainer="CardboardCI" \
-    org.opencontainers.image.schema-version="1.0" \
-    org.opencontainers.image.name="pylint" \
+    org.opencontainers.image.title="pylint" \
     org.opencontainers.image.release="CardboardCI version:0.0.0" \
     org.opencontainers.image.vendor="cardboardci" \
     org.opencontainers.image.architecture="amd64" \
@@ -38,4 +37,4 @@ LABEL \
     org.opencontainers.image.distribution-scope="public" \
     org.opencontainers.image.vcs-type="git" \
     org.opencontainers.image.source="https://github.com/cardboardci/dockerfiles/images/pylint" \
-    org.opencontainers.image.vcs-ref="${vcs_ref}"
+    org.opencontainers.image.revision="${vcs_ref}"

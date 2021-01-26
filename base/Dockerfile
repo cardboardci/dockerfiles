@@ -23,8 +23,7 @@ ENTRYPOINT [ "/bin/bash", "-l", "-c" ]
 
 ARG version=1.0.0
 LABEL maintainer="CardboardCI"
-LABEL org.opencontainers.image.schema-version="1.0"
-LABEL org.opencontainers.image.name="ci-core"
+LABEL org.opencontainers.image.title="ci-core"
 LABEL org.opencontainers.image.version="${version}"
 LABEL org.opencontainers.image.release="CardboardCI version:${version}"
 LABEL org.opencontainers.image.vendor="cardboardci"

@@ -19,8 +19,7 @@ USER cardboardci
 ARG vcs_ref
 LABEL \
     maintainer="{org_labelschema_maintainer}" \
-    org.opencontainers.image.schema-version="{org_labelschema_schemaversion}" \
-    org.opencontainers.image.name="{org_labelschema_name}" \
+    org.opencontainers.image.title="{org_labelschema_name}" \
     org.opencontainers.image.release="CardboardCI version:{version}" \
     org.opencontainers.image.vendor="{org_labelschema_vendor}" \
     org.opencontainers.image.architecture="{org_labelschema_architecture}" \
@@ -32,4 +31,4 @@ LABEL \
     org.opencontainers.image.distribution-scope="{org_labelschema_distributionscope}" \
     org.opencontainers.image.vcs-type="{org_labelschema_vcs_type}" \
     org.opencontainers.image.source="{vcs_url}" \
-    org.opencontainers.image.vcs-ref="${vcs_ref}"
+    org.opencontainers.image.revision="${vcs_ref}"

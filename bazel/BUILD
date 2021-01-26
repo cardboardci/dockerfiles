@@ -50,8 +50,7 @@ container_image(
     files = glob(["image_data/*"]),
     labels = {
         "maintainer": "CardboardCI",
-        "org.opencontainers.image.schema-version": "1.0",
-        "org.opencontainers.image.name": "awscli",
+        "org.opencontainers.image.title": "awscli",
         "org.opencontainers.image.version": "1.16",
         "org.opencontainers.image.release=": "CardboardCI version:1.16",
         "org.opencontainers.image.vendor": "cardboardci",

@@ -7,8 +7,6 @@ metadataTest:
   labels:
     - key: "maintainer"
       value: "CardboardCI"
-    - key: "org.opencontainers.image.schema-version"
-      value: "1.0"
     - key: "org.opencontainers.image.vendor"
       value: "cardboardci"
     - key: "org.opencontainers.image.architecture"
