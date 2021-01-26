@@ -13,5 +13,5 @@ libspiro-dev=1:20190731-2
 libpango1.0-dev=1.44.7-2ubuntu4
 libcairo2-dev=1.16.0-4ubuntu1
 chrpath=0.16-2
-uuid-dev=2.34-0.1ubuntu9
+uuid-dev=2.34-0.1ubuntu9.1
 uthash-dev=2.1.0-1

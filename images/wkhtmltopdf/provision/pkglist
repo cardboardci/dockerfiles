@@ -1,5 +1,5 @@
-openssl=1.1.1f-1ubuntu2
-build-essential=12.8ubuntu1
+openssl=1.1.1f-1ubuntu2.1
+build-essential=12.8ubuntu1.1
 xz-utils=5.2.4-1ubuntu1
 xfonts-100dpi=1:1.0.4+nmu1
 xfonts-75dpi=1:1.0.4+nmu1
@@ -10,5 +10,5 @@ ttf-mscorefonts-installer=3.7ubuntu6
 fontconfig=2.13.1-2ubuntu3
 xorg=1:7.7+19ubuntu14
 wget=1.20.3-1ubuntu1
-zlib1g=1:1.2.11.dfsg-2ubuntu1
+zlib1g=1:1.2.11.dfsg-2ubuntu1.2
 libpng16-16=1.6.37-2
