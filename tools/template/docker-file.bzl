@@ -12,7 +12,7 @@ ORG_LABELSCHEMA = {
     "{vcs_url}": "https://github.com/cardboardci/dockerfiles",
 }
 
-COMMON_DIGEST = "sha256:5d7351ea2789b130c4bee518731b51bd7c83bd03bc93d5818d6750835a842a94"
+COMMON_DIGEST = "sha256:819c94ef6398775e2b4c7eba1f3c60d063cc04b48f13d9e93bacc742c7acf7fc"
 
 def _ziplist_impl():
     return """
