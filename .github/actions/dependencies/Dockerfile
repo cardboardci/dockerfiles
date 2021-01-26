@@ -1,5 +1,5 @@
 # tag: ubuntu:xenial-20210114
-FROM ubuntu@sha256:0eb12402800064cd8f7ae75e9c4ce1a1b5d6b9582bbaf20c539ae19652cc46ec
+FROM ubuntu@sha256:edf232ee7dc18c57c063bc83533ef2c03c6dfae55a0124f7d372aed51cd1d9c8
 
 LABEL "name"="dependencies"
 LABEL "maintainer"="Jonathan Beverly <jonathan@jrbeverly.me>"
