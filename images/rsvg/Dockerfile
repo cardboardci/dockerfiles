@@ -22,17 +22,16 @@ USER cardboardci
 ARG vcs_ref
 LABEL \
     maintainer="CardboardCI" \
-    org.label-schema.schema-version="1.0" \
-    org.label-schema.name="rsvg" \
-    org.label-schema.release="CardboardCI version:0.0.0" \
-    org.label-schema.vendor="cardboardci" \
-    org.label-schema.architecture="amd64" \
-    org.label-schema.summary="Rasterize SVGs" \
-    org.label-schema.description=" Turn SVG files into raster images" \
-    org.label-schema.url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.changelog-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.distribution-scope="public" \
-    org.label-schema.vcs-type="git" \
-    org.label-schema.vcs-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.vcs-ref="${vcs_ref}"
+    org.opencontainers.image.title="rsvg" \
+    org.opencontainers.image.release="CardboardCI version:0.0.0" \
+    org.opencontainers.image.vendor="cardboardci" \
+    org.opencontainers.image.architecture="amd64" \
+    org.opencontainers.image.summary="Rasterize SVGs" \
+    org.opencontainers.image.description=" Turn SVG files into raster images" \
+    org.opencontainers.image.url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.changelog-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.distribution-scope="public" \
+    org.opencontainers.image.vcs-type="git" \
+    org.opencontainers.image.source="https://github.com/cardboardci/dockerfiles/images/rsvg" \
+    org.opencontainers.image.revision="${vcs_ref}"

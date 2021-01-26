@@ -22,17 +22,16 @@ USER cardboardci
 ARG vcs_ref
 LABEL \
     maintainer="CardboardCI" \
-    org.label-schema.schema-version="1.0" \
-    org.label-schema.name="tflint" \
-    org.label-schema.release="CardboardCI version:0.0.0" \
-    org.label-schema.vendor="cardboardci" \
-    org.label-schema.architecture="amd64" \
-    org.label-schema.summary="Terraform linter" \
-    org.label-schema.description=" TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan" \
-    org.label-schema.url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.changelog-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.distribution-scope="public" \
-    org.label-schema.vcs-type="git" \
-    org.label-schema.vcs-url="https://github.com/cardboardci/dockerfiles" \
-    org.label-schema.vcs-ref="${vcs_ref}"
+    org.opencontainers.image.title="tflint" \
+    org.opencontainers.image.release="CardboardCI version:0.0.0" \
+    org.opencontainers.image.vendor="cardboardci" \
+    org.opencontainers.image.architecture="amd64" \
+    org.opencontainers.image.summary="Terraform linter" \
+    org.opencontainers.image.description=" TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan" \
+    org.opencontainers.image.url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.changelog-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.distribution-scope="public" \
+    org.opencontainers.image.vcs-type="git" \
+    org.opencontainers.image.source="https://github.com/cardboardci/dockerfiles/images/tflint" \
+    org.opencontainers.image.revision="${vcs_ref}"

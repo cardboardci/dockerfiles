@@ -19,17 +19,16 @@ USER cardboardci
 ARG vcs_ref
 LABEL \
     maintainer="{org_labelschema_maintainer}" \
-    org.label-schema.schema-version="{org_labelschema_schemaversion}" \
-    org.label-schema.name="{org_labelschema_name}" \
-    org.label-schema.release="CardboardCI version:{version}" \
-    org.label-schema.vendor="{org_labelschema_vendor}" \
-    org.label-schema.architecture="{org_labelschema_architecture}" \
-    org.label-schema.summary="{summary}" \
-    org.label-schema.description=" {description}" \
-    org.label-schema.url="{vcs_url}" \
-    org.label-schema.changelog-url="{vcs_url}" \
-    org.label-schema.authoritative-source-url="{vcs_url}" \
-    org.label-schema.distribution-scope="{org_labelschema_distributionscope}" \
-    org.label-schema.vcs-type="{org_labelschema_vcs_type}" \
-    org.label-schema.vcs-url="{vcs_url}" \
-    org.label-schema.vcs-ref="${vcs_ref}"
+    org.opencontainers.image.title="{org_labelschema_name}" \
+    org.opencontainers.image.release="CardboardCI version:{version}" \
+    org.opencontainers.image.vendor="{org_labelschema_vendor}" \
+    org.opencontainers.image.architecture="{org_labelschema_architecture}" \
+    org.opencontainers.image.summary="{summary}" \
+    org.opencontainers.image.description=" {description}" \
+    org.opencontainers.image.url="{vcs_url}" \
+    org.opencontainers.image.changelog-url="{vcs_url}" \
+    org.opencontainers.image.authoritative-source-url="{vcs_url}" \
+    org.opencontainers.image.distribution-scope="{org_labelschema_distributionscope}" \
+    org.opencontainers.image.vcs-type="{org_labelschema_vcs_type}" \
+    org.opencontainers.image.source="{vcs_url}" \
+    org.opencontainers.image.revision="${vcs_ref}"
