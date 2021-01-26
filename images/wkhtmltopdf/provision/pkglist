@@ -12,3 +12,4 @@ xorg=1:7.7+13ubuntu3.1
 wget=1.17.1-1ubuntu1.5
 zlib1g=1:1.2.8.dfsg-2ubuntu4.3
 libpng16-16=1.6.20-2
+libjpeg-turbo8-dev=1.4.2-0ubuntu3.4
