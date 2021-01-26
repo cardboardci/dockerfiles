@@ -1,8 +1,8 @@
-make=4.1-6
-bison=2:3.0.4.dfsg-1
-dpkg-dev=1.18.4ubuntu1.6
-libgdbm-dev=1.8.3-13.1
-ruby=1:2.3.0+1
-ruby-dev=1:2.3.0+1
-build-essential=12.1ubuntu2
-gcc=4:5.3.1-1ubuntu1
+make=4.2.1-1.2
+bison=2:3.5.1+dfsg-1
+dpkg-dev=1.19.7ubuntu3
+libgdbm-dev=1.18.1-5
+ruby=1:2.7+1
+ruby-dev=1:2.7+1
+build-essential=12.8ubuntu1.1
+gcc=4:9.3.0-1ubuntu2
