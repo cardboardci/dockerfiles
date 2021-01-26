@@ -63,7 +63,7 @@ container_image(
         "org.opencontainers.image.authoritative-source-url": "https://cloud.docker.com/u/cardboardci/repository/docker/cardboardci/awscli",
         "org.opencontainers.image.distribution-scope": "public",
         "org.opencontainers.image.vcs-type": "git",
-        "org.opencontainers.image.vcs-url": "https://github.com/cardboardci/docker-awscli",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/docker-awscli",
     },
 
     # The path /workspace is made available for all development work

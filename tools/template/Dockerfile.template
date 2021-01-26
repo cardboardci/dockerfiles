@@ -31,5 +31,5 @@ LABEL \
     org.opencontainers.image.authoritative-source-url="{vcs_url}" \
     org.opencontainers.image.distribution-scope="{org_labelschema_distributionscope}" \
     org.opencontainers.image.vcs-type="{org_labelschema_vcs_type}" \
-    org.opencontainers.image.vcs-url="{vcs_url}" \
+    org.opencontainers.image.source="{vcs_url}" \
     org.opencontainers.image.vcs-ref="${vcs_ref}"

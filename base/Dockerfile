@@ -36,4 +36,4 @@ LABEL org.opencontainers.image.changelog-url="https://github.com/cardboardci/doc
 LABEL org.opencontainers.image.authoritative-source-url="https://hub.docker.com/r/cardboardci/ci-core"
 LABEL org.opencontainers.image.distribution-scope="public"
 LABEL org.opencontainers.image.vcs-type="git"
-LABEL org.opencontainers.image.vcs-url="https://github.com/cardboardci/docker-ci-core"
+LABEL org.opencontainers.image.source="https://github.com/cardboardci/dockerfiles/base"

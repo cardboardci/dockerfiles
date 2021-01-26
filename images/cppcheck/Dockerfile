@@ -34,5 +34,5 @@ LABEL \
     org.opencontainers.image.authoritative-source-url="https://github.com/cardboardci/dockerfiles" \
     org.opencontainers.image.distribution-scope="public" \
     org.opencontainers.image.vcs-type="git" \
-    org.opencontainers.image.vcs-url="https://github.com/cardboardci/dockerfiles" \
+    org.opencontainers.image.source="https://github.com/cardboardci/dockerfiles/images/cppcheck" \
     org.opencontainers.image.vcs-ref="${vcs_ref}"
