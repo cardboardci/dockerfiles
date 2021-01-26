@@ -1,5 +1,5 @@
-git=1:2.25.1-1ubuntu3
-jq=1.6-1
-curl=7.68.0-1ubuntu2
-bash=5.0-6ubuntu1
+git=1:2.7.4-0ubuntu1.9
+jq=1.5+dfsg-1ubuntu0.1
+curl=7.47.0-1ubuntu2.18
+bash=4.3-14ubuntu1.4
 ca-certificates=20201027ubuntu0.16.04.1
