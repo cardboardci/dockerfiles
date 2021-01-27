@@ -19,7 +19,7 @@ jobs:
 
       - name: Test
         run: |
-          bazel test //images/awscli:tests
+          bazel test //images/awscli:test
 
       # Configure credentials for container_push in bazel
       - name: Push to GitHub Packages
