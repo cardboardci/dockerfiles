@@ -13,10 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Setup bazel
-        uses: jwlawson/actions-setup-bazel@v1
-        with:
-          bazel-version: '3.5.1'
+      - name: Install bazel
+        run: |
+          ls ${INSTALLER_SCRIPT_FOLDER}
+          bash ${INSTALLER_SCRIPT_FOLDER}/bazel.sh
 
       - name: Set image variables
         id: vars
