@@ -10,7 +10,10 @@ def images():
 
     container_pull(
         name = "cardboardci_base",
-        registry = "ghcr.io",
-        repository = "cardboardci/base",
-        digest = "sha256:74be5d6438114943e76d0f4f27d2ef5b05d873f07eb9a1ccd5e4735de1d43902",
+        registry = "index.docker.io",
+        repository = "library/ubuntu",
+        digest = "sha256:edf232ee7dc18c57c063bc83533ef2c03c6dfae55a0124f7d372aed51cd1d9c8",
+        # registry = "ghcr.io",
+        # repository = "cardboardci/base",
+        # digest = "sha256:74be5d6438114943e76d0f4f27d2ef5b05d873f07eb9a1ccd5e4735de1d43902",
     )
