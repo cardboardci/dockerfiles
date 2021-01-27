@@ -14,4 +14,4 @@ metadataTest:
   exposedPorts: []
   volumes: ["/workspace"]
   cmd: [ "/bin/bash" ]
-  workdir: "/cardboardci/workspace" 
+  workdir: "/workspace" 
