@@ -15,8 +15,7 @@ jobs:
 
       - name: Install bazel
         run: |
-          ls ${INSTALLER_SCRIPT_FOLDER}
-          bash ${INSTALLER_SCRIPT_FOLDER}/bazel.sh
+          bazel --version
 
       - name: Set image variables
         id: vars
