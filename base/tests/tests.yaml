@@ -6,5 +6,5 @@ metadataTest:
       value: cardboardci
   exposedPorts: []
   volumes: []
-  cmd: []
+  cmd: [ "/bin/bash" ]
   workdir: "/cardboardci/workspace" 
