@@ -2,17 +2,10 @@ name: awscli-build
 on:
   push:
     paths:
-      - images/awscli/provision/*
-      - images/awscli/provision/*/*
-      - images/awscli/provision/*/*/*
-      - images/awscli/rootfs/*
-      - images/awscli/rootfs/*/*
-      - images/awscli/rootfs/*/*/*
-      - images/awscli/tests/*
-      - images/awscli/tests/*/*
-      - images/awscli/Dockerfile
-      - images/awscli/.hadolint.yaml
       - .github/workflows/awscli.build.yml
+      - images/awscli/image_data/**/*
+      - images/awscli/test_configs/**/*
+      - images/awscli/BUILD
 
 jobs:
   build-and-test:
@@ -20,32 +13,29 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Setup bazel
+        uses: jwlawson/actions-setup-bazel@v1
+        with:
+          bazel-version: '3.5.0'
+
       - name: Set image variables
         id: vars
         run: |
           echo ::set-output name=docker_path::images/awscli
           echo ::set-output name=dockerfile::images/awscli/Dockerfile
           echo ::set-output name=dockerdir::images/awscli/.
-          echo ::set-output name=hadolint_config::images/awscli/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/awscli
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Hadolint
-        uses: docker://docker.io/cardboardci/hadolint:latest
-        with:
-          args: "hadolint --config=${{ steps.vars.outputs.hadolint_config }} ${{ steps.vars.outputs.dockerfile }}"
+      - name: Build
+        run: |
+          bazel build //images/awscli:image
 
       - name: Build
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
+          bazel test //images/awscli:tests
 
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
-
+      # Configure credentials for container_push in bazel
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |

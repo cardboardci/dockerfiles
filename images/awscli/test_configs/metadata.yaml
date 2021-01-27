@@ -11,4 +11,8 @@ metadataTest:
       value: "cardboardci"
     - key: "org.opencontainers.image.architecture"
       value: "amd64"
+  exposedPorts: []
+  user: "cardboardci"
   volumes: ["/workspace"]
+  cmd: [ "/bin/bash" ]
+  workdir: "/cardboardci/workspace" 

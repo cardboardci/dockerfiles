@@ -25,6 +25,7 @@ container_image(
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
+    user = "cardboardci",
     labels = {
         "maintainer":"CardboardCI",
         "org.opencontainers.image.title":"awscli",
