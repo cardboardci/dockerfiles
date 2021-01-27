@@ -21,7 +21,21 @@ jobs:
         run: |
           bazel test //images/awscli:test
 
-      # Configure credentials for container_push in bazel
+      - name: Set image variables
+        id: vars
+        run: |
+          echo ::set-output name=docker_path::images/awscli
+          echo ::set-output name=dockerfile::images/awscli/Dockerfile
+          echo ::set-output name=dockerdir::images/awscli/.
+          echo ::set-output name=hadolint_config::images/awscli/.hadolint.yaml
+          echo ::set-output name=docker_image::ghcr.io/cardboardci/awscli
+          echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
+
+      - name: Tag Image
+        run: |
+          bazel run //images/awscli:image
+          docker tag bazel/images/awscli:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
+
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |
