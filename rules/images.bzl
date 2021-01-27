@@ -7,3 +7,10 @@ def images():
         repository = "library/ubuntu",
         digest = "sha256:cb6a3a1298c73e3248b6b07ef3c78a14df4bade77b4be1ad725f8f5f2785e348",
     )
+
+    container_pull(
+        name = "cardboardci_base",
+        registry = "ghcr.io",
+        repository = "cardboardci/base",
+        digest = "sha256:bbf36e6f9e1ff487b92a81e0a1f5fbad9bac9453dbdd3ae6c06631e27999238c",
+    )
