@@ -18,7 +18,6 @@ COPY provision/user.sh /cardboardci/user.sh
 RUN bash /cardboardci/user.sh ; sync ; rm -f /cardboardci/user.sh
 
 WORKDIR /cardboardci/workspace
-ENTRYPOINT [ "/bin/bash", "-l", "-c" ]
 
 ARG version=1.0.0
 LABEL maintainer="CardboardCI"
