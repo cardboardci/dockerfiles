@@ -1,12 +1,54 @@
-load("//tools/template:docker-file.bzl", "dockerfile", "COMMON_DIGEST")
+load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
+load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
+load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
-dockerfile(
-    name = "dockerfile",
-    image = "tflint",
-    digest = COMMON_DIGEST,
-    packages = ['apt-get', 'zip'],
-    label_schema = {
-        "{summary}" : "Terraform linter",
-        "{description}" : "TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan",
-    }
+download_pkgs(
+    name = "apt_get_download",
+    image_tar = "@cardboardci_base//image",
+    packages = ["tflint=1.18.69-1ubuntu0.16.04.1"],
+)
+
+install_pkgs(
+    name = "apt_get_installed",
+    image_tar = "@cardboardci_base//image",
+    installables_tar = ":apt_get_download.tar",
+    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
+    output_image_name = "apt_get_installed",
+)
+
+container_image(
+    name = "image",
+    base = ":apt_get_installed.tar",
+    env = {
+        "CARDBOARDCI_WORKSPACE": "/workspace",
+    },
+    files = glob(["image_data/*"]),
+    user = "cardboardci",
+    labels = {
+        "maintainer":"CardboardCI",
+        "org.opencontainers.image.title":"tflint",
+        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor":"cardboardci",
+        "org.opencontainers.image.architecture":"amd64",
+        "org.opencontainers.image.summary":"Terraform linter",
+        "org.opencontainers.image.description":"TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan",
+        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/tflint",
+    },
+    volumes = [
+        "/workspace",
+    ],
+    entrypoint = "",
+    cmd = ["/bin/bash"],
+    workdir = "/workspace",
+)
+
+container_test(
+    name = "test",
+    configs = [
+        "//images/tflint/test_configs:command.yaml",
+        "//images/tflint/test_configs:metadata.yaml",
+    ],
+    image = ":image",
 )
