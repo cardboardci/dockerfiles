@@ -1,11 +1,11 @@
-name: awscli-build
+name: cppcheck-build
 on:
   push:
     paths:
-      - .github/workflows/awscli.build.yml
-      - images/awscli/image_data/**/*
-      - images/awscli/test_configs/**/*
-      - images/awscli/BUILD
+      - .github/workflows/cppcheck.build.yml
+      - images/cppcheck/image_data/**/*
+      - images/cppcheck/test_configs/**/*
+      - images/cppcheck/BUILD
 
 jobs:
   build-and-test:
@@ -15,26 +15,26 @@ jobs:
 
       - name: Build
         run: |
-          bazel build //images/awscli:image
+          bazel build //images/cppcheck:image
 
       - name: Test
         run: |
-          bazel test //images/awscli:test
+          bazel test //images/cppcheck:test
 
       - name: Set image variables
         id: vars
         run: |
-          echo ::set-output name=docker_path::images/awscli
-          echo ::set-output name=dockerfile::images/awscli/Dockerfile
-          echo ::set-output name=dockerdir::images/awscli/.
-          echo ::set-output name=hadolint_config::images/awscli/.hadolint.yaml
-          echo ::set-output name=docker_image::ghcr.io/cardboardci/awscli
+          echo ::set-output name=docker_path::images/cppcheck
+          echo ::set-output name=dockerfile::images/cppcheck/Dockerfile
+          echo ::set-output name=dockerdir::images/cppcheck/.
+          echo ::set-output name=hadolint_config::images/cppcheck/.hadolint.yaml
+          echo ::set-output name=docker_image::ghcr.io/cardboardci/cppcheck
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Tag Image
         run: |
-          bazel run //images/awscli:image
-          docker tag bazel/images/awscli:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
+          bazel run //images/cppcheck:image
+          docker tag bazel/images/cppcheck:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
