@@ -61,7 +61,8 @@ container_image(
     volumes = [
         "/workspace",
     ],
-    cmd = "/bin/bash",
+    entrypoint = "",
+    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 
