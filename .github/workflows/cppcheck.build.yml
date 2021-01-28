@@ -2,23 +2,24 @@ name: cppcheck-build
 on:
   push:
     paths:
-      - images/cppcheck/provision/*
-      - images/cppcheck/provision/*/*
-      - images/cppcheck/provision/*/*/*
-      - images/cppcheck/rootfs/*
-      - images/cppcheck/rootfs/*/*
-      - images/cppcheck/rootfs/*/*/*
-      - images/cppcheck/tests/*
-      - images/cppcheck/tests/*/*
-      - images/cppcheck/Dockerfile
-      - images/cppcheck/.hadolint.yaml
       - .github/workflows/cppcheck.build.yml
+      - images/cppcheck/image_data/**/*
+      - images/cppcheck/test_configs/**/*
+      - images/cppcheck/BUILD
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/cppcheck:image
+
+      - name: Test
+        run: |
+          bazel test //images/cppcheck:test
 
       - name: Set image variables
         id: vars
@@ -30,21 +31,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/cppcheck
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Hadolint
-        uses: docker://docker.io/cardboardci/hadolint:latest
-        with:
-          args: "hadolint --config=${{ steps.vars.outputs.hadolint_config }} ${{ steps.vars.outputs.dockerfile }}"
-
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/cppcheck:image
+          docker tag bazel/images/cppcheck:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
