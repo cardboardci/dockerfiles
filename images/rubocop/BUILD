@@ -1,12 +1,54 @@
-load("//tools/template:docker-file.bzl", "dockerfile", "COMMON_DIGEST")
+load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
+load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
+load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
-dockerfile(
-    name = "dockerfile",
-    image = "rubocop",
-    digest = COMMON_DIGEST,
-    packages = ['apt-get', 'rubygems'],
-    label_schema = {
-        "{summary}" : "Ruby static code analyzer",
-        "{description}" : "A Ruby static code analyzer and formatter, based on the community Ruby style guide",
-    }
+download_pkgs(
+    name = "apt_get_download",
+    image_tar = "@cardboardci_base//image",
+    packages = ["rubocop=1.18.69-1ubuntu0.16.04.1"],
+)
+
+install_pkgs(
+    name = "apt_get_installed",
+    image_tar = "@cardboardci_base//image",
+    installables_tar = ":apt_get_download.tar",
+    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
+    output_image_name = "apt_get_installed",
+)
+
+container_image(
+    name = "image",
+    base = ":apt_get_installed.tar",
+    env = {
+        "CARDBOARDCI_WORKSPACE": "/workspace",
+    },
+    files = glob(["image_data/*"]),
+    user = "cardboardci",
+    labels = {
+        "maintainer":"CardboardCI",
+        "org.opencontainers.image.title":"rubocop",
+        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor":"cardboardci",
+        "org.opencontainers.image.architecture":"amd64",
+        "org.opencontainers.image.summary":"Ruby static code analyzer",
+        "org.opencontainers.image.description":"A Ruby static code analyzer and formatter, based on the community Ruby style guide",
+        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/rubocop",
+    },
+    volumes = [
+        "/workspace",
+    ],
+    entrypoint = "",
+    cmd = ["/bin/bash"],
+    workdir = "/workspace",
+)
+
+container_test(
+    name = "test",
+    configs = [
+        "//images/rubocop/test_configs:command.yaml",
+        "//images/rubocop/test_configs:metadata.yaml",
+    ],
+    image = ":image",
 )
