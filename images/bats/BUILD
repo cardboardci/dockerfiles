@@ -26,8 +26,6 @@ install_pkgs(
 container_image(
     name = "apt_get_installed",
     base = ":apt_get_install.tar",
-    cmd = "",
-    entrypoint = "",
 )
 
 ## npm
@@ -63,6 +61,7 @@ container_image(
     volumes = [
         "/workspace",
     ],
+    cmd = "/bin/bash",
     workdir = "/workspace",
 )
 
