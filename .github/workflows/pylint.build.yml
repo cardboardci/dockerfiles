@@ -26,14 +26,8 @@ jobs:
           echo ::set-output name=docker_path::images/pylint
           echo ::set-output name=dockerfile::images/pylint/Dockerfile
           echo ::set-output name=dockerdir::images/pylint/.
-          echo ::set-output name=hadolint_config::images/pylint/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/pylint
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
-
-      - name: Hadolint
-        uses: docker://docker.io/cardboardci/hadolint:latest
-        with:
-          args: "hadolint --config=${{ steps.vars.outputs.hadolint_config }} ${{ steps.vars.outputs.dockerfile }}"
 
       - name: Build
         run: |

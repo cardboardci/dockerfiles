@@ -26,14 +26,8 @@ jobs:
           echo ::set-output name=docker_path::images/dbxcli
           echo ::set-output name=dockerfile::images/dbxcli/Dockerfile
           echo ::set-output name=dockerdir::images/dbxcli/.
-          echo ::set-output name=hadolint_config::images/dbxcli/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/dbxcli
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
-
-      - name: Hadolint
-        uses: docker://docker.io/cardboardci/hadolint:latest
-        with:
-          args: "hadolint --config=${{ steps.vars.outputs.hadolint_config }} ${{ steps.vars.outputs.dockerfile }}"
 
       - name: Build
         run: |
