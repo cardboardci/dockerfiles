@@ -26,7 +26,6 @@ jobs:
           echo ::set-output name=docker_path::images/netlify
           echo ::set-output name=dockerfile::images/netlify/Dockerfile
           echo ::set-output name=dockerdir::images/netlify/.
-          echo ::set-output name=hadolint_config::images/netlify/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/netlify
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

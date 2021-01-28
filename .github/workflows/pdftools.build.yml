@@ -26,7 +26,6 @@ jobs:
           echo ::set-output name=docker_path::images/pdftools
           echo ::set-output name=dockerfile::images/pdftools/Dockerfile
           echo ::set-output name=dockerdir::images/pdftools/.
-          echo ::set-output name=hadolint_config::images/pdftools/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/pdftools
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

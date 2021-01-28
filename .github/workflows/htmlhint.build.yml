@@ -26,7 +26,6 @@ jobs:
           echo ::set-output name=docker_path::images/htmlhint
           echo ::set-output name=dockerfile::images/htmlhint/Dockerfile
           echo ::set-output name=dockerdir::images/htmlhint/.
-          echo ::set-output name=hadolint_config::images/htmlhint/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/htmlhint
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

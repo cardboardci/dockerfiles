@@ -26,7 +26,6 @@ jobs:
           echo ::set-output name=docker_path::images/surge
           echo ::set-output name=dockerfile::images/surge/Dockerfile
           echo ::set-output name=dockerdir::images/surge/.
-          echo ::set-output name=hadolint_config::images/surge/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/surge
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

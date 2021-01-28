@@ -26,7 +26,6 @@ jobs:
           echo ::set-output name=docker_path::images/rsvg
           echo ::set-output name=dockerfile::images/rsvg/Dockerfile
           echo ::set-output name=dockerdir::images/rsvg/.
-          echo ::set-output name=hadolint_config::images/rsvg/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/rsvg
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

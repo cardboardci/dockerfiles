@@ -26,7 +26,6 @@ jobs:
           echo ::set-output name=docker_path::images/ecr
           echo ::set-output name=dockerfile::images/ecr/Dockerfile
           echo ::set-output name=dockerdir::images/ecr/.
-          echo ::set-output name=hadolint_config::images/ecr/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/ecr
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
