@@ -7,7 +7,7 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["latex=1.18.69-1ubuntu0.16.04.1"],
+    packages = ["texlive-full=2015.20160320-1ubuntu0.1"],
 )
 
 install_pkgs(
