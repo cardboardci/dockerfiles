@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+  - name: "cppcheck_test"
+    command: "cppcheck"
+    args: ["--version"]
+    expectedOutput: ["Cppcheck \\d+\\..*"]
