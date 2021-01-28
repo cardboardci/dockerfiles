@@ -1,0 +1,10 @@
+schemaVersion: "2.0.0"
+
+metadataTest:
+  labels:
+    - key: 'org.opencontainers.image.vendor'
+      value: cardboardci
+  exposedPorts: []
+  volumes: []
+  cmd: []
+  workdir: "/cardboardci/workspace" 
