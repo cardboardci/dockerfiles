@@ -7,7 +7,13 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["cppcheck=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "build-essential=12.1ubuntu2",
+        "libpcre3-dev=2:8.38-3.1",
+        "python3=3.5.1-3",
+        "python-pygments=2.1+dfsg-1",
+        "cppcheck=1.72-1",
+    ],
 )
 
 install_pkgs(
