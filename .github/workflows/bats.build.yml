@@ -2,16 +2,10 @@ name: bats-build
 on:
   push:
     paths:
-      - images/bats/provision/*
-      - images/bats/provision/*/*
-      - images/bats/provision/*/*/*
-      - images/bats/rootfs/*
-      - images/bats/rootfs/*/*
-      - images/bats/rootfs/*/*/*
-      - images/bats/tests/*
-      - images/bats/tests/*/*
-      - images/bats/Dockerfile
       - .github/workflows/bats.build.yml
+      - images/bats/image_data/**/*
+      - images/bats/test_configs/**/*
+      - images/bats/BUILD
 
 jobs:
   build-and-test:
@@ -19,33 +13,28 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set versions
-        id: version
+      - name: Build
         run: |
-          echo ::set-output name=docker_version::0.0.1
-          echo ::set-output name=docker_path::images/bats
+          bazel build //images/bats:image
 
-      - name: Set tag var
+      - name: Test
+        run: |
+          bazel test //images/bats:test
+
+      - name: Set image variables
         id: vars
         run: |
+          echo ::set-output name=docker_path::images/bats
+          echo ::set-output name=dockerfile::images/bats/Dockerfile
+          echo ::set-output name=dockerdir::images/bats/.
+          echo ::set-output name=hadolint_config::images/bats/.hadolint.yaml
           echo ::set-output name=docker_image::ghcr.io/cardboardci/bats
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Hadolint
-        uses: docker://docker.io/cardboardci/hadolint:latest
-        with:
-          args: "hadolint images/bats/Dockerfile"
-
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.version.outputs.docker_path }}/. \
-            --file ${{ steps.version.outputs.docker_path }}/Dockerfile \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.version.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/bats:image
+          docker tag bazel/images/bats:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
