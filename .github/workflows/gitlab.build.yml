@@ -2,23 +2,24 @@ name: gitlab-build
 on:
   push:
     paths:
-      - images/gitlab/provision/*
-      - images/gitlab/provision/*/*
-      - images/gitlab/provision/*/*/*
-      - images/gitlab/rootfs/*
-      - images/gitlab/rootfs/*/*
-      - images/gitlab/rootfs/*/*/*
-      - images/gitlab/tests/*
-      - images/gitlab/tests/*/*
-      - images/gitlab/Dockerfile
-      - images/gitlab/.hadolint.yaml
       - .github/workflows/gitlab.build.yml
+      - images/gitlab/image_data/**/*
+      - images/gitlab/test_configs/**/*
+      - images/gitlab/BUILD
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/gitlab:image
+
+      - name: Test
+        run: |
+          bazel test //images/gitlab:test
 
       - name: Set image variables
         id: vars
@@ -29,16 +30,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/gitlab
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/gitlab:image
+          docker tag bazel/images/gitlab:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
