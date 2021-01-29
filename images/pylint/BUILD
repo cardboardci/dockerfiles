@@ -6,21 +6,38 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 download_pkgs(
     name = "apt_get_download",
-    image_tar = "@cardboardci_base//image",
-    packages = ["pylint=1.18.69-1ubuntu0.16.04.1"],
+    image_tar = "@ubuntu//image",
+    packages = [
+        "python3",
+        "python3-pip",
+    ],
 )
 
 install_pkgs(
     name = "apt_get_installed",
-    image_tar = "@cardboardci_base//image",
+    image_tar = "@ubuntu//image",
     installables_tar = ":apt_get_download.tar",
     installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "apt_get_installed",
 )
 
 container_image(
-    name = "image",
+    name = "apt_get_done",
     base = ":apt_get_installed.tar",
+)
+
+container_run_and_commit(
+    name = "pip_install",
+    commands = [
+        "python3 -m pip install --upgrade pip==21.0 setuptools==52.0.0 wheel==0.36.2",
+        "python3 -m pip install pylint==2.4.4",
+    ],
+    image = ":apt_get_done.tar",
+)
+
+container_image(
+    name = "image",
+    base = ":pip_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
