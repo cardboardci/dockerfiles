@@ -2,23 +2,24 @@ name: hadolint-build
 on:
   push:
     paths:
-      - images/hadolint/provision/*
-      - images/hadolint/provision/*/*
-      - images/hadolint/provision/*/*/*
-      - images/hadolint/rootfs/*
-      - images/hadolint/rootfs/*/*
-      - images/hadolint/rootfs/*/*/*
-      - images/hadolint/tests/*
-      - images/hadolint/tests/*/*
-      - images/hadolint/Dockerfile
-      - images/hadolint/.hadolint.yaml
       - .github/workflows/hadolint.build.yml
+      - images/hadolint/image_data/**/*
+      - images/hadolint/test_configs/**/*
+      - images/hadolint/BUILD
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/hadolint:image
+
+      - name: Test
+        run: |
+          bazel test //images/hadolint:test
 
       - name: Set image variables
         id: vars
@@ -29,16 +30,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/hadolint
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/hadolint:image
+          docker tag bazel/images/hadolint:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
