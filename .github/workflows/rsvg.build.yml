@@ -2,23 +2,24 @@ name: rsvg-build
 on:
   push:
     paths:
-      - images/rsvg/provision/*
-      - images/rsvg/provision/*/*
-      - images/rsvg/provision/*/*/*
-      - images/rsvg/rootfs/*
-      - images/rsvg/rootfs/*/*
-      - images/rsvg/rootfs/*/*/*
-      - images/rsvg/tests/*
-      - images/rsvg/tests/*/*
-      - images/rsvg/Dockerfile
-      - images/rsvg/.hadolint.yaml
       - .github/workflows/rsvg.build.yml
+      - images/rsvg/image_data/**/*
+      - images/rsvg/test_configs/**/*
+      - images/rsvg/BUILD
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/rsvg:image
+
+      - name: Test
+        run: |
+          bazel test //images/rsvg:test
 
       - name: Set image variables
         id: vars
@@ -29,16 +30,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/rsvg
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/rsvg:image
+          docker tag bazel/images/rsvg:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
