@@ -7,7 +7,10 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["hadolint=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "libgmp10=2:6.1.0+dfsg-2",
+        "wget=1.17.1-1ubuntu1.5",
+    ],
 )
 
 install_pkgs(
@@ -18,9 +21,18 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
+container_run_and_commit(
+    name = "bin_install",
+    commands = [
+        "wget https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64 -O /usr/bin/hadolint",
+        "chmod +x /usr/bin/hadolint",
+    ],
+    image = ":apt_get_installed.tar",
+)
+
 container_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
