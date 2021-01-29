@@ -7,7 +7,11 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["github=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "openssh-client=1:7.2p2-4ubuntu2.10",
+        "vim-nox=2:7.4.1689-3ubuntu1.5",
+        "wget=1.17.1-1ubuntu1.5",
+    ],
 )
 
 install_pkgs(
@@ -16,6 +20,15 @@ install_pkgs(
     installables_tar = ":apt_get_download.tar",
     installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "apt_get_installed",
+)
+
+container_run_and_commit(
+    name = "bin_install",
+    commands = [
+        "wget https://github.com/cli/cli/releases/download/v0.6.4/gh_0.6.4_linux_amd64.deb --directory-prefix=/tmp/deb",
+        "dpkg -i /tmp/deb/*.deb",
+    ],
+    image = ":apt_get_installed.tar",
 )
 
 container_image(
