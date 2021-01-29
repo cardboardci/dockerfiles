@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+  - name: "pdf2htmlex_test"
+    command: "pdf2htmlex"
+    args: ["--version"]
+    expectedOutput: ["((.|\n)*)hub version \\d+\\..*"]

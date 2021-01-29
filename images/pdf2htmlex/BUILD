@@ -8,6 +8,7 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
     packages = [
+        "m4",
         "cmake=3.5.1-1ubuntu3",
         "autotools-dev=20150820.1",
         "libjpeg-dev=8c-2ubuntu8",
@@ -39,8 +40,8 @@ install_pkgs(
 container_run_and_commit(
     name = "bin_install",
     commands = [
-        "apt-get update",
-        "apt-get install -qq libtiff4-dev libpng12-dev",
+        "apt-get update -y ",
+        "apt-get install -y libtiff5-dev libpng12-dev",
         "git clone https://github.com/coolwanglu/fontforge.git fontforge.git",
         "cd fontforge.git",
         "git checkout pdf2htmlEX",
@@ -48,7 +49,7 @@ container_run_and_commit(
         "./configure",
         "make V=1",
         "make install",
-        "apt-get install -qq libpoppler-glib-dev",
+        "apt-get install -y libpoppler-glib-dev",
         "rm -rf var/cache/archives/*",
         "git clone https://github.com/coolwanglu/pdf2htmlEX.git",
         "cd pdf2htmlEX",
@@ -62,7 +63,7 @@ container_run_and_commit(
 
 container_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
