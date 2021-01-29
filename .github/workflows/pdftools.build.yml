@@ -2,23 +2,24 @@ name: pdftools-build
 on:
   push:
     paths:
-      - images/pdftools/provision/*
-      - images/pdftools/provision/*/*
-      - images/pdftools/provision/*/*/*
-      - images/pdftools/rootfs/*
-      - images/pdftools/rootfs/*/*
-      - images/pdftools/rootfs/*/*/*
-      - images/pdftools/tests/*
-      - images/pdftools/tests/*/*
-      - images/pdftools/Dockerfile
-      - images/pdftools/.hadolint.yaml
       - .github/workflows/pdftools.build.yml
+      - images/pdftools/image_data/**/*
+      - images/pdftools/test_configs/**/*
+      - images/pdftools/BUILD
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/pdftools:image
+
+      - name: Test
+        run: |
+          bazel test //images/pdftools:test
 
       - name: Set image variables
         id: vars
@@ -29,16 +30,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/pdftools
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/pdftools:image
+          docker tag bazel/images/pdftools:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
