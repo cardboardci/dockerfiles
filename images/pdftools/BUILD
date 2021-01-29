@@ -7,7 +7,7 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["pdftools=1.18.69-1ubuntu0.16.04.1"],
+    packages = ["poppler-utils=0.41.0-0ubuntu1.16"],
 )
 
 install_pkgs(
