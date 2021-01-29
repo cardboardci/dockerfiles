@@ -7,7 +7,11 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["gitlab=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "openssh-client=1:7.2p2-4ubuntu2.10",
+        "vim-nox=2:7.4.1689-3ubuntu1.5",
+        "wget=1.17.1-1ubuntu1.5",
+    ],
 )
 
 install_pkgs(
@@ -18,9 +22,23 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
+container_run_and_commit(
+    name = "bin_install",
+    commands = [
+        "wget https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz -O /tmp/hub",
+        "tar -xvzf /tmp/hub",
+        "mv hub-linux-amd64-2.14.2/bin/hub /usr/bin/hub",
+        "chmod +x /usr/bin/hub",
+        "rm -rf hub*",
+        "curl -sSL 'https://raw.githubusercontent.com/zaquestion/lab/master/install.sh' -o /tmp/install.sh",
+        "bash /tmp/install.sh",
+    ],
+    image = ":apt_get_installed.tar",
+)
+
 container_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
