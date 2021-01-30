@@ -1,5 +1,5 @@
-# tag: ubuntu:xenial-20210114
-FROM ubuntu@sha256:edf232ee7dc18c57c063bc83533ef2c03c6dfae55a0124f7d372aed51cd1d9c8
+# tag: ubuntu:focal-20210119
+FROM ubuntu@sha256:3093096ee188f8ff4531949b8f6115af4747ec1c58858c091c8cb4579c39cc4e
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USER=cardboardci
 
