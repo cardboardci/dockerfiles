@@ -7,7 +7,9 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["texlive-full"],
+    packages = [
+        "wget",
+    ],
 )
 
 install_pkgs(
@@ -18,9 +20,19 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
+container_run_and_commit(
+    name = "bin_install",
+    commands = [
+        "apt-get update -y",
+        "apt-get install -y texlive-full",
+        "rm -rf /var/lib/apt/lists/*",
+    ],
+    image = ":apt_get_installed.tar",
+)
+
 container_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
