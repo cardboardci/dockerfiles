@@ -25,7 +25,7 @@ install_pkgs(
 container_run_and_commit(
     name = "npm_install",
     commands = [
-        "npm install -g -y netlify-cli",
+        "npm install --ignore-scripts -g -y netlify-cli",
     ],
     image = ":apt_get_installed.tar",
 )

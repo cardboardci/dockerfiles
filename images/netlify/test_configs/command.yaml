@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+  - name: "netlify_test"
+    command: "netlify"
+    args: ["--version"]
+    expectedOutput: ["netlify-cli\\/\\d+\\..*"]
