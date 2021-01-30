@@ -1,1 +1,12 @@
 schemaVersion: 2.0.0
+
+fileExistenceTests:
+  - name: "tflint_test"
+    path: "/usr/local/bin/tflint"
+    shouldExist: true
+
+commandTests:
+  - name: "tflint_test"
+    command: "tflint"
+    args: ["--version"]
+    expectedOutput: ["TFLint version \\d+\\..*"]

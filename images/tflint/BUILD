@@ -7,7 +7,10 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["tflint=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "curl",
+        "unzip",
+    ],
 )
 
 install_pkgs(
@@ -19,8 +22,23 @@ install_pkgs(
 )
 
 container_image(
-    name = "image",
+    name = "apt_get_done",
     base = ":apt_get_installed.tar",
+)
+
+container_run_and_commit(
+    name = "bin_install",
+    commands = [
+        "curl -L https://github.com/wata727/tflint/releases/download/v0.23.1/tflint_linux_amd64.zip -o /tmp/tflint.zip",
+        "unzip /tmp/tflint.zip -d /usr/local/bin",
+        "rm /tmp/tflint.zip",
+    ],
+    image = ":apt_get_done.tar",
+)
+
+container_image(
+    name = "image",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },

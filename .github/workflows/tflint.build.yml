@@ -2,23 +2,25 @@ name: tflint-build
 on:
   push:
     paths:
-      - images/tflint/provision/*
-      - images/tflint/provision/*/*
-      - images/tflint/provision/*/*/*
-      - images/tflint/rootfs/*
-      - images/tflint/rootfs/*/*
-      - images/tflint/rootfs/*/*/*
-      - images/tflint/tests/*
-      - images/tflint/tests/*/*
-      - images/tflint/Dockerfile
-      - images/tflint/.hadolint.yaml
       - .github/workflows/tflint.build.yml
+      - images/tflint/image_data/**/*
+      - images/tflint/test_configs/**/*
+      - images/tflint/BUILD
+      - rules/images.bzl
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/tflint:image
+
+      - name: Test
+        run: |
+          bazel test //images/tflint:test
 
       - name: Set image variables
         id: vars
@@ -29,16 +31,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/tflint
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/tflint:image
+          docker tag bazel/images/tflint:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
