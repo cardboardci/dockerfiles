@@ -28,9 +28,8 @@ container_image(
 container_run_and_commit(
     name = "gem_install",
     commands = [
-        "ruby -v",
-        # "gem install rake:13.0.3",
-        # "gem install rubocop",
+        "gem install rake",
+        "gem install rubocop",
     ],
     image = ":apt_get_done.tar",
 )
