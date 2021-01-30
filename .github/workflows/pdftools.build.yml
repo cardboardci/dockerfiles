@@ -6,6 +6,7 @@ on:
       - images/pdftools/image_data/**/*
       - images/pdftools/test_configs/**/*
       - images/pdftools/BUILD
+      - rules/images.bzl
 
 jobs:
   build-and-test:

@@ -6,6 +6,7 @@ on:
       - images/pylint/image_data/**/*
       - images/pylint/test_configs/**/*
       - images/pylint/BUILD
+      - rules/images.bzl
 
 jobs:
   build-and-test:

@@ -6,6 +6,7 @@ on:
       - images/hugo/image_data/**/*
       - images/hugo/test_configs/**/*
       - images/hugo/BUILD
+      - rules/images.bzl
 
 jobs:
   build-and-test:
