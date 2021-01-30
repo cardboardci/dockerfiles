@@ -8,8 +8,8 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
     packages = [
-        "wget=1.17.1-1ubuntu1.5",
-        "liblttng-ust0=2.7.1-1",
+        "wget",
+        "liblttng-ust0",
     ],
 )
 
