@@ -10,6 +10,16 @@ download_pkgs(
     packages = [
         "wget",
         "liblttng-ust0",
+        "less",
+        "locales",
+        "libssl1.1",
+        "libc6",
+        "libgcc1",
+        "libgssapi-krb5-2",
+        "liblttng-ust0",
+        "libstdc++6",
+        "zlib1g",
+        "curl",
     ],
 )
 
@@ -29,11 +39,15 @@ container_image(
 container_run_and_commit(
     name = "bin_install",
     commands = [
-        "wget http://mirrors.edge.kernel.org/ubuntu/pool/main/i/icu/libicu60_60.2-3ubuntu3_amd64.deb --directory-prefix=/tmp/deb",
-        "wget https://github.com/PowerShell/PowerShell/releases/download/v7.0.0/powershell_7.0.0-1.ubuntu.18.04_amd64.deb --directory-prefix=/tmp/deb",
-        "dpkg -i /tmp/deb/*.deb",
-        "mkdir -p /home/cardboardci/.local/share/powershell/",
+        "wget http://ftp.us.debian.org/debian/pool/main/i/icu/libicu57_57.1-6+deb9u4_amd64.deb",
+        "dpkg -i libicu57_57.1-6+deb9u4_amd64.deb",
+        "rm libicu57_57.1-6+deb9u4_amd64.deb",
+        "mkdir -p /home/cardboardci/.local/share/powershell/ /opt/microsoft/powershell/7",
         "chown -R cardboardci:cardboardci /home/cardboardci/ /opt/microsoft/",
+        "curl -L  https://github.com/PowerShell/PowerShell/releases/download/v7.1.0/powershell-7.1.0-linux-x64.tar.gz -o /tmp/powershell.tar.gz",
+        "tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7",
+        "ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh",
+        "chmod +x /opt/microsoft/powershell/7/pwsh",
         "pwsh -c 'Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.18.3 -Scope AllUsers -Force'",
         "pwsh -c 'Import-Module PSScriptAnalyzer'",
     ],
