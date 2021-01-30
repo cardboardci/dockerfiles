@@ -7,7 +7,9 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["rubocop=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "ruby2.7",
+    ],
 )
 
 install_pkgs(
@@ -19,8 +21,23 @@ install_pkgs(
 )
 
 container_image(
-    name = "image",
+    name = "apt_get_done",
     base = ":apt_get_installed.tar",
+)
+
+container_run_and_commit(
+    name = "gem_install",
+    commands = [
+        "ruby -v",
+        # "gem install rake:13.0.3",
+        # "gem install rubocop",
+    ],
+    image = ":apt_get_done.tar",
+)
+
+container_image(
+    name = "image",
+    base = ":gem_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
