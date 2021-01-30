@@ -8,9 +8,9 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
     packages = [
-        "openssh-client=1:7.2p2-4ubuntu2.10",
-        "vim-nox=2:7.4.1689-3ubuntu1.5",
-        "wget=1.17.1-1ubuntu1.5",
+        "openssh-client",
+        "vim-nox",
+        "wget",
     ],
 )
 

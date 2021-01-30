@@ -7,7 +7,7 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["wget=1.17.1-1ubuntu1.5"],
+    packages = ["wget"],
 )
 
 install_pkgs(

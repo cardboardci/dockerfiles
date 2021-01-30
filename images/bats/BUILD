@@ -10,8 +10,8 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
     packages = [
-        "nodejs=4.2.6~dfsg-1ubuntu4.2",
-        "npm=3.5.2-0ubuntu4",
+        "nodejs",
+        "npm",
     ],
 )
 
@@ -33,7 +33,7 @@ container_image(
 container_run_and_commit(
     name = "npm_install",
     commands = [
-        "npm install -g -y bats@1.2.1",
+        "npm install -g -y bats",
     ],
     image = ":apt_get_installed.tar",
 )

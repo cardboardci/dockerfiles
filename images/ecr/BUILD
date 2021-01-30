@@ -8,8 +8,8 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
     packages = [
-        "awscli=1.18.69-1ubuntu0.16.04.1",
-        "docker.io=18.09.7-0ubuntu1~16.04.7",
+        "awscli",
+        "docker.io",
     ],
 )
 

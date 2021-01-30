@@ -7,7 +7,7 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["librsvg2-bin=2.40.13-3ubuntu0.2"],
+    packages = ["librsvg2-bin"],
 )
 
 install_pkgs(
