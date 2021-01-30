@@ -24,8 +24,6 @@ install_pkgs(
 container_image(
     name = "apt_get_done",
     base = ":apt_get_installed.tar",
-    directory = "/usr/bin/",
-    files = glob(["image_data/usr/bin/*"]),
 )
 
 container_run_and_commit(
@@ -38,8 +36,6 @@ container_run_and_commit(
         "chown -R cardboardci:cardboardci /home/cardboardci/ /opt/microsoft/",
         "pwsh -c 'Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.18.3 -Scope AllUsers -Force'",
         "pwsh -c 'Import-Module PSScriptAnalyzer'",
-        "chmod +x /usr/bin/PSFormatter",
-        "chmod +x /usr/bin/PSScriptAnalyzer",
     ],
     image = ":apt_get_done.tar",
 )
@@ -51,6 +47,8 @@ container_image(
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     user = "cardboardci",
+    directory = "/usr/bin/",
+    files = glob(["image_data/usr/bin/*"]),
     labels = {
         "maintainer":"CardboardCI",
         "org.opencontainers.image.title":"psscriptanalyzer",
