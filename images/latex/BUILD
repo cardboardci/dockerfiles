@@ -7,7 +7,7 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["texlive-full=2015.20160320-1ubuntu0.1"],
+    packages = ["texlive-full"],
 )
 
 install_pkgs(
