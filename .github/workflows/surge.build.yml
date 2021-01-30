@@ -2,23 +2,25 @@ name: surge-build
 on:
   push:
     paths:
-      - images/surge/provision/*
-      - images/surge/provision/*/*
-      - images/surge/provision/*/*/*
-      - images/surge/rootfs/*
-      - images/surge/rootfs/*/*
-      - images/surge/rootfs/*/*/*
-      - images/surge/tests/*
-      - images/surge/tests/*/*
-      - images/surge/Dockerfile
-      - images/surge/.hadolint.yaml
       - .github/workflows/surge.build.yml
+      - images/surge/image_data/**/*
+      - images/surge/test_configs/**/*
+      - images/surge/BUILD
+      - rules/images.bzl
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/surge:image
+
+      - name: Test
+        run: |
+          bazel test //images/surge:test
 
       - name: Set image variables
         id: vars
@@ -29,16 +31,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/surge
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/surge:image
+          docker tag bazel/images/surge:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
