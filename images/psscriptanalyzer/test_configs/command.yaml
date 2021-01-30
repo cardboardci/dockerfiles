@@ -1,1 +1,24 @@
 schemaVersion: 2.0.0
+
+fileExistenceTests:
+  - name: 'psscriptanalyzer'
+    path: '/usr/bin/PSScriptAnalyzer'
+    shouldExist: true
+  - name: 'psformat'
+    path: '/usr/bin/PSFormatter'
+    shouldExist: true
+
+commandTests:
+  - name: "pwsh_test"
+    command: "pwsh"
+    args: ["--version"]
+    expectedOutput: ["PowerShell \\d+\\..*"]
+  - name: "psformat_test"
+    command: "PSFormatter"
+    args: ["-ScriptDefinition", "\"     Write-Output 'hello world'\""]
+    expectedOutput: ["Write-Output 'hello world'"]
+  - name: "psscriptanalyzer_test"
+    command: "PSScriptAnalyzer"
+    args: ["-ScriptDefinition", "\"\\$someVar = $null\""]
+    expectedOutput: ["((.|\n)*)PSAvoidTrailingWhitespace.*"]
+    exitCode: 1

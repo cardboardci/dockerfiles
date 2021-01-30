@@ -7,7 +7,10 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["psscriptanalyzer=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "wget=1.17.1-1ubuntu1.5",
+        "liblttng-ust0=2.7.1-1",
+    ],
 )
 
 install_pkgs(
@@ -19,12 +22,32 @@ install_pkgs(
 )
 
 container_image(
-    name = "image",
+    name = "apt_get_done",
     base = ":apt_get_installed.tar",
+)
+
+container_run_and_commit(
+    name = "bin_install",
+    commands = [
+        "wget http://mirrors.edge.kernel.org/ubuntu/pool/main/i/icu/libicu60_60.2-3ubuntu3_amd64.deb --directory-prefix=/tmp/deb",
+        "wget https://github.com/PowerShell/PowerShell/releases/download/v7.0.0/powershell_7.0.0-1.ubuntu.18.04_amd64.deb --directory-prefix=/tmp/deb",
+        "dpkg -i /tmp/deb/*.deb",
+        "mkdir -p /home/cardboardci/.local/share/powershell/",
+        "chown -R cardboardci:cardboardci /home/cardboardci/ /opt/microsoft/",
+        "pwsh -c 'Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.18.3 -Scope AllUsers -Force'",
+        "pwsh -c 'Import-Module PSScriptAnalyzer'",
+    ],
+    image = ":apt_get_done.tar",
+)
+
+container_image(
+    name = "image",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
-    files = glob(["image_data/*"]),
+    files = glob(["image_data/usr/bin/*"]),
+    directory = "/usr/bin/",
     user = "cardboardci",
     labels = {
         "maintainer":"CardboardCI",
