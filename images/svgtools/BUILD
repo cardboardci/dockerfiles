@@ -8,8 +8,8 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
     packages = [
-        "librsvg2-bin=2.40.13-3ubuntu0.2",
-        "inkscape=0.91-7ubuntu2",
+        "librsvg2-bin",
+        "inkscape",
     ],
 )
 

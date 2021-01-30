@@ -29,8 +29,8 @@ container_image(
 container_run_and_commit(
     name = "pip_install",
     commands = [
-        "python3 -m pip install --upgrade pip==21.0 setuptools==52.0.0 wheel==0.36.2",
-        "python3 -m pip install pylint==2.4.4",
+        "python3 -m pip install --upgrade pip setuptools wheel",
+        "python3 -m pip install pylint",
     ],
     image = ":apt_get_done.tar",
 )

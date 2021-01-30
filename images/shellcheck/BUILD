@@ -7,7 +7,7 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["shellcheck=0.3.7-5"],
+    packages = ["shellcheck"],
 )
 
 install_pkgs(

@@ -8,8 +8,8 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
     packages = [
-        "libgmp10=2:6.1.0+dfsg-2",
-        "wget=1.17.1-1ubuntu1.5",
+        "libgmp10",
+        "wget",
     ],
 )
 

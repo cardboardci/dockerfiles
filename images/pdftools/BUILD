@@ -7,7 +7,7 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["poppler-utils=0.41.0-0ubuntu1.16"],
+    packages = ["poppler-utils"],
 )
 
 install_pkgs(

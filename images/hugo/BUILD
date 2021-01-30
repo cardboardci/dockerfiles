@@ -8,9 +8,9 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
     packages = [
-        "libstdc++6=5.4.0-6ubuntu1~16.04.12",
-        "python-pygments=2.1+dfsg-1",
-        "wget=1.17.1-1ubuntu1.5",
+        "libstdc++6",
+        "python-pygments",
+        "wget",
     ],
 )
 

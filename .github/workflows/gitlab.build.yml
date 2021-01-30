@@ -6,6 +6,7 @@ on:
       - images/gitlab/image_data/**/*
       - images/gitlab/test_configs/**/*
       - images/gitlab/BUILD
+      - rules/images.bzl
 
 jobs:
   build-and-test:
