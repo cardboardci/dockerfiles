@@ -12,5 +12,5 @@ def images():
         name = "cardboardci_base",
         registry = "ghcr.io",
         repository = "cardboardci/base",
-        digest = "sha256:95898fc0dff94f43186942e59b9dfb39dd55256f9b943250222d58db26f23195",
+        digest = "sha256:0ce687225919e808935c00e9e0646b1fdbe5f953152b24be6ab25e4db92cc51b",
     )
