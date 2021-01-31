@@ -7,7 +7,11 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["luacheck=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "luarocks",
+        "lua-sec",
+        "gcc",
+    ],
 )
 
 install_pkgs(
@@ -18,9 +22,17 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
+container_run_and_commit(
+    name = "lua_install",
+    commands = [
+        "luarocks install luacheck",
+    ],
+    image = ":apt_get_installed.tar",
+)
+
 container_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":lua_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
