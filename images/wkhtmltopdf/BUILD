@@ -7,7 +7,22 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["wkhtmltopdf=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "openssl",
+        "build-essential",
+        "xz-utils",
+        "xfonts-100dpi",
+        "xfonts-75dpi",
+        "xfonts-base",
+        "fonts-roboto",
+        "fonts-inconsolata",
+        "ttf-mscorefonts-installer",
+        "fontconfig",
+        "xorg",
+        "wget",
+        "zlib1g",
+        "libpng16-16",
+    ],
 )
 
 install_pkgs(
@@ -18,9 +33,18 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
+container_run_and_commit(
+    name = "bin_install",
+    commands = [
+        "wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.focal_amd64.deb --directory-prefix=/tmp/deb",
+        "dpkg -i /tmp/deb/*.deb",
+    ],
+    image = ":apt_get_installed.tar",
+)
+
 container_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
