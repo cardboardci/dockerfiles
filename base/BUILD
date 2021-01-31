@@ -51,7 +51,7 @@ container_run_and_commit(
 
 container_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
