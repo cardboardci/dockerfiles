@@ -5,7 +5,8 @@ def images():
         name = "ubuntu",
         registry = "index.docker.io",
         repository = "library/ubuntu",
-        digest = "sha256:cb6a3a1298c73e3248b6b07ef3c78a14df4bade77b4be1ad725f8f5f2785e348",
+        # tag: ubuntu:focal-20210119
+        digest = "sha256:3093096ee188f8ff4531949b8f6115af4747ec1c58858c091c8cb4579c39cc4e",
     )
 
     container_pull(
