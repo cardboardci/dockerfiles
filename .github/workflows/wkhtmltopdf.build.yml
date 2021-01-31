@@ -2,23 +2,25 @@ name: wkhtmltopdf-build
 on:
   push:
     paths:
-      - images/wkhtmltopdf/provision/*
-      - images/wkhtmltopdf/provision/*/*
-      - images/wkhtmltopdf/provision/*/*/*
-      - images/wkhtmltopdf/rootfs/*
-      - images/wkhtmltopdf/rootfs/*/*
-      - images/wkhtmltopdf/rootfs/*/*/*
-      - images/wkhtmltopdf/tests/*
-      - images/wkhtmltopdf/tests/*/*
-      - images/wkhtmltopdf/Dockerfile
-      - images/wkhtmltopdf/.hadolint.yaml
       - .github/workflows/wkhtmltopdf.build.yml
+      - images/wkhtmltopdf/image_data/**/*
+      - images/wkhtmltopdf/test_configs/**/*
+      - images/wkhtmltopdf/BUILD
+      - rules/images.bzl
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/wkhtmltopdf:image
+
+      - name: Test
+        run: |
+          bazel test //images/wkhtmltopdf:test
 
       - name: Set image variables
         id: vars
@@ -29,16 +31,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/wkhtmltopdf
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/wkhtmltopdf:image
+          docker tag bazel/images/wkhtmltopdf:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
