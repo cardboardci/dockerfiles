@@ -6,7 +6,7 @@ on:
       - images/hadolint/image_data/**/*
       - images/hadolint/test_configs/**/*
       - images/hadolint/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

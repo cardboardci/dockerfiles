@@ -6,7 +6,7 @@ on:
       - images/surge/image_data/**/*
       - images/surge/test_configs/**/*
       - images/surge/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

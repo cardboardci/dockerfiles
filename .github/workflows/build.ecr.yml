@@ -6,7 +6,7 @@ on:
       - images/ecr/image_data/**/*
       - images/ecr/test_configs/**/*
       - images/ecr/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

@@ -6,7 +6,7 @@ on:
       - images/wkhtmltopdf/image_data/**/*
       - images/wkhtmltopdf/test_configs/**/*
       - images/wkhtmltopdf/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

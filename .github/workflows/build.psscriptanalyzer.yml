@@ -6,7 +6,7 @@ on:
       - images/psscriptanalyzer/image_data/**/*
       - images/psscriptanalyzer/test_configs/**/*
       - images/psscriptanalyzer/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

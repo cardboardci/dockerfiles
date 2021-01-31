@@ -6,7 +6,7 @@ on:
       - images/svgtools/image_data/**/*
       - images/svgtools/test_configs/**/*
       - images/svgtools/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

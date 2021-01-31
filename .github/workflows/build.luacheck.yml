@@ -6,7 +6,7 @@ on:
       - images/luacheck/image_data/**/*
       - images/luacheck/test_configs/**/*
       - images/luacheck/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:
