@@ -4,7 +4,6 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
-
 container_image(
     name = "base_image",
     user = "root",
