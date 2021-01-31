@@ -7,7 +7,28 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 download_pkgs(
     name = "apt_get_download",
     image_tar = "@cardboardci_base//image",
-    packages = ["pdf2htmlex=1.18.69-1ubuntu0.16.04.1"],
+    packages = [
+        "cmake",
+        "autotools-dev",
+        "libjpeg-dev",
+        "libgif-dev",
+        "libxt-dev",
+        "autoconf",
+        "automake",
+        "libtool",
+        "bzip2",
+        "libxml2-dev",
+        "libuninameslist-dev",
+        "libspiro-dev",
+        "libpango1.0-dev",
+        "libcairo2-dev",
+        "chrpath",
+        "uuid-dev",
+        "uthash-dev",
+        "libltdl-dev",
+        "build-essential",
+        "wget",
+    ],
 )
 
 install_pkgs(
@@ -18,9 +39,18 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
+container_run_and_commit(
+    name = "bin_install",
+    commands = [
+        "wget https://github.com/pdf2htmlEX/pdf2htmlEX/releases/download/v0.18.8.rc1/pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-focal-x86_64.deb --directory-prefix=/tmp/deb",
+        "dpkg -i /tmp/deb/*.deb",
+    ],
+    image = ":apt_get_installed.tar",
+)
+
 container_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":bin_install_commit.tar",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
