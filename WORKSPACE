@@ -27,6 +27,7 @@ load("//rules:images.bzl", "images")
 images()
 
 # Pinned base image for working with pdfhtmlex
+load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 container_pull(
     name = "cardboardci_pdf2htmlex",
     registry = "ghcr.io",
