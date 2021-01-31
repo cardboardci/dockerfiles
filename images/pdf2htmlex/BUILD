@@ -39,7 +39,7 @@ download_pkgs(
 
 install_pkgs(
     name = "apt_get_installed",
-    image_tar = "@cardboardci_pdf2htmlex//image",
+    image_tar = ":base_image.tar",
     installables_tar = ":apt_get_download.tar",
     installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "apt_get_installed",
