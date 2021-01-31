@@ -78,8 +78,8 @@ container_image(
 container_test(
     name = "test",
     configs = [
-        "//base/test_configs:command.yaml",
-        "//base/test_configs:metadata.yaml",
+        "//images/base/test_configs:command.yaml",
+        "//images/base/test_configs:metadata.yaml",
     ],
     image = ":image",
 )
