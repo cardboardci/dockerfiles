@@ -2,11 +2,11 @@ name: markdownlint-build
 on:
   push:
     paths:
-      - .github/workflows/markdownlint.build.yml
+      - .github/workflows/build.markdownlint.yml
       - images/markdownlint/image_data/**/*
       - images/markdownlint/test_configs/**/*
       - images/markdownlint/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

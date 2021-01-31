@@ -2,11 +2,11 @@ name: wkhtmltopdf-build
 on:
   push:
     paths:
-      - .github/workflows/wkhtmltopdf.build.yml
+      - .github/workflows/build.wkhtmltopdf.yml
       - images/wkhtmltopdf/image_data/**/*
       - images/wkhtmltopdf/test_configs/**/*
       - images/wkhtmltopdf/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

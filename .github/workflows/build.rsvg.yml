@@ -2,11 +2,11 @@ name: rsvg-build
 on:
   push:
     paths:
-      - .github/workflows/rsvg.build.yml
+      - .github/workflows/build.rsvg.yml
       - images/rsvg/image_data/**/*
       - images/rsvg/test_configs/**/*
       - images/rsvg/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

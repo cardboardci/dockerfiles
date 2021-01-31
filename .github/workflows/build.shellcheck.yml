@@ -2,11 +2,11 @@ name: shellcheck-build
 on:
   push:
     paths:
-      - .github/workflows/shellcheck.build.yml
+      - .github/workflows/build.shellcheck.yml
       - images/shellcheck/image_data/**/*
       - images/shellcheck/test_configs/**/*
       - images/shellcheck/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

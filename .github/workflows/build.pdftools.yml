@@ -2,11 +2,11 @@ name: pdftools-build
 on:
   push:
     paths:
-      - .github/workflows/pdftools.build.yml
+      - .github/workflows/build.pdftools.yml
       - images/pdftools/image_data/**/*
       - images/pdftools/test_configs/**/*
       - images/pdftools/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

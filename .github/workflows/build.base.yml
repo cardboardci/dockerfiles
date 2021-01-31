@@ -2,11 +2,11 @@ name: base-build
 on:
   push:
     paths:
-      - .github/workflows/base.build.yml
+      - .github/workflows/build.base.yml
       - images/base/image_data/**/*
       - images/base/test_configs/**/*
       - images/base/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

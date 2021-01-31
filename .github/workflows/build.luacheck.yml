@@ -2,11 +2,11 @@ name: luacheck-build
 on:
   push:
     paths:
-      - .github/workflows/luacheck.build.yml
+      - .github/workflows/build.luacheck.yml
       - images/luacheck/image_data/**/*
       - images/luacheck/test_configs/**/*
       - images/luacheck/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

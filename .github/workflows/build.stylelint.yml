@@ -2,11 +2,11 @@ name: stylelint-build
 on:
   push:
     paths:
-      - .github/workflows/stylelint.build.yml
+      - .github/workflows/build.stylelint.yml
       - images/stylelint/image_data/**/*
       - images/stylelint/test_configs/**/*
       - images/stylelint/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

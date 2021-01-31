@@ -2,11 +2,11 @@ name: hadolint-build
 on:
   push:
     paths:
-      - .github/workflows/hadolint.build.yml
+      - .github/workflows/build.hadolint.yml
       - images/hadolint/image_data/**/*
       - images/hadolint/test_configs/**/*
       - images/hadolint/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

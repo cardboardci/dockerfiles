@@ -2,11 +2,11 @@ name: tflint-build
 on:
   push:
     paths:
-      - .github/workflows/tflint.build.yml
+      - .github/workflows/build.tflint.yml
       - images/tflint/image_data/**/*
       - images/tflint/test_configs/**/*
       - images/tflint/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

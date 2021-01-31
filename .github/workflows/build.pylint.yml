@@ -2,11 +2,11 @@ name: pylint-build
 on:
   push:
     paths:
-      - .github/workflows/pylint.build.yml
+      - .github/workflows/build.pylint.yml
       - images/pylint/image_data/**/*
       - images/pylint/test_configs/**/*
       - images/pylint/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

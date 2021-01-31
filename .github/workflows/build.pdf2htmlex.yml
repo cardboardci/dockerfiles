@@ -2,7 +2,7 @@ name: pdf2htmlex-build
 on:
   push:
     paths:
-      - .github/workflows/pdf2htmlex.build.yml
+      - .github/workflows/build.pdf2htmlex.yml
       - images/pdf2htmlex/image_data/**/*
       - images/pdf2htmlex/test_configs/**/*
       - images/pdf2htmlex/BUILD

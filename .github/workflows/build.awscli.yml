@@ -2,11 +2,11 @@ name: awscli-build
 on:
   push:
     paths:
-      - .github/workflows/awscli.build.yml
+      - .github/workflows/build.awscli.yml
       - images/awscli/image_data/**/*
       - images/awscli/test_configs/**/*
       - images/awscli/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

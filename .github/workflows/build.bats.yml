@@ -2,11 +2,11 @@ name: bats-build
 on:
   push:
     paths:
-      - .github/workflows/bats.build.yml
+      - .github/workflows/build.bats.yml
       - images/bats/image_data/**/*
       - images/bats/test_configs/**/*
       - images/bats/BUILD
-      - rules/images.bzl
+      - deps/images.bzl
 
 jobs:
   build-and-test:

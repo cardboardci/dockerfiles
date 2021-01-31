@@ -23,14 +23,5 @@ load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
 
 pip_deps()
 
-load("//rules:images.bzl", "images")
+load("//deps:images.bzl", "images")
 images()
-
-# Pinned base image for working with pdfhtmlex
-load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
-container_pull(
-    name = "cardboardci_pdf2htmlex",
-    registry = "ghcr.io",
-    repository = "cardboardci/base",
-    digest = "sha256:bbf36e6f9e1ff487b92a81e0a1f5fbad9bac9453dbdd3ae6c06631e27999238c",
-)
