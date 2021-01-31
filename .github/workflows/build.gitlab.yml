@@ -2,7 +2,7 @@ name: gitlab-build
 on:
   push:
     paths:
-      - .github/workflows/gitlab.build.yml
+      - .github/workflows/build.gitlab.yml
       - images/gitlab/image_data/**/*
       - images/gitlab/test_configs/**/*
       - images/gitlab/BUILD

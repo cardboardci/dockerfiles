@@ -2,7 +2,7 @@ name: github-build
 on:
   push:
     paths:
-      - .github/workflows/github.build.yml
+      - .github/workflows/build.github.yml
       - images/github/image_data/**/*
       - images/github/test_configs/**/*
       - images/github/BUILD

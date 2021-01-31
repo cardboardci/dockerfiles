@@ -2,7 +2,7 @@ name: ecr-build
 on:
   push:
     paths:
-      - .github/workflows/ecr.build.yml
+      - .github/workflows/build.ecr.yml
       - images/ecr/image_data/**/*
       - images/ecr/test_configs/**/*
       - images/ecr/BUILD

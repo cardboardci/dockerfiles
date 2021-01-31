@@ -2,7 +2,7 @@ name: hugo-build
 on:
   push:
     paths:
-      - .github/workflows/hugo.build.yml
+      - .github/workflows/build.hugo.yml
       - images/hugo/image_data/**/*
       - images/hugo/test_configs/**/*
       - images/hugo/BUILD

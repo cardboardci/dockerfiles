@@ -2,7 +2,7 @@ name: psscriptanalyzer-build
 on:
   push:
     paths:
-      - .github/workflows/psscriptanalyzer.build.yml
+      - .github/workflows/build.psscriptanalyzer.yml
       - images/psscriptanalyzer/image_data/**/*
       - images/psscriptanalyzer/test_configs/**/*
       - images/psscriptanalyzer/BUILD

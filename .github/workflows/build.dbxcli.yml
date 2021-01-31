@@ -2,7 +2,7 @@ name: dbxcli-build
 on:
   push:
     paths:
-      - .github/workflows/dbxcli.build.yml
+      - .github/workflows/build.dbxcli.yml
       - images/dbxcli/image_data/**/*
       - images/dbxcli/test_configs/**/*
       - images/dbxcli/BUILD

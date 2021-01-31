@@ -2,7 +2,7 @@ name: surge-build
 on:
   push:
     paths:
-      - .github/workflows/surge.build.yml
+      - .github/workflows/build.surge.yml
       - images/surge/image_data/**/*
       - images/surge/test_configs/**/*
       - images/surge/BUILD

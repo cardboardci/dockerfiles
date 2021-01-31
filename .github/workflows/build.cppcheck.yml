@@ -2,7 +2,7 @@ name: cppcheck-build
 on:
   push:
     paths:
-      - .github/workflows/cppcheck.build.yml
+      - .github/workflows/build.cppcheck.yml
       - images/cppcheck/image_data/**/*
       - images/cppcheck/test_configs/**/*
       - images/cppcheck/BUILD

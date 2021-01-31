@@ -2,7 +2,7 @@ name: rubocop-build
 on:
   push:
     paths:
-      - .github/workflows/rubocop.build.yml
+      - .github/workflows/build.rubocop.yml
       - images/rubocop/image_data/**/*
       - images/rubocop/test_configs/**/*
       - images/rubocop/BUILD

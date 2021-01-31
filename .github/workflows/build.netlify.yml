@@ -2,7 +2,7 @@ name: netlify-build
 on:
   push:
     paths:
-      - .github/workflows/netlify.build.yml
+      - .github/workflows/build.netlify.yml
       - images/netlify/image_data/**/*
       - images/netlify/test_configs/**/*
       - images/netlify/BUILD
