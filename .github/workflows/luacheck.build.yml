@@ -2,23 +2,25 @@ name: luacheck-build
 on:
   push:
     paths:
-      - images/luacheck/provision/*
-      - images/luacheck/provision/*/*
-      - images/luacheck/provision/*/*/*
-      - images/luacheck/rootfs/*
-      - images/luacheck/rootfs/*/*
-      - images/luacheck/rootfs/*/*/*
-      - images/luacheck/tests/*
-      - images/luacheck/tests/*/*
-      - images/luacheck/Dockerfile
-      - images/luacheck/.hadolint.yaml
       - .github/workflows/luacheck.build.yml
+      - images/luacheck/image_data/**/*
+      - images/luacheck/test_configs/**/*
+      - images/luacheck/BUILD
+      - rules/images.bzl
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          bazel build //images/luacheck:image
+
+      - name: Test
+        run: |
+          bazel test //images/luacheck:test
 
       - name: Set image variables
         id: vars
@@ -29,16 +31,10 @@ jobs:
           echo ::set-output name=docker_image::ghcr.io/cardboardci/luacheck
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
-      - name: Build
+      - name: Tag Image
         run: |
-          docker build ${{ steps.vars.outputs.dockerdir }} \
-            --file ${{ steps.vars.outputs.dockerfile }} \
-            --tag ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }} \
-
-      - name: Tests
-        uses: docker://gcr.io/gcp-runtimes/container-structure-test
-        with:
-          args: "test --config ${{ steps.vars.outputs.docker_path }}/tests/tests.yaml --image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}"
+          bazel run //images/luacheck:image
+          docker tag bazel/images/luacheck:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
