@@ -23,7 +23,7 @@ runs:
     - id: action
       shell: bash
       run: |
-          query=".results | .[] | select( .name == \"${REGISTRY_TAG}\") | .images | .[] | select( .architecture == \"${REGISTRY_ARCH}\") | .digest"
+          query='.results | .[] | select( .name == "${{ inputs.tag }}") | .images | .[] | select( .architecture == "${{ inputs.arch }}") | .digest'
           echo "Querying: ${query}"
-          image_digest=$(curl -sSL "https://${REGISTRY_URL}/v2/repositories/${REGISTRY_IMAGE}/tags/" | jq -r -c "${${query}}")
+          image_digest=$(curl -sSL "https://${{ inputs.url }}/v2/repositories/${{ inputs.image }}/tags/" | jq -r -c "${query}")
           echo "::set-output name=image-digest::$image_digest"
