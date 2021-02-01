@@ -1,0 +1,22 @@
+name: dependecy-imagebase
+
+on:
+  schedule:
+    - cron: "30 4 6 * *"
+  push:
+    paths:
+      - .github/workflows/upgrader.base.yml
+
+jobs:
+  apt-get:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Get latest dockerhub image sha
+        uses: ./.github/actions/docker-hub-image-update
+        env:
+          REGISTRY_URL: registry.hub.docker.com
+          REGISTRY_IMAGE: library/ubuntu
+          REGISTRY_ARCH: amd64
+          REGISTRY_TAG: focal
