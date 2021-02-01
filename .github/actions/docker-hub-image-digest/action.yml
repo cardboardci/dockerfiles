@@ -1,0 +1,28 @@
+name: 'DockerHub Image Digest'
+description: 'Retrieve the image digest associated with a tag.'
+inputs:
+  url:
+    description: 'The docker registry domain'
+    required: true
+  image:
+    description: 'The namespace of the image'
+    required: true
+  arch:
+    description: 'The architecture of the image'
+    required: true
+  tag:
+    description: 'The tag of the image'
+    required: true
+outputs:
+  image-digest:
+    description: "The image digest"
+    value: ${{ steps.action.outputs.image-digest }}
+runs:
+  using: "composite"
+  steps:
+    - id: action
+      shell: bash
+      run: |
+        image_digest=$(curl -sSL "https://${REGISTRY_URL}/v2/repositories/${REGISTRY_IMAGE}/tags/" | \
+	        jq -r -c ".results | .[] | select( .name == \"${REGISTRY_TAG}\") | .images | .[] | select( .architecture == \"${REGISTRY_ARCH}\") | .digest")
+        echo "::set-output name=image-digest::$image_digest"

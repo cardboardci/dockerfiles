@@ -13,10 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Get latest dockerhub image sha
-        uses: ./.github/actions/docker-hub-image-update
-        env:
-          REGISTRY_URL: registry.hub.docker.com
-          REGISTRY_IMAGE: library/ubuntu
-          REGISTRY_ARCH: amd64
-          REGISTRY_TAG: focal
+      # - name: Get latest dockerhub image sha
+      #   uses: ./.github/actions/docker-hub-image-digest
+      #   env:
+      #     REGISTRY_URL: registry.hub.docker.com
+      #     REGISTRY_IMAGE: library/ubuntu
+      #     REGISTRY_ARCH: amd64
+      #     REGISTRY_TAG: focal
+      - name: Get the dockerhub image sha
+        id: dockerhub
+        uses: ./.github/actions/docker-hub-image-digest
+        with:
+          url: registry.hub.docker.com
+          image: library/ubuntu
+          arch: amd64
+          tag: focal
+      - run: echo random-number ${{ steps.dockerhub.outputs.image-digest }}
+        shell: bash
