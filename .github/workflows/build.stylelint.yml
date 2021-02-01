@@ -6,7 +6,8 @@ on:
       - images/stylelint/image_data/**/*
       - images/stylelint/test_configs/**/*
       - images/stylelint/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

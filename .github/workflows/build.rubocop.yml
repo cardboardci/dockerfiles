@@ -6,7 +6,8 @@ on:
       - images/rubocop/image_data/**/*
       - images/rubocop/test_configs/**/*
       - images/rubocop/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

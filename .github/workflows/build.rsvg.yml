@@ -6,7 +6,8 @@ on:
       - images/rsvg/image_data/**/*
       - images/rsvg/test_configs/**/*
       - images/rsvg/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

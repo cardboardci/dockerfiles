@@ -6,7 +6,8 @@ on:
       - images/tflint/image_data/**/*
       - images/tflint/test_configs/**/*
       - images/tflint/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

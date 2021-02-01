@@ -6,7 +6,8 @@ on:
       - images/hugo/image_data/**/*
       - images/hugo/test_configs/**/*
       - images/hugo/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

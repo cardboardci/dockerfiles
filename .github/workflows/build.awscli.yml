@@ -6,7 +6,8 @@ on:
       - images/awscli/image_data/**/*
       - images/awscli/test_configs/**/*
       - images/awscli/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:
