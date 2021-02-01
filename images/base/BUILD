@@ -4,23 +4,9 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
-# TODO: Pinned versions to avoid bad version upgrades
-# This just ensures that the base official image is upgraded to latest for packages
-# Ideally this would pin the package versions of the official version, then upgrade on-demand
-container_run_and_commit(
-    name = "upgraded_base",
-    commands = [
-        "apt-get update -y",
-        "apt-get upgrade -y",
-        "apt-get clean",
-        "rm -rf /var/lib/apt/lists/*"
-    ],
-    image = "@ubuntu//image",
-)
-
 download_pkgs(
     name = "apt_get_download",
-    image_tar = ":upgraded_base_commit.tar",
+    image_tar = "@ubuntu//image",
     packages = [
         "git",
         "jq",
@@ -32,7 +18,7 @@ download_pkgs(
 
 install_pkgs(
     name = "apt_get_installed",
-    image_tar = ":upgraded_base_commit.tar",
+    image_tar = "@ubuntu//image",
     installables_tar = ":apt_get_download.tar",
     installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "apt_get_installed",
