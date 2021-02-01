@@ -6,7 +6,8 @@ on:
       - images/bats/image_data/**/*
       - images/bats/test_configs/**/*
       - images/bats/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

@@ -6,7 +6,8 @@ on:
       - images/dbxcli/image_data/**/*
       - images/dbxcli/test_configs/**/*
       - images/dbxcli/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

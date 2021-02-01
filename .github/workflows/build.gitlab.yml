@@ -6,7 +6,8 @@ on:
       - images/gitlab/image_data/**/*
       - images/gitlab/test_configs/**/*
       - images/gitlab/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

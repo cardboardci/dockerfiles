@@ -6,6 +6,8 @@ on:
       - images/pdf2htmlex/image_data/**/*
       - images/pdf2htmlex/test_configs/**/*
       - images/pdf2htmlex/BUILD
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

@@ -6,7 +6,8 @@ on:
       - images/markdownlint/image_data/**/*
       - images/markdownlint/test_configs/**/*
       - images/markdownlint/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

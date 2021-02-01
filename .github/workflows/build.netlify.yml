@@ -6,7 +6,8 @@ on:
       - images/netlify/image_data/**/*
       - images/netlify/test_configs/**/*
       - images/netlify/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

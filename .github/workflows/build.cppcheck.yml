@@ -6,7 +6,8 @@ on:
       - images/cppcheck/image_data/**/*
       - images/cppcheck/test_configs/**/*
       - images/cppcheck/BUILD
-      - deps/images.bzl
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:
