@@ -6,13 +6,13 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 download_pkgs(
     name = "apt_get_download",
-    image_tar = "@cardboardci_base//image",
+    image_tar = "//images/base:image.tar",
     packages = ["poppler-utils"],
 )
 
 install_pkgs(
     name = "apt_get_installed",
-    image_tar = "@cardboardci_base//image",
+    image_tar = "//images/base:image.tar",
     installables_tar = ":apt_get_download.tar",
     installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "apt_get_installed",
