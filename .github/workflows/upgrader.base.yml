@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - .github/workflows/upgrader.base.yml
+      - .github/actions/docker-hub-image-digest/*
 
 jobs:
   apt-get:
