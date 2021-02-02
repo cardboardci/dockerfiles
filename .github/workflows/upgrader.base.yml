@@ -9,7 +9,7 @@ on:
       - .github/actions/docker-hub-image-digest/*
 
 jobs:
-  apt-get:
+  image-upgrade:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -30,11 +30,18 @@ jobs:
         run: |
           image_digest=`cat WORKSPACE | ./buildozer 'print digest' -:ubuntu`
           echo "::set-output name=image-digest::$image_digest"
-      - name: Changes to the environment
+      - name: Print the determined image digests
         run: |
           echo DockerHub digest ${{ steps.dockerhub.outputs.image-digest }}
           echo Source digest ${{ steps.source.outputs.image-digest }}
-      #     git status
+      - name: Changes to the environment
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        run: |
+          echo $(cat WORKSPACE | ./buildozer 'set digest ${{ steps.dockerhub.outputs.image-digest }}' -:ubuntu) > WORKSPACE.tmp
+          cat WORKSPACE.tmp
+          rm WORKSPACE
+          mv WORKSPACE.tmp
+          cat WORKSPACE
       # - name: Commit all of the dependencies
       #   uses: ./.github/actions/auto-commit
       #   env:
