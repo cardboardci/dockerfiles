@@ -7,6 +7,8 @@ on:
       - images/rsvg/test_configs/**/*
       - images/rsvg/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

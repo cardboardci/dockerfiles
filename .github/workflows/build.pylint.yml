@@ -7,6 +7,8 @@ on:
       - images/pylint/test_configs/**/*
       - images/pylint/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

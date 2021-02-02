@@ -7,6 +7,8 @@ on:
       - images/stylelint/test_configs/**/*
       - images/stylelint/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

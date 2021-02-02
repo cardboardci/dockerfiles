@@ -7,6 +7,8 @@ on:
       - images/pdftools/test_configs/**/*
       - images/pdftools/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

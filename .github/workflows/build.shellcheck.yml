@@ -7,6 +7,8 @@ on:
       - images/shellcheck/test_configs/**/*
       - images/shellcheck/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

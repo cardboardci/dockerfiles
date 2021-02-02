@@ -7,6 +7,8 @@ on:
       - images/cppcheck/test_configs/**/*
       - images/cppcheck/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

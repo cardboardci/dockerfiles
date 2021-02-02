@@ -7,6 +7,8 @@ on:
       - images/netlify/test_configs/**/*
       - images/netlify/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

@@ -7,6 +7,8 @@ on:
       - images/luacheck/test_configs/**/*
       - images/luacheck/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

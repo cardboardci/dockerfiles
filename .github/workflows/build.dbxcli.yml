@@ -7,6 +7,8 @@ on:
       - images/dbxcli/test_configs/**/*
       - images/dbxcli/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

@@ -7,6 +7,8 @@ on:
       - images/github/test_configs/**/*
       - images/github/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:

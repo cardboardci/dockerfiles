@@ -7,6 +7,8 @@ on:
       - images/psscriptanalyzer/test_configs/**/*
       - images/psscriptanalyzer/BUILD
       - WORKSPACE
+      - images/base/*
+      - images/base/**/*
 
 jobs:
   build-and-test:
