@@ -10,9 +10,9 @@ The idea of these images is to balance the following:
 
 ## Status
 
-I have just recently moved the project from GitLab to GitHub, and I am in the process of enabling GitHub Actions for all of the docker images. In the future I'd like for it to:
+Project is still is progress, documentation is lacking, progress will evolve over time. Aims as below:
 
-- Update the dependencies automatically
-- Have sufficient documentation for each image (and how to use)
-- Tests to verify that each image works
-- Samples that verify each image is working as intended
+- Dependencies are pinned
+- Dependencies are updated automatically by GitHub Actions
+- Images have basic documentation for common usages (GitHub Actions / etc)
+- Tests verifying aspects of each image (/tmp empty, metadata set)
