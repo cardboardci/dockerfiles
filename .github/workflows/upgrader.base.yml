@@ -48,4 +48,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
           BRANCH: '/baseimg'
           MESSAGE: 'Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}'
-          PULL_REQUEST_TITLE: 'Bump ubuntu image to latest version of 'focal''
+          PULL_REQUEST_TITLE: 'Bump ubuntu image to latest version of focal'
