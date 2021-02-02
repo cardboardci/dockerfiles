@@ -6,6 +6,7 @@ on:
       - images/stylelint/image_data/**/*
       - images/stylelint/test_configs/**/*
       - images/stylelint/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

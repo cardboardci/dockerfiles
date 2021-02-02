@@ -1,0 +1,51 @@
+name: dependecy-imagebase
+
+on:
+  schedule:
+    - cron: "30 4 6 * *"
+  push:
+    paths:
+      - .github/workflows/upgrader.base.yml
+      - .github/actions/docker-hub-image-digest/*
+
+jobs:
+  image-upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install buildozer
+        run: |
+          curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
+          chmod +x buildozer
+      - name: Get the dockerhub image sha
+        id: dockerhub
+        uses: ./.github/actions/docker-hub-image-digest
+        with:
+          url: registry.hub.docker.com
+          image: library/ubuntu
+          arch: amd64
+          tag: focal
+      - name: Determine the current image digest
+        id: source
+        run: |
+          image_digest=`cat WORKSPACE | ./buildozer 'print digest' -:ubuntu`
+          echo "::set-output name=image-digest::$image_digest"
+      - name: Print the determined image digests
+        run: |
+          echo DockerHub digest ${{ steps.dockerhub.outputs.image-digest }}
+          echo Source digest ${{ steps.source.outputs.image-digest }}
+      - name: Changes to the environment
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        run: |
+          echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
+          rm WORKSPACE
+          mv WORKSPACE.tmp WORKSPACE
+          cat WORKSPACE
+      - name: Commit all of the dependencies
+        uses: ./.github/actions/auto-commit
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+          BRANCH: '/baseimg'
+          MESSAGE: 'Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}'
+          PULL_REQUEST_TITLE: 'Bump ubuntu image to latest version of focal'

@@ -6,6 +6,7 @@ on:
       - images/luacheck/image_data/**/*
       - images/luacheck/test_configs/**/*
       - images/luacheck/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

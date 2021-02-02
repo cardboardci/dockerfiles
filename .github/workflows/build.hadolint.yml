@@ -6,6 +6,7 @@ on:
       - images/hadolint/image_data/**/*
       - images/hadolint/test_configs/**/*
       - images/hadolint/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

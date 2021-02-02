@@ -6,6 +6,7 @@ on:
       - images/gitlab/image_data/**/*
       - images/gitlab/test_configs/**/*
       - images/gitlab/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

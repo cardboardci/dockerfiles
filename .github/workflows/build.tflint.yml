@@ -6,6 +6,7 @@ on:
       - images/tflint/image_data/**/*
       - images/tflint/test_configs/**/*
       - images/tflint/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

@@ -6,6 +6,7 @@ on:
       - images/psscriptanalyzer/image_data/**/*
       - images/psscriptanalyzer/test_configs/**/*
       - images/psscriptanalyzer/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

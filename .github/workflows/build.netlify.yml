@@ -6,6 +6,7 @@ on:
       - images/netlify/image_data/**/*
       - images/netlify/test_configs/**/*
       - images/netlify/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

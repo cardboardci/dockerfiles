@@ -6,6 +6,7 @@ on:
       - images/awscli/image_data/**/*
       - images/awscli/test_configs/**/*
       - images/awscli/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

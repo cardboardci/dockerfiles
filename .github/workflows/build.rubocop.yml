@@ -6,6 +6,7 @@ on:
       - images/rubocop/image_data/**/*
       - images/rubocop/test_configs/**/*
       - images/rubocop/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 

@@ -6,6 +6,7 @@ on:
       - images/rsvg/image_data/**/*
       - images/rsvg/test_configs/**/*
       - images/rsvg/BUILD
+      - WORKSPACE
       - images/base/*
       - images/base/**/*
 
