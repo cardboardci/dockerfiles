@@ -1,0 +1,20 @@
+# Project information
+site_name: 'CardboardCI'
+site_description: 'Temporary website for CardboardCI.'
+site_author: 'Jonathan Beverly'
+site_dir: public
+docs_dir: www
+
+theme:
+  name: 'material'
+  language: 'en'
+  palette:
+    primary: 'white'
+    accent: 'indigo'
+
+extra:
+  search:
+    language: 'en'
+  social:
+    - type: 'github'
+      link: 'https://github.com/cardboardci'
