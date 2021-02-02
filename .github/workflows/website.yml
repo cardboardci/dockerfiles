@@ -16,14 +16,10 @@ jobs:
         uses: docker://squidfunk/mkdocs-material@sha256:5282540ecb411db49a2ae3ccea3b00a0ab1f55ecd8151e2941cf0ccad69d2beb
         with:
           args: "build --config-file docs/mkdocs.yml --site-dir public"
-      - name: Install buildozer
-        run: |
-          ls 
-          ls docs/
-          ls docs/public/
-      # - name: Deploy
-      #   uses: JamesIves/github-pages-deploy-action@releases/v3
-      #   with:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     BRANCH: gh-pages
-      #     FOLDER: docs/public
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        # if: github.ref == 'refs/heads/master'
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs/public
