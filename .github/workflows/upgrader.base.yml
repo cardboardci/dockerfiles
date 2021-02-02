@@ -41,10 +41,12 @@ jobs:
           rm WORKSPACE
           mv WORKSPACE.tmp WORKSPACE
           cat WORKSPACE
-      # - name: Commit all of the dependencies
-      #   uses: ./.github/actions/auto-commit
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
-      #     BRANCH: '/deps'
-      #     MESSAGE: 'Upgrade packages to latest dependencies'
-      #     PULL_REQUEST_TITLE: 'Bump image dependencies to latest'
+      - name: Commit all of the dependencies
+        uses: ./.github/actions/auto-commit
+        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest and github.ref == 'refs/heads/master' }}
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+          BRANCH: '/deps'
+          MESSAGE: 'Update ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}'
+          PULL_REQUEST_TITLE: 'ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}'
