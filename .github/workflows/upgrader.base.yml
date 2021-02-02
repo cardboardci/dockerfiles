@@ -37,11 +37,12 @@ jobs:
       - name: Changes to the environment
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
-          echo $(cat WORKSPACE | ./buildozer 'set digest ${{ steps.dockerhub.outputs.image-digest }}' -:ubuntu) > WORKSPACE.tmp
-          cat WORKSPACE.tmp
-          rm WORKSPACE
-          mv WORKSPACE.tmp
-          cat WORKSPACE
+          cat WORKSPACE | ./buildozer 'set digest ${{ steps.dockerhub.outputs.image-digest }}' -:ubuntu
+
+      # cat WORKSPACE.tmp
+      # rm WORKSPACE
+      # mv WORKSPACE.tmp
+      # cat WORKSPACE
       # - name: Commit all of the dependencies
       #   uses: ./.github/actions/auto-commit
       #   env:
