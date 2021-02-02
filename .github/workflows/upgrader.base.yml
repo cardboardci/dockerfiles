@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Install buildozer
         run: |
-          curl -sS https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer -o /usr/bin/buildozer
+          curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > /usr/bin/buildozer
           chmod +x /usr/bin/buildozer
       - name: Get the dockerhub image sha
         id: dockerhub
