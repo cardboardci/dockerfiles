@@ -6,7 +6,7 @@ on:
       - images/shellcheck/image_data/**/*
       - images/shellcheck/test_configs/**/*
       - images/shellcheck/BUILD
-      - deps/images.bzl
+      - WORKSPACE
 
 jobs:
   build-and-test:

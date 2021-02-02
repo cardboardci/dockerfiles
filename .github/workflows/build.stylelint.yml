@@ -6,7 +6,7 @@ on:
       - images/stylelint/image_data/**/*
       - images/stylelint/test_configs/**/*
       - images/stylelint/BUILD
-      - deps/images.bzl
+      - WORKSPACE
 
 jobs:
   build-and-test:

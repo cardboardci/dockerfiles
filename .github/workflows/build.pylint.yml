@@ -6,7 +6,7 @@ on:
       - images/pylint/image_data/**/*
       - images/pylint/test_configs/**/*
       - images/pylint/BUILD
-      - deps/images.bzl
+      - WORKSPACE
 
 jobs:
   build-and-test:

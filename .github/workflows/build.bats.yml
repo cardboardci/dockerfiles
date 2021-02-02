@@ -6,7 +6,7 @@ on:
       - images/bats/image_data/**/*
       - images/bats/test_configs/**/*
       - images/bats/BUILD
-      - deps/images.bzl
+      - WORKSPACE
 
 jobs:
   build-and-test:

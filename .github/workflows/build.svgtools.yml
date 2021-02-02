@@ -6,7 +6,7 @@ on:
       - images/svgtools/image_data/**/*
       - images/svgtools/test_configs/**/*
       - images/svgtools/BUILD
-      - deps/images.bzl
+      - WORKSPACE
 
 jobs:
   build-and-test:
