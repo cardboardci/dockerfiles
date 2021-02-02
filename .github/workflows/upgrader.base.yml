@@ -39,7 +39,7 @@ jobs:
         run: |
           echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
           rm WORKSPACE
-          mv WORKSPACE.tmp
+          mv WORKSPACE.tmp WORKSPACE
           cat WORKSPACE
       # - name: Commit all of the dependencies
       #   uses: ./.github/actions/auto-commit
