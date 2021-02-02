@@ -12,10 +12,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install and Build
+      - name: Mkdocs
         uses: docker://squidfunk/mkdocs-material@sha256:5282540ecb411db49a2ae3ccea3b00a0ab1f55ecd8151e2941cf0ccad69d2beb
         with:
-          args: "build --config-file docs/mkdocs.yml --site-dir docs/public"
+          args: "build --config-file docs/mkdocs.yml --site-dir public"
+      - name: Install buildozer
+        run: |
+          ls 
+          ls docs/
+          ls docs/public/
       # - name: Deploy
       #   uses: JamesIves/github-pages-deploy-action@releases/v3
       #   with:
