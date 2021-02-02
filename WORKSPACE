@@ -23,6 +23,8 @@ load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
 
 pip_deps()
 
+load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
+
 container_pull(
     name = "ubuntu",
     registry = "index.docker.io",
