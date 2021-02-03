@@ -1,8 +1,8 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+load("@cardboardci//rules:wrappers.bzl", "luacheck_download_and_install")
 
 download_pkgs(
     name = "apt_get_download",
@@ -22,10 +22,10 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
-container_run_and_commit(
+luacheck_download_and_install(
     name = "lua_install",
-    commands = [
-        "luarocks install luacheck",
+    packages = [
+        "luacheck",
     ],
     image = ":apt_get_installed.tar",
 )
