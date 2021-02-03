@@ -3,7 +3,7 @@ name: dependecy-imagebase
 on:
   schedule:
     - cron: "30 4 6 * *"
-  trigger:
+  workflow_dispatch:
 
 jobs:
   image-upgrade:
