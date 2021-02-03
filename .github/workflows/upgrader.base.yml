@@ -3,10 +3,7 @@ name: dependecy-imagebase
 on:
   schedule:
     - cron: "30 4 6 * *"
-  push:
-    paths:
-      - .github/workflows/upgrader.base.yml
-      - .github/actions/docker-hub-image-digest/*
+  trigger:
 
 jobs:
   image-upgrade:
