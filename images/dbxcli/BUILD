@@ -20,34 +20,34 @@ install_pkgs(
 
 binary_download_and_install(
     name = "bin_install",
-    target = "/usr/bin/dbxcli",
-    package = "https://github.com/dropbox/dbxcli/releases/download/v3.0.0/dbxcli-linux-amd64",
     image = ":apt_get_installed.tar",
+    package = "https://github.com/dropbox/dbxcli/releases/download/v3.0.0/dbxcli-linux-amd64",
+    target = "/usr/bin/dbxcli",
 )
 
 container_image(
     name = "image",
     base = ":bin_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"dbxcli",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Dropbox CLI",
-        "org.opencontainers.image.description":"A command line client for Dropbox built using the Go SDK.",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/dbxcli",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "dbxcli",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Dropbox CLI",
+        "org.opencontainers.image.description": "A command line client for Dropbox built using the Go SDK.",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/dbxcli",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 
