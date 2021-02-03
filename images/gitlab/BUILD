@@ -39,26 +39,26 @@ container_run_and_commit(
 container_image(
     name = "image",
     base = ":bin_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"gitlab",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"GitLab CLI",
-        "org.opencontainers.image.description":"Lab wraps Git or Hub, making it simple to clone, fork, and interact with repositories on GitLab",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/gitlab",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "gitlab",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "GitLab CLI",
+        "org.opencontainers.image.description": "Lab wraps Git or Hub, making it simple to clone, fork, and interact with repositories on GitLab",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/gitlab",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

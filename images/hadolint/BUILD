@@ -23,34 +23,34 @@ install_pkgs(
 
 binary_download_and_install(
     name = "bin_install",
+    image = ":apt_get_installed.tar",
     package = "https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64",
     target = "/usr/bin/hadolint",
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":bin_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"hadolint",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Dockerfile linter",
-        "org.opencontainers.image.description":"Dockerfile linter, validate inline bash, written in Haskell",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/hadolint",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "hadolint",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Dockerfile linter",
+        "org.opencontainers.image.description": "Dockerfile linter, validate inline bash, written in Haskell",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/hadolint",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

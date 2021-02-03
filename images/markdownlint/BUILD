@@ -23,35 +23,35 @@ install_pkgs(
 
 npm_download_and_install(
     name = "npm_install",
+    image = ":apt_get_installed.tar",
     packages = [
         "markdownlint-cli",
     ],
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":npm_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"markdownlint",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"NodeJS linter",
-        "org.opencontainers.image.description":"A Node.js style checker and lint tool for Markdown/CommonMark files",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/markdownlint",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "markdownlint",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "NodeJS linter",
+        "org.opencontainers.image.description": "A Node.js style checker and lint tool for Markdown/CommonMark files",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/markdownlint",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

@@ -8,9 +8,9 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "//images/base:image.tar",
     packages = [
-        "luarocks",
-        "lua-sec",
         "gcc",
+        "lua-sec",
+        "luarocks",
     ],
 )
 
@@ -24,35 +24,35 @@ install_pkgs(
 
 luacheck_download_and_install(
     name = "lua_install",
+    image = ":apt_get_installed.tar",
     packages = [
         "luacheck",
     ],
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":lua_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"luacheck",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Lua linter",
-        "org.opencontainers.image.description":"Luacheck is a static analyzer and a linter for Lua",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/luacheck",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "luacheck",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Lua linter",
+        "org.opencontainers.image.description": "Luacheck is a static analyzer and a linter for Lua",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/luacheck",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

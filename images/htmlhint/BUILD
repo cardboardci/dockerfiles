@@ -23,35 +23,35 @@ install_pkgs(
 
 npm_download_and_install(
     name = "npm_install",
+    image = ":apt_get_installed.tar",
     packages = [
         "htmlhint",
     ],
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":npm_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"htmlhint",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"HTML linter",
-        "org.opencontainers.image.description":"The static code analysis tool you need for your HTML",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/htmlhint",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "htmlhint",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "HTML linter",
+        "org.opencontainers.image.description": "The static code analysis tool you need for your HTML",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/htmlhint",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

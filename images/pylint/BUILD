@@ -23,35 +23,35 @@ install_pkgs(
 
 pip_download_and_install(
     name = "pip_install",
+    image = ":apt_get_installed.tar",
     packages = [
         "pylint",
     ],
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":pip_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"pylint",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Python linter",
-        "org.opencontainers.image.description":"Pylint is a Python static code analysis tool which looks for programming errors",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/pylint",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "pylint",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Python linter",
+        "org.opencontainers.image.description": "Pylint is a Python static code analysis tool which looks for programming errors",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/pylint",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

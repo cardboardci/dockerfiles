@@ -20,26 +20,26 @@ install_pkgs(
 container_image(
     name = "image",
     base = ":apt_get_installed.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"pdftools",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"PDF CLIs",
-        "org.opencontainers.image.description":" Command line tools for manipulating pdfs",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/pdftools",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "pdftools",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "PDF CLIs",
+        "org.opencontainers.image.description": " Command line tools for manipulating pdfs",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/pdftools",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

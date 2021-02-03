@@ -23,36 +23,36 @@ install_pkgs(
 
 npm_download_and_install(
     name = "npm_install",
+    image = ":apt_get_installed.tar",
     packages = [
         "stylelint",
         "stylelint-config-standard",
     ],
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":npm_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"stylelint",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Style linter",
-        "org.opencontainers.image.description":"A mighty, modern style linter",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/stylelint",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "stylelint",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Style linter",
+        "org.opencontainers.image.description": "A mighty, modern style linter",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/stylelint",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

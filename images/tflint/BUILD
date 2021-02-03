@@ -23,34 +23,34 @@ install_pkgs(
 
 zip_download_and_install(
     name = "bin_install",
+    image = ":apt_get_installed.tar",
     package = "https://github.com/wata727/tflint/releases/download/v0.23.1/tflint_linux_amd64.zip",
     target = "/usr/local/bin",
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":bin_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"tflint",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Terraform linter",
-        "org.opencontainers.image.description":"TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/tflint",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "tflint",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Terraform linter",
+        "org.opencontainers.image.description": "TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/tflint",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 
