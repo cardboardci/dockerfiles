@@ -1,32 +1,32 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+load("@cardboardci//rules:wrappers.bzl", "deb_download_and_install")
 
 download_pkgs(
     name = "apt_get_download",
     image_tar = "//images/base:image.tar",
     packages = [
-        "cmake",
-        "autotools-dev",
-        "libjpeg-dev",
-        "libgif-dev",
-        "libxt-dev",
         "autoconf",
         "automake",
-        "libtool",
-        "bzip2",
-        "libxml2-dev",
-        "libuninameslist-dev",
-        "libspiro-dev",
-        "libpango1.0-dev",
-        "libcairo2-dev",
-        "chrpath",
-        "uuid-dev",
-        "uthash-dev",
-        "libltdl-dev",
+        "autotools-dev",
         "build-essential",
+        "bzip2",
+        "chrpath",
+        "cmake",
+        "libcairo2-dev",
+        "libgif-dev",
+        "libjpeg-dev",
+        "libltdl-dev",
+        "libpango1.0-dev",
+        "libspiro-dev",
+        "libtool",
+        "libuninameslist-dev",
+        "libxml2-dev",
+        "libxt-dev",
+        "uthash-dev",
+        "uuid-dev",
         "wget",
     ],
 )
@@ -39,38 +39,37 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
-container_run_and_commit(
+deb_download_and_install(
     name = "bin_install",
-    commands = [
-        "wget https://github.com/pdf2htmlEX/pdf2htmlEX/releases/download/v0.18.8.rc1/pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-focal-x86_64.deb --directory-prefix=/tmp/deb",
-        "dpkg -i /tmp/deb/*.deb",
-    ],
     image = ":apt_get_installed.tar",
+    packages = [
+        "https://github.com/pdf2htmlEX/pdf2htmlEX/releases/download/v0.18.8.rc1/pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-focal-x86_64.deb",
+    ],
 )
 
 container_image(
     name = "image",
     base = ":bin_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"pdf2htmlex",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"PDF 2 HTML",
-        "org.opencontainers.image.description":"Convert PDF to HTML without losing text or format",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/pdf2htmlex",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "pdf2htmlex",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "PDF 2 HTML",
+        "org.opencontainers.image.description": "Convert PDF to HTML without losing text or format",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/pdf2htmlex",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

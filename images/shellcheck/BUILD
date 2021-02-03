@@ -1,7 +1,6 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 download_pkgs(
@@ -21,26 +20,26 @@ install_pkgs(
 container_image(
     name = "image",
     base = ":apt_get_installed.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"shellcheck",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Shell script static anaylsis",
-        "org.opencontainers.image.description":"ShellCheck is a static anaylsis tool that automatically finds bugs in your shell scripts",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/shellcheck",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "shellcheck",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Shell script static anaylsis",
+        "org.opencontainers.image.description": "ShellCheck is a static anaylsis tool that automatically finds bugs in your shell scripts",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/shellcheck",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

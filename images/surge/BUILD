@@ -1,8 +1,8 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+load("@cardboardci//rules:wrappers.bzl", "npm_download_and_install")
 
 download_pkgs(
     name = "apt_get_download",
@@ -21,37 +21,37 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
-container_run_and_commit(
+npm_download_and_install(
     name = "npm_install",
-    commands = [
-        "npm install -g -y surge",
-    ],
     image = ":apt_get_installed.tar",
+    packages = [
+        "surge",
+    ],
 )
 
 container_image(
     name = "image",
     base = ":npm_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"surge",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Static web publishing",
-        "org.opencontainers.image.description":"Surge is static web publishing for Front-End Developers, right from the CLI",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/surge",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "surge",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Static web publishing",
+        "org.opencontainers.image.description": "Surge is static web publishing for Front-End Developers, right from the CLI",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/surge",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

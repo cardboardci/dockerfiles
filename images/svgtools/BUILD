@@ -1,15 +1,14 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 download_pkgs(
     name = "apt_get_download",
     image_tar = "//images/base:image.tar",
     packages = [
-        "librsvg2-bin",
         "inkscape",
+        "librsvg2-bin",
     ],
 )
 
@@ -24,26 +23,26 @@ install_pkgs(
 container_image(
     name = "image",
     base = ":apt_get_installed.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"svgtools",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Rasterize SVGs",
-        "org.opencontainers.image.description":"Tools for working with Scalable Vector Graphics (SVG) files",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/svgtools",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "svgtools",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Rasterize SVGs",
+        "org.opencontainers.image.description": "Tools for working with Scalable Vector Graphics (SVG) files",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/svgtools",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 

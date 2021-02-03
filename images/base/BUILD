@@ -8,11 +8,11 @@ download_pkgs(
     name = "apt_get_download",
     image_tar = "@ubuntu//image",
     packages = [
-        "git",
-        "jq",
-        "curl",
         "bash",
         "ca-certificates",
+        "curl",
+        "git",
+        "jq",
     ],
 )
 
@@ -38,27 +38,27 @@ container_run_and_commit(
 container_image(
     name = "image",
     base = ":bin_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"base",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"CardboardCI BaseImage",
-        "org.opencontainers.image.description":"A base image with common dependencies for CI environments",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/base",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "base",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "CardboardCI BaseImage",
+        "org.opencontainers.image.description": "A base image with common dependencies for CI environments",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/base",
     },
+    visibility = ["//visibility:public"],
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
-    visibility = ["//visibility:public"],
 )
 
 container_test(
