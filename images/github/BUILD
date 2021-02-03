@@ -1,8 +1,8 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+load("@cardboardci//rules:wrappers.bzl", "deb_download_and_install")
 
 download_pkgs(
     name = "apt_get_download",
@@ -22,11 +22,10 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
-container_run_and_commit(
+deb_download_and_install(
     name = "bin_install",
-    commands = [
-        "wget https://github.com/cli/cli/releases/download/v0.6.4/gh_0.6.4_linux_amd64.deb --directory-prefix=/tmp/deb",
-        "dpkg -i /tmp/deb/*.deb",
+    packages = [
+        "https://github.com/cli/cli/releases/download/v0.6.4/gh_0.6.4_linux_amd64.deb",
     ],
     image = ":apt_get_installed.tar",
 )

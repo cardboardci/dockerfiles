@@ -1,8 +1,8 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@cardboardci//rules:wrappers.bzl", "luacheck_download_and_install")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+load("@cardboardci//rules:wrappers.bzl", "deb_download_and_install")
 
 download_pkgs(
     name = "apt_get_download",
@@ -33,7 +33,7 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
-luacheck_download_and_install(
+deb_download_and_install(
     name = "bin_install",
     packages = [
         "https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.focal_amd64.deb",

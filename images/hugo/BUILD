@@ -3,6 +3,7 @@ load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "instal
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+load("@cardboardci//rules:wrappers.bzl", "deb_download_and_install")
 
 download_pkgs(
     name = "apt_get_download",
@@ -22,11 +23,10 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
-container_run_and_commit(
+deb_download_and_install(
     name = "bin_install",
-    commands = [
-        "wget https://github.com/gohugoio/hugo/releases/download/v0.69.0/hugo_extended_0.69.0_Linux-64bit.deb --directory-prefix=/tmp/deb",
-        "dpkg -i /tmp/deb/*.deb",
+    packages = [
+        "https://github.com/gohugoio/hugo/releases/download/v0.69.0/hugo_extended_0.69.0_Linux-64bit.deb",
     ],
     image = ":apt_get_installed.tar",
 )
