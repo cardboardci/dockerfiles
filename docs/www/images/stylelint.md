@@ -1,0 +1,3 @@
+# Stylelint
+
+A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.
