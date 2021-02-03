@@ -24,35 +24,35 @@ install_pkgs(
 
 deb_download_and_install(
     name = "bin_install",
+    image = ":apt_get_installed.tar",
     packages = [
         "https://github.com/cli/cli/releases/download/v0.6.4/gh_0.6.4_linux_amd64.deb",
     ],
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":apt_get_installed.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"github",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"GitHub CLI",
-        "org.opencontainers.image.description":"A command-line tool that makes git easier to use with GitHub",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/github",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "github",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "GitHub CLI",
+        "org.opencontainers.image.description": "A command-line tool that makes git easier to use with GitHub",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/github",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 
