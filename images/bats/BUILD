@@ -23,35 +23,35 @@ install_pkgs(
 
 npm_download_and_install(
     name = "npm_install",
+    image = ":apt_get_installed.tar",
     packages = [
         "bats",
     ],
-    image = ":apt_get_installed.tar",
 )
 
 container_image(
     name = "image",
     base = ":npm_install_commit.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"bats",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"Bash Automated Testing System",
-        "org.opencontainers.image.description":"Bats is most useful when testing software written in Bash, but you can use it to test any UNIX program",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/bats",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "bats",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "Bash Automated Testing System",
+        "org.opencontainers.image.description": "Bats is most useful when testing software written in Bash, but you can use it to test any UNIX program",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/bats",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 
