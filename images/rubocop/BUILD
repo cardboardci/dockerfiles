@@ -22,7 +22,7 @@ install_pkgs(
 
 gem_download_and_install(
     name = "gem_install",
-    commands = [
+    packages = [
         "rake",
         "rubocop",
     ],

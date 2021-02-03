@@ -21,13 +21,10 @@ install_pkgs(
     output_image_name = "apt_get_installed",
 )
 
-container_run_and_commit(
+zip_download_and_install(
     name = "bin_install",
-    commands = [
-        "curl -L https://github.com/wata727/tflint/releases/download/v0.23.1/tflint_linux_amd64.zip -o /tmp/tflint.zip",
-        "unzip /tmp/tflint.zip -d /usr/local/bin",
-        "rm /tmp/tflint.zip",
-    ],
+    package = "https://github.com/wata727/tflint/releases/download/v0.23.1/tflint_linux_amd64.zip",
+    target = "/usr/local/bin",
     image = ":apt_get_installed.tar",
 )
 

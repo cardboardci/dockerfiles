@@ -23,7 +23,7 @@ install_pkgs(
 
 npm_download_and_install(
     name = "npm_install",
-    commands = [
+    packages = [
         "bats",
     ],
     image = ":apt_get_installed.tar",

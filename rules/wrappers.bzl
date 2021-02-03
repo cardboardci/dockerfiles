@@ -51,10 +51,15 @@ def deb_download_and_install(name, image, packages):
     )
 
 # Replace with GitHub releases style command
-def zip_download_and_install(name, image, packages):
+def zip_download_and_install(name, image, target, package):
     commands = ["wget %s --directory-prefix=/tmp/deb" % p for p in packages]
     container_run_and_commit(
         name = name,
-        commands = commands + ["dpkg -i /tmp/deb/*.deb", "rm /tmp/deb/*.deb"],
+        commands = [
+            "curl -L %s -o /tmp/%s.zip" % (package, name),
+            "unzip /tmp/%s.zip -d %s" % (name, target),
+            "rm /tmp/%s.zip" % (name),
+        ],
+        ],
         image = image,
     )
