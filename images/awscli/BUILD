@@ -1,7 +1,6 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 download_pkgs(
@@ -25,17 +24,17 @@ container_image(
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"awscli",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"AWS CLI",
-        "org.opencontainers.image.description":" The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/awscli",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "awscli",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "AWS CLI",
+        "org.opencontainers.image.description": " The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/awscli",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
