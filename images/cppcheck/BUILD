@@ -8,10 +8,10 @@ download_pkgs(
     image_tar = "//images/base:image.tar",
     packages = [
         "build-essential",
-        "libpcre3-dev",
-        "python3",
-        "python-pygments",
         "cppcheck",
+        "libpcre3-dev",
+        "python-pygments",
+        "python3",
     ],
 )
 
@@ -26,26 +26,26 @@ install_pkgs(
 container_image(
     name = "image",
     base = ":apt_get_installed.tar",
+    cmd = ["/bin/bash"],
+    entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
     },
     files = glob(["image_data/*"]),
-    user = "cardboardci",
     labels = {
-        "maintainer":"CardboardCI",
-        "org.opencontainers.image.title":"cppcheck",
-        "org.opencontainers.image.release":"CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor":"cardboardci",
-        "org.opencontainers.image.architecture":"amd64",
-        "org.opencontainers.image.summary":"C++ linter",
-        "org.opencontainers.image.description":"Static analysis of C/C++ code",
-        "org.opencontainers.image.source":"https://github.com/cardboardci/dockerfiles/images/cppcheck",
+        "maintainer": "CardboardCI",
+        "org.opencontainers.image.title": "cppcheck",
+        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
+        "org.opencontainers.image.vendor": "cardboardci",
+        "org.opencontainers.image.architecture": "amd64",
+        "org.opencontainers.image.summary": "C++ linter",
+        "org.opencontainers.image.description": "Static analysis of C/C++ code",
+        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/cppcheck",
     },
+    user = "cardboardci",
     volumes = [
         "/workspace",
     ],
-    entrypoint = "",
-    cmd = ["/bin/bash"],
     workdir = "/workspace",
 )
 
