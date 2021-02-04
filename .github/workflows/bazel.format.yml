@@ -5,10 +5,12 @@ on:
     paths:
       - .github/workflows/bazel.format.yml
       - WORKSPACE
-      - */BUILD
-      - */*.bzl
-      - */**/BUILD
-      - */**/*.bzl
+      - BUILD
+      - "*.bzl"
+      - "*/BUILD"
+      - "*/*.bzl"
+      - "*/**/BUILD"
+      - "*/**/*.bzl"
 
 jobs:
   image-upgrade:
