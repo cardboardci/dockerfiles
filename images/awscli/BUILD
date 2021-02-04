@@ -46,6 +46,7 @@ container_test(
     configs = [
         "//images/awscli/test_configs:command.yaml",
         "//tests:metadata.yaml",
+        "//tests:limited_user.yaml",
     ],
     image = ":image",
 )

@@ -56,6 +56,7 @@ container_test(
     configs = [
         "//images/dbxcli/test_configs:command.yaml",
         "//tests:metadata.yaml",
+        "//tests:limited_user.yaml",
     ],
     image = ":image",
 )

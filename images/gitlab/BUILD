@@ -67,6 +67,7 @@ container_test(
     configs = [
         "//images/gitlab/test_configs:command.yaml",
         "//tests:metadata.yaml",
+        "//tests:limited_user.yaml",
     ],
     image = ":image",
 )

@@ -78,6 +78,7 @@ container_test(
     configs = [
         "//images/pdf2htmlex/test_configs:command.yaml",
         "//tests:metadata.yaml",
+        "//tests:limited_user.yaml",
     ],
     image = ":image",
 )
