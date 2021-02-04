@@ -24,12 +24,12 @@ metadataTest:
         - key: "org.opencontainers.image.source"
           value: "https://github.com/cardboardci/dockerfiles/.*"
           isRegex: true
-        - key: "org.opencontainers.image.url"
-          value: "https://github.com/cardboardci/dockerfiles/.*"
-          isRegex: true
-        - key: "org.opencontainers.image.documentation"
-          value: "https://cardboardci.jrbeverly.me"
-          isRegex: true
+        # - key: "org.opencontainers.image.url"
+        #   value: "https://github.com/cardboardci/dockerfiles/.*"
+        #   isRegex: true
+        # - key: "org.opencontainers.image.documentation"
+        #   value: "https://cardboardci.jrbeverly.me"
+        #   isRegex: true
         - key: "org.opencontainers.image.title"
           value: ".*"
           isRegex: true
