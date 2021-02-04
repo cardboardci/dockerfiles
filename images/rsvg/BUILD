@@ -47,7 +47,7 @@ container_test(
     name = "test",
     configs = [
         "//images/rsvg/test_configs:command.yaml",
-        "//images/rsvg/test_configs:metadata.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

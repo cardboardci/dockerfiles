@@ -59,7 +59,7 @@ container_test(
     name = "test",
     configs = [
         "//images/bats/test_configs:command.yaml",
-        "//images/bats/test_configs:metadata.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

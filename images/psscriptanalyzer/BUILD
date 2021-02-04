@@ -84,7 +84,7 @@ container_test(
     name = "test",
     configs = [
         "//images/psscriptanalyzer/test_configs:command.yaml",
-        "//images/psscriptanalyzer/test_configs:metadata.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

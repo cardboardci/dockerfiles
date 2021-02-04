@@ -60,7 +60,7 @@ container_test(
     name = "test",
     configs = [
         "//images/luacheck/test_configs:command.yaml",
-        "//images/luacheck/test_configs:metadata.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

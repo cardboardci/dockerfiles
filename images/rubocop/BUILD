@@ -59,7 +59,7 @@ container_test(
     name = "test",
     configs = [
         "//images/rubocop/test_configs:command.yaml",
-        "//images/rubocop/test_configs:metadata.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

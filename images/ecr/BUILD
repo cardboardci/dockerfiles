@@ -50,7 +50,7 @@ container_test(
     name = "test",
     configs = [
         "//images/ecr/test_configs:command.yaml",
-        "//images/ecr/test_configs:metadata.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

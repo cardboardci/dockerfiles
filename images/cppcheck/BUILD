@@ -53,7 +53,7 @@ container_test(
     name = "test",
     configs = [
         "//images/cppcheck/test_configs:command.yaml",
-        "//images/cppcheck/test_configs:metadata.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )
