@@ -21,4 +21,4 @@ jobs:
           chmod +x buildifier
       - name: Run buildifier
         run: |
-          ./buildifier --lint=warn -r .
+          ./buildifier --mode=check --lint=warn -r .
