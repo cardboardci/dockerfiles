@@ -1,0 +1,24 @@
+name: bazel-format
+
+on:
+  push:
+    paths:
+      - .github/workflows/bazel.format.yml
+      - WORKSPACE
+      - */BUILD
+      - */*.bzl
+      - */**/BUILD
+      - */**/*.bzl
+
+jobs:
+  image-upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install buildifier
+        run: |
+          curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier > buildifier
+          chmod +x buildifier
+      - name: Run buildifier
+        run: |
+          ./buildifier --lint=warn -r .
