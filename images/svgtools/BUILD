@@ -50,8 +50,8 @@ container_test(
     name = "test",
     configs = [
         "//images/svgtools/test_configs:command.yaml",
-        "//tests:metadata.yaml",
         "//tests:limited_user.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

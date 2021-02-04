@@ -47,8 +47,8 @@ container_test(
     name = "test",
     configs = [
         "//images/pdftools/test_configs:command.yaml",
-        "//tests:metadata.yaml",
         "//tests:limited_user.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )
