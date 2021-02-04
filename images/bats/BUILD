@@ -60,6 +60,7 @@ container_test(
     configs = [
         "//images/bats/test_configs:command.yaml",
         "//tests:metadata.yaml",
+        "//tests:limited_user.yaml",
     ],
     image = ":image",
 )

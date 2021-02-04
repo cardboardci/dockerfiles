@@ -1,5 +1,15 @@
 schemaVersion: 2.0.0
 
+commandTests:
+    - name: "uid"
+      command: "id"
+      args: ["-u", "cardboardci"]
+      expectedOutput: ["180000"]
+    - name: "gid"
+      command: "id"
+      args: ["-g", "cardboardci"]
+      expectedOutput: ["180000"]
+
 metadataTest:
     env:
         - key: CARDBOARDCI_WORKSPACE
