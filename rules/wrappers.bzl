@@ -4,6 +4,9 @@ A collection of wrappers for installing from package managers.
 
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 
+USER_UID="18000"
+GROUP_UID="18000"
+
 def luacheck_download_and_install(name, image, packages):
     commands = ["luarocks install %s" % p for p in packages]
     container_run_and_commit(
