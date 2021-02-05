@@ -33,7 +33,7 @@ runs:
       run: |
         git status
         git checkout -b "${{ inputs.branch }}"
-        git add *
+        git add WORKSPACE
         success=`git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"`
         echo "::set-output name=success::$success"
     - id: pull-request
