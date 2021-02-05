@@ -46,6 +46,9 @@ container_image(
     entrypoint = "",
     env = {
         "CARDBOARDCI_WORKSPACE": "/workspace",
+        "LANG": "en_US.UTF-8",
+        "LANGUAGE": "en_US:en",
+        "LC_ALL": "en_US.UTF-8",
     },
     files = glob(["image_data/*"]),
     labels = {
