@@ -35,6 +35,8 @@ container_image(
         "org.opencontainers.image.summary": "Shell script static anaylsis",
         "org.opencontainers.image.description": "ShellCheck is a static anaylsis tool that automatically finds bugs in your shell scripts",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/shellcheck",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/shellcheck",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

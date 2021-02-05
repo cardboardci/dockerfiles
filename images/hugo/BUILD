@@ -48,6 +48,8 @@ container_image(
         "org.opencontainers.image.summary": "Hugo static site generator",
         "org.opencontainers.image.description": "Hugo is an open-source static site generator",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/hugo",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/hugo",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

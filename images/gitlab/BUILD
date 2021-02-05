@@ -54,6 +54,8 @@ container_image(
         "org.opencontainers.image.summary": "GitLab CLI",
         "org.opencontainers.image.description": "Lab wraps Git or Hub, making it simple to clone, fork, and interact with repositories on GitLab",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/gitlab",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/gitlab",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

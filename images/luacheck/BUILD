@@ -48,6 +48,8 @@ container_image(
         "org.opencontainers.image.summary": "Lua linter",
         "org.opencontainers.image.description": "Luacheck is a static analyzer and a linter for Lua",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/luacheck",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/luacheck",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

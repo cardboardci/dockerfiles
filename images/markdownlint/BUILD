@@ -47,6 +47,8 @@ container_image(
         "org.opencontainers.image.summary": "NodeJS linter",
         "org.opencontainers.image.description": "A Node.js style checker and lint tool for Markdown/CommonMark files",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/markdownlint",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/markdownlint",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

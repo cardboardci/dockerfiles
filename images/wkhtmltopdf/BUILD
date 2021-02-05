@@ -59,6 +59,8 @@ container_image(
         "org.opencontainers.image.summary": "Render HTML into PDFs",
         "org.opencontainers.image.description": "wkhtmltopdf is a command line tools to render HTML into PDF",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/wkhtmltopdf",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/wkhtmltopdf",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

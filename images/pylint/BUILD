@@ -47,6 +47,8 @@ container_image(
         "org.opencontainers.image.summary": "Python linter",
         "org.opencontainers.image.description": "Pylint is a Python static code analysis tool which looks for programming errors",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/pylint",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/pylint",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

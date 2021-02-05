@@ -48,6 +48,8 @@ container_image(
         "org.opencontainers.image.summary": "GitHub CLI",
         "org.opencontainers.image.description": "A command-line tool that makes git easier to use with GitHub",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/github",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/github",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

@@ -38,6 +38,8 @@ container_image(
         "org.opencontainers.image.summary": "Rasterize SVGs",
         "org.opencontainers.image.description": "Tools for working with Scalable Vector Graphics (SVG) files",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/svgtools",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/svgtools",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

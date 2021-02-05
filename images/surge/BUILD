@@ -47,6 +47,8 @@ container_image(
         "org.opencontainers.image.summary": "Static web publishing",
         "org.opencontainers.image.description": "Surge is static web publishing for Front-End Developers, right from the CLI",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/surge",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/surge",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

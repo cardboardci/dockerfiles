@@ -46,6 +46,8 @@ container_image(
         "org.opencontainers.image.summary": "Dockerfile linter",
         "org.opencontainers.image.description": "Dockerfile linter, validate inline bash, written in Haskell",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/hadolint",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/hadolint",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

@@ -33,6 +33,8 @@ container_image(
         "org.opencontainers.image.summary": "AWS CLI",
         "org.opencontainers.image.description": " The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/awscli",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/awscli",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

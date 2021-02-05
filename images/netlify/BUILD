@@ -47,6 +47,8 @@ container_image(
         "org.opencontainers.image.summary": "Netlify CLI",
         "org.opencontainers.image.description": "Netlify builds, deploys and hosts your netlify services",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/netlify",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/netlify",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

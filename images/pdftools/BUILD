@@ -35,6 +35,8 @@ container_image(
         "org.opencontainers.image.summary": "PDF CLIs",
         "org.opencontainers.image.description": " Command line tools for manipulating pdfs",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/pdftools",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/pdftools",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

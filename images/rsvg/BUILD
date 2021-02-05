@@ -35,6 +35,8 @@ container_image(
         "org.opencontainers.image.summary": "Rasterize SVGs",
         "org.opencontainers.image.description": "Turn SVG files into raster images",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/rsvg",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/rsvg",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

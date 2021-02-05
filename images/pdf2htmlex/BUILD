@@ -65,6 +65,8 @@ container_image(
         "org.opencontainers.image.summary": "PDF 2 HTML",
         "org.opencontainers.image.description": "Convert PDF to HTML without losing text or format",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/pdf2htmlex",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/pdf2htmlex",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

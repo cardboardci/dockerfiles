@@ -38,6 +38,8 @@ container_image(
         "org.opencontainers.image.summary": "AWS ECR",
         "org.opencontainers.image.description": "A unified tool to deploy Docker images to Amazon Elastic Container Registry (ECR)",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/ecr",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/ecr",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

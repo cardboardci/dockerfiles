@@ -47,6 +47,8 @@ container_image(
         "org.opencontainers.image.summary": "Ruby static code analyzer",
         "org.opencontainers.image.description": "A Ruby static code analyzer and formatter, based on the community Ruby style guide",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/rubocop",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/rubocop",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

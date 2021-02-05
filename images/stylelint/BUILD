@@ -48,6 +48,8 @@ container_image(
         "org.opencontainers.image.summary": "Style linter",
         "org.opencontainers.image.description": "A mighty, modern style linter",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/stylelint",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/stylelint",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

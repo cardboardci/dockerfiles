@@ -47,6 +47,8 @@ container_image(
         "org.opencontainers.image.summary": "HTML linter",
         "org.opencontainers.image.description": "The static code analysis tool you need for your HTML",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/htmlhint",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/htmlhint",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

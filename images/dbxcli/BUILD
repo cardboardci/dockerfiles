@@ -43,6 +43,8 @@ container_image(
         "org.opencontainers.image.summary": "Dropbox CLI",
         "org.opencontainers.image.description": "A command line client for Dropbox built using the Go SDK.",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/dbxcli",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/dbxcli",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

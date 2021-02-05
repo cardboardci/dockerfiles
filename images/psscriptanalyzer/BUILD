@@ -72,6 +72,8 @@ container_image(
         "org.opencontainers.image.summary": "Powershell linter",
         "org.opencontainers.image.description": "PSScriptAnalyzer is a static code checker for Windows PowerShell modules and scripts",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/psscriptanalyzer",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/psscriptanalyzer",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

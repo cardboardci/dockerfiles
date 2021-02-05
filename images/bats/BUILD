@@ -47,6 +47,8 @@ container_image(
         "org.opencontainers.image.summary": "Bash Automated Testing System",
         "org.opencontainers.image.description": "Bats is most useful when testing software written in Bash, but you can use it to test any UNIX program",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/bats",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/bats",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [

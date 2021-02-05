@@ -41,6 +41,8 @@ container_image(
         "org.opencontainers.image.summary": "C++ linter",
         "org.opencontainers.image.description": "Static analysis of C/C++ code",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/cppcheck",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/cppcheck",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     user = "cardboardci",
     volumes = [
