@@ -28,6 +28,5 @@ runs:
           request_url="https://${{ inputs.url }}/v2/repositories/${{ inputs.image }}/tags/"
           echo "Request: ${request_url}"
           response=$(curl -sSL "${request_url}")
-          echo "${response}"
           image_digest=$(echo "${response}" | jq -r -c "${query}")
           echo "::set-output name=image-digest::$image_digest"
