@@ -1,3 +1,7 @@
+"""
+A collection of wrappers for installing from package managers.
+"""
+
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 
 def luacheck_download_and_install(name, image, packages):

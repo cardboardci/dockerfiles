@@ -6,7 +6,7 @@ load("@cardboardci//rules:wrappers.bzl", "pip_download_and_install")
 
 download_pkgs(
     name = "apt_get_download",
-    image_tar = "@ubuntu//image",
+    image_tar = "//images/base:image.tar",
     packages = [
         "python3",
         "python3-pip",
@@ -15,7 +15,7 @@ download_pkgs(
 
 install_pkgs(
     name = "apt_get_installed",
-    image_tar = "@ubuntu//image",
+    image_tar = "//images/base:image.tar",
     installables_tar = ":apt_get_download.tar",
     installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "apt_get_installed",
@@ -59,7 +59,8 @@ container_test(
     name = "test",
     configs = [
         "//images/pylint/test_configs:command.yaml",
-        "//images/pylint/test_configs:metadata.yaml",
+        "//tests:limited_user.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

@@ -58,7 +58,8 @@ container_test(
     name = "test",
     configs = [
         "//images/hadolint/test_configs:command.yaml",
-        "//images/hadolint/test_configs:metadata.yaml",
+        "//tests:limited_user.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

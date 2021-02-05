@@ -71,7 +71,8 @@ container_test(
     name = "test",
     configs = [
         "//images/wkhtmltopdf/test_configs:command.yaml",
-        "//images/wkhtmltopdf/test_configs:metadata.yaml",
+        "//tests:limited_user.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

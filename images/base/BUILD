@@ -13,6 +13,7 @@ download_pkgs(
         "curl",
         "git",
         "jq",
+        "locales",
     ],
 )
 
@@ -27,10 +28,9 @@ install_pkgs(
 container_run_and_commit(
     name = "bin_install",
     commands = [
-        "groupadd -r cardboardci",
-        "useradd --no-log-init -r -g cardboardci cardboardci",
-        "mkdir -p /home/cardboardci",
-        "chown cardboardci /home/cardboardci",
+        "groupadd -r -g 180000 cardboardci",
+        "useradd --uid=180000 --gid=180000 --create-home cardboardci",
+        "locale-gen en_US.UTF-8",
     ],
     image = ":apt_get_installed.tar",
 )
@@ -53,6 +53,8 @@ container_image(
         "org.opencontainers.image.summary": "CardboardCI BaseImage",
         "org.opencontainers.image.description": "A base image with common dependencies for CI environments",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/base",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/base",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
     },
     visibility = ["//visibility:public"],
     volumes = [
@@ -65,7 +67,7 @@ container_test(
     name = "test",
     configs = [
         "//images/base/test_configs:command.yaml",
-        "//images/base/test_configs:metadata.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

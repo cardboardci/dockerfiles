@@ -60,7 +60,8 @@ container_test(
     name = "test",
     configs = [
         "//images/stylelint/test_configs:command.yaml",
-        "//images/stylelint/test_configs:metadata.yaml",
+        "//tests:limited_user.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

@@ -55,7 +55,8 @@ container_test(
     name = "test",
     configs = [
         "//images/dbxcli/test_configs:command.yaml",
-        "//images/dbxcli/test_configs:metadata.yaml",
+        "//tests:limited_user.yaml",
+        "//tests:metadata.yaml",
     ],
     image = ":image",
 )
