@@ -3,6 +3,7 @@ load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "instal
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+load("@cardboardci//rules:wrappers.bzl", "CARDBOARDCI_UID", "CARDBOARDCI_GID")
 
 download_pkgs(
     name = "apt_get_download",
@@ -28,8 +29,8 @@ install_pkgs(
 container_run_and_commit(
     name = "bin_install",
     commands = [
-        "groupadd -r -g 180000 cardboardci",
-        "useradd --uid=180000 --gid=180000 --create-home cardboardci",
+        "groupadd -r -g {gid} cardboardci".format(gid=CARDBOARDCI_GID),
+        "useradd --uid={uid} --gid={gid} --create-home cardboardci".format(uid=CARDBOARDCI_UID, gid=CARDBOARDCI_GID),
         "locale-gen en_US.UTF-8",
     ],
     image = ":apt_get_installed.tar",
@@ -56,9 +57,9 @@ container_image(
         "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/base",
         "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
         "org.cardboardci.image.user": "cardboardci",
-        "org.cardboardci.image.uid": "180000",
+        "org.cardboardci.image.uid": CARDBOARDCI_UID,
         "org.cardboardci.image.group": "cardboardci",
-        "org.cardboardci.image.gid": "180000",
+        "org.cardboardci.image.gid": CARDBOARDCI_GID,
     },
     visibility = ["//visibility:public"],
     volumes = [
