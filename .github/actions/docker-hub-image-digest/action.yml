@@ -25,7 +25,7 @@ runs:
       run: |
           query='.results | .[] | select( .name == "${{ inputs.tag }}") | .images | .[] | select( .architecture == "${{ inputs.arch }}") | .digest'
           echo "Querying: ${query}"
-          request_url="https://${{ inputs.url }}/v2/repositories/${{ inputs.image }}/tags/"
+          request_url="https://${{ inputs.url }}/v2/repositories/${{ inputs.image }}/tags/?page_size=100&page=1&ordering=last_updated"
           echo "Request: ${request_url}"
           response=$(curl -sSL "${request_url}")
           image_digest=$(echo "${response}" | jq -r -c "${query}")
