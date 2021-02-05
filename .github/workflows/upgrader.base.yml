@@ -46,6 +46,6 @@ jobs:
         with:
           username: jrbeverly
           email: jonathan@jrbeverly.me
-          branch: '/baseimg'
+          branch: 'name-of-branch'
           options: '--body "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"'
           title: 'Bump ubuntu image to latest version of focal'
