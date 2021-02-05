@@ -24,12 +24,12 @@ metadataTest:
         - key: "org.opencontainers.image.source"
           value: "https://github.com/cardboardci/dockerfiles/.*"
           isRegex: true
-        # - key: "org.opencontainers.image.url"
-        #   value: "https://github.com/cardboardci/dockerfiles/.*"
-        #   isRegex: true
-        # - key: "org.opencontainers.image.documentation"
-        #   value: "https://cardboardci.jrbeverly.me"
-        #   isRegex: true
+        - key: "org.opencontainers.image.url"
+          value: "https://github.com/cardboardci/dockerfiles/.*"
+          isRegex: true
+        - key: "org.opencontainers.image.documentation"
+          value: "https://cardboardci.jrbeverly.me"
+          isRegex: true
         - key: "org.opencontainers.image.title"
           value: ".*"
           isRegex: true
@@ -42,6 +42,14 @@ metadataTest:
         - key: "org.opencontainers.image.description"
           value: ".*"
           isRegex: true
+        - key: "org.cardboardci.image.user"
+          value: "cardboardci"
+        - key: "org.cardboardci.image.uid"
+          value: "180000"
+        - key: "org.cardboardci.image.group"
+          value: "cardboardci"
+        - key: "org.cardboardci.image.gid"
+          value: "180000"
     exposedPorts: []
     volumes: ["/workspace"]
     cmd: ["/bin/bash"]

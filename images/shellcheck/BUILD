@@ -2,6 +2,7 @@ load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "downl
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+load("@cardboardci//rules:wrappers.bzl", "CARDBOARDCI_GID", "CARDBOARDCI_UID")
 
 download_pkgs(
     name = "apt_get_download",
@@ -35,6 +36,12 @@ container_image(
         "org.opencontainers.image.summary": "Shell script static anaylsis",
         "org.opencontainers.image.description": "ShellCheck is a static anaylsis tool that automatically finds bugs in your shell scripts",
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/shellcheck",
+        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/shellcheck",
+        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
+        "org.cardboardci.image.user": "cardboardci",
+        "org.cardboardci.image.uid": CARDBOARDCI_UID,
+        "org.cardboardci.image.group": "cardboardci",
+        "org.cardboardci.image.gid": CARDBOARDCI_GID,
     },
     user = "cardboardci",
     volumes = [
