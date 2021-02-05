@@ -37,7 +37,7 @@ runs:
         echo "::set-output name=success::$success"
     - id: pull-request
       shell: bash
-      if: ${{ steps.action.outputs.success }}
+      # if: ${{ steps.action.outputs.success }}
       run: |
         git remote add github "https://${{ inputs.username }}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
         git push -u github HEAD
