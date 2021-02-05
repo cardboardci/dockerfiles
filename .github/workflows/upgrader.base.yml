@@ -20,7 +20,7 @@ jobs:
         with:
           url: index.docker.io
           image: ubuntu
-          tag: focal-20210119
+          tag: focal
       - name: Determine the current image digest
         id: source
         run: |
