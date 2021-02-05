@@ -1,9 +1,6 @@
 name: 'DockerHub Image Digest'
 description: 'Retrieve the image digest associated with a tag.'
 inputs:
-  branch:
-    description: 'Temporary'
-    required: true
   title:
     description: 'Temporary'
     required: true
@@ -16,7 +13,6 @@ runs:
     - id: git-commit
       shell: bash
       run: |
-        git checkout -b "${{ inputs.branch }}"
         success=`git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"`
         echo "::set-output name=success::$success"
     - id: pull-request

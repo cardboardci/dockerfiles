@@ -7,6 +7,9 @@ inputs:
   email:
     description: 'Email of the GitHub actor'
     required: true
+  branch:
+    description: 'Temporary'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -16,3 +19,4 @@ runs:
         git config --global user.name "${{ inputs.username }}"
         git config --global user.email "${{ inputs.email }}"
         git remote add github "https://${{ inputs.username }}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        git checkout -b "${{ inputs.branch }}"
