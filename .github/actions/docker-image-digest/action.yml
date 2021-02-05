@@ -28,7 +28,9 @@ runs:
       run: |
           request_url="https://${{ inputs.url }}/v2/repositories/${{ inputs.image }}/tags"
           echo "Request: ${request_url}"
+          wget -q "${request_url}" -O - | tr -d '[]" ' | tr '}' '\n' | awk -F: '{print $3}' 
           latest=$(wget -q "${request_url}" -O - | tr -d '[]" ' | tr '}' '\n' | awk -F: '{print $3}' | grep '${{ inputs.tag }}' | sort -rn | head -n1)
+          echo docker pull ${{ inputs.url }}/${{ inputs.image }}:${latest}
           docker pull ${{ inputs.url }}/${{ inputs.image }}:${latest}
           docker inspect ${{ inputs.url }}/${{ inputs.image }}:${latest}
           image_digest=`docker inspect --format='{{index .RepoDigests 0}}' ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }} | cut -d'@' -f2`
