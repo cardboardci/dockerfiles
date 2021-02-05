@@ -40,6 +40,10 @@ container_image(
         "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/svgtools",
         "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/svgtools",
         "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
+        "org.cardboardci.image.user": "cardboardci",
+        "org.cardboardci.image.uid": "180000",
+        "org.cardboardci.image.group": "cardboardci",
+        "org.cardboardci.image.gid": "180000",
     },
     user = "cardboardci",
     volumes = [
