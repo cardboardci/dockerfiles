@@ -13,12 +13,12 @@ commandTests:
     # Empty directories
     - name: "empty /tmp"
       command: "ls"
-      args: ["ls", "-A" /tmp"]
+      args: ["ls", "-A", "/tmp"]
       expectedOutput: [""]
       exitCode: 0
     - name: "empty /var/lib/apt/lists/"
       command: "ls"
-      args: ["ls", "-A" /var/lib/apt/lists/"]
+      args: ["ls", "-A", "/var/lib/apt/lists/"]
       expectedOutput: [""]
       exitCode: 0
 
