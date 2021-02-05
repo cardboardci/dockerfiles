@@ -38,14 +38,22 @@ jobs:
           mv WORKSPACE.tmp WORKSPACE
           echo "# ensure always commits" >> WORKSPACE
           cat WORKSPACE
+          git add WORKSPACE
+          # Add a line here to git status if any changes
+      - name: Configure git
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        uses: ./.github/actions/git-config
+        env:
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+        with:
+          username: jrbeverly
+          email: jonathan@jrbeverly.me
       - name: Commit all of the dependencies
         uses: ./.github/actions/commit
         # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
-          username: jrbeverly
-          email: jonathan@jrbeverly.me
           branch: 'name-of-branch'
           options: '--body "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"'
           title: 'Bump ubuntu image to latest version of focal'
