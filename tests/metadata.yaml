@@ -1,6 +1,7 @@
 schemaVersion: 2.0.0
 
 commandTests:
+    # Ensure that user exists
     - name: "uid"
       command: "id"
       args: ["-u", "cardboardci"]
@@ -9,6 +10,17 @@ commandTests:
       command: "id"
       args: ["-g", "cardboardci"]
       expectedOutput: ["180000"]
+    # Empty directories
+    - name: "empty /tmp"
+      command: "ls"
+      args: ["-A", "/tmp"]
+      expectedOutput: [""]
+      exitCode: 0
+    - name: "empty /var/lib/apt/lists/"
+      command: "ls"
+      args: ["-A", "/var/lib/apt/lists/"]
+      expectedOutput: [""]
+      exitCode: 0
 
 metadataTest:
     env:
