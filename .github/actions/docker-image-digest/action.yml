@@ -20,6 +20,7 @@ runs:
     - id: action
       shell: bash
       run: |
+          set -x
           docker pull ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }}
           image_digest=`docker inspect --format='{{index .RepoDigests 0}}' ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }} | cut -d'@' -f2`
           echo "::set-output name=image-digest::$image_digest"

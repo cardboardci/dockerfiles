@@ -18,7 +18,7 @@ jobs:
         id: dockerhub
         uses: ./.github/actions/docker-image-digest
         with:
-          url: docker.io
+          url: index.docker.io
           image: ubuntu
           tag: focal
       - name: Determine the current image digest
