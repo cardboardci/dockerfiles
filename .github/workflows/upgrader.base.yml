@@ -14,14 +14,20 @@ jobs:
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
           chmod +x buildozer
+      # - name: Get the dockerhub image sha
+      #   id: dockerhub
+      #   uses: ./.github/actions/docker-hub-image-digest
+      #   with:
+      #     url: registry.hub.docker.com
+      #     image: library/ubuntu
+      #     arch: amd64
+      #     tag: focal
       - name: Get the dockerhub image sha
         id: dockerhub
-        uses: ./.github/actions/docker-hub-image-digest
-        with:
-          url: registry.hub.docker.com
-          image: library/ubuntu
-          arch: amd64
-          tag: focal
+        run: |
+          docker pull docker.io/ubuntu:focal
+          image_digest=`docker inspect --format='{{index .RepoDigests 0}}' docker.io/ubuntu:focal | cut -d'@' -f2`
+          echo "::set-output name=image-digest::$image_digest"
       - name: Determine the current image digest
         id: source
         run: |
