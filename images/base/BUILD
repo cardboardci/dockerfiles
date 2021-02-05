@@ -3,7 +3,7 @@ load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "instal
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
-load("@cardboardci//rules:wrappers.bzl", "CARDBOARDCI_UID", "CARDBOARDCI_GID")
+load("@cardboardci//rules:wrappers.bzl", "CARDBOARDCI_GID", "CARDBOARDCI_UID")
 
 download_pkgs(
     name = "apt_get_download",
@@ -29,8 +29,11 @@ install_pkgs(
 container_run_and_commit(
     name = "bin_install",
     commands = [
-        "groupadd -r -g {gid} cardboardci".format(gid=CARDBOARDCI_GID),
-        "useradd --uid={uid} --gid={gid} --create-home cardboardci".format(uid=CARDBOARDCI_UID, gid=CARDBOARDCI_GID),
+        "groupadd -r -g {gid} cardboardci".format(gid = CARDBOARDCI_GID),
+        "useradd --uid={uid} --gid={gid} --create-home cardboardci".format(
+            uid = CARDBOARDCI_UID,
+            gid = CARDBOARDCI_GID,
+        ),
         "locale-gen en_US.UTF-8",
     ],
     image = ":apt_get_installed.tar",
