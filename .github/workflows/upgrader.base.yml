@@ -36,12 +36,16 @@ jobs:
           echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
           rm WORKSPACE
           mv WORKSPACE.tmp WORKSPACE
+          echo "# ensure always commits" >> WORKSPACE
           cat WORKSPACE
       - name: Commit all of the dependencies
-        uses: ./.github/actions/auto-commit
-        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+        uses: ./.github/actions/commit
+        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
-          BRANCH: '/baseimg'
-          MESSAGE: 'Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}'
-          PULL_REQUEST_TITLE: 'Bump ubuntu image to latest version of focal'
+        with:
+          username: jrbeverly
+          email: jonathan@jrbeverly.me
+          branch: '/baseimg'
+          options: '--body "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"'
+          title: 'Bump ubuntu image to latest version of focal'

@@ -1,0 +1,44 @@
+name: 'DockerHub Image Digest'
+description: 'Retrieve the image digest associated with a tag.'
+inputs:
+  username:
+    description: 'Temporary'
+    required: true
+  email:
+    description: 'Temporary'
+    required: true
+  branch:
+    description: 'Temporary'
+    required: true
+  title:
+    description: 'Temporary'
+    required: true
+  options:
+    description: 'Temporary'
+    required: true
+# outputs:
+#   image-digest:
+#     description: "The image digest"
+#     value: ${{ steps.action.outputs.image-digest }}
+runs:
+  using: "composite"
+  steps:
+    - id: git-config
+      shell: bash
+      run: |
+        git config --global user.name "${{ inputs.username }}"
+        git config --global user.email "${{ inputs.email }}"
+    - id: git-commit
+      shell: bash
+      run: |
+        git checkout -b "${{ inputs.branch }}"
+        git add *
+        success=`git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"`
+        echo "::set-output name=success::$success"
+    - id: pull-request
+      shell: bash
+      if: ${{ steps.action.outputs.success }}
+      run: |
+        git remote add github "https://${{ inputs.username }}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        git push -u github HEAD
+        #hub pull-request -m "${{ inputs.title }}" ${{ inputs.options }} --assign "${{ inputs.username }}"
