@@ -8,6 +8,7 @@ on:
       - images/pdf2htmlex/BUILD
       - images/base/*
       - images/base/**/*
+      - tests/*.yaml
 
 jobs:
   build-and-test:

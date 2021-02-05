@@ -9,6 +9,7 @@ on:
       - WORKSPACE
       - images/base/*
       - images/base/**/*
+      - tests/*.yaml
 
 jobs:
   build-and-test:
