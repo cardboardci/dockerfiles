@@ -54,6 +54,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
-          branch: 'name-of-branch'
+          branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
           options: '--body "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"'
           title: 'Bump ubuntu image to latest version of focal'
