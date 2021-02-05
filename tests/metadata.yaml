@@ -42,6 +42,14 @@ metadataTest:
         - key: "org.opencontainers.image.description"
           value: ".*"
           isRegex: true
+        - key: "org.cardboardci.image.user"
+          value: "cardboardci"
+        - key: "org.cardboardci.image.uid"
+          value: "180000"
+        - key: "org.cardboardci.image.group"
+          value: "cardboardci"
+        - key: "org.cardboardci.image.gid"
+          value: "180000"
     exposedPorts: []
     volumes: ["/workspace"]
     cmd: ["/bin/bash"]
