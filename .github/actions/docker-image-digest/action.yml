@@ -1,0 +1,27 @@
+name: 'Docker Image Digest'
+description: 'Retrieve the image digest associated with a tag.'
+inputs:
+  url:
+    description: 'The docker registry domain'
+    required: true
+  image:
+    description: 'The namespace of the image'
+    required: true
+  tag:
+    description: 'The tag of the image'
+    required: true
+outputs:
+  image-digest:
+    description: "The image digest"
+    value: ${{ steps.action.outputs.image-digest }}
+runs:
+  using: "composite"
+  steps:
+    - id: action
+      shell: bash
+      run: |
+          echo "Pulling from ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }}"
+          docker pull ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }}
+          docker inspect ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }}
+          image_digest=`docker inspect --format='{{index .RepoDigests 0}}' ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }} | cut -d'@' -f2`
+          echo "::set-output name=image-digest::$image_digest"

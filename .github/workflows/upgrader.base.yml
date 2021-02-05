@@ -2,7 +2,7 @@ name: dependecy-imagebase
 
 on:
   schedule:
-    - cron: "30 4 6 * *"
+    - cron: "30 4 * * *"
   workflow_dispatch:
 
 jobs:
@@ -14,13 +14,12 @@ jobs:
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
           chmod +x buildozer
-      - name: Get the dockerhub image sha
+      - name: Get the docker image sha
         id: dockerhub
-        uses: ./.github/actions/docker-hub-image-digest
+        uses: ./.github/actions/docker-image-digest
         with:
-          url: registry.hub.docker.com
-          image: library/ubuntu
-          arch: amd64
+          url: index.docker.io
+          image: ubuntu
           tag: focal
       - name: Determine the current image digest
         id: source
