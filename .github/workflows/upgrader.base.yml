@@ -46,6 +46,10 @@ jobs:
           set -x
           echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
           cat WORKSPACE.tmp
+          rm WORKSPACE
+          mv WORKSPACE.tmp WORKSPACE
+          ./buildifier
+          cat WORKSPACE
         # # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         # run: |
         #   set -x
