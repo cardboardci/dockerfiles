@@ -56,5 +56,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
           options: "--label dependencies"
-          body: "Automated upgrading of the base image ubuntu to tag `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces digest at digest `${{ steps.source.outputs.image-digest }}` to the digest of tag `${{ steps.dockerhub.outputs.image-tag }}` (`${{ steps.dockerhub.outputs.image-digest }}`)"
+          body: "Automated upgrading of the base image ubuntu to tag \`${{ steps.dockerhub.outputs.image-tag }}\`.\n\nReplaces digest at digest \`${{ steps.source.outputs.image-digest }}\` to the digest of tag \`${{ steps.dockerhub.outputs.image-tag }}\` (\`${{ steps.dockerhub.outputs.image-digest }}\`)"
           title: "Bump base ubuntu image to ${{ steps.dockerhub.outputs.image-tag }} tag"
