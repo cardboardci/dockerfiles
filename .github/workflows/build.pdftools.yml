@@ -1,4 +1,4 @@
-name: pdftools-build
+name: build-pdftools
 on:
   push:
     paths:

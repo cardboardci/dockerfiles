@@ -1,4 +1,4 @@
-name: psscriptanalyzer-build
+name: build-psscriptanalyzer
 on:
   push:
     paths:

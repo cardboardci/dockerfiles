@@ -1,4 +1,4 @@
-name: svgtools-build
+name: build-svgtools
 on:
   push:
     paths:

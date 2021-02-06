@@ -1,4 +1,4 @@
-name: hadolint-build
+name: build-hadolint
 on:
   push:
     paths:

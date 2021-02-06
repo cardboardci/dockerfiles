@@ -1,4 +1,4 @@
-name: bats-build
+name: build-bats
 on:
   push:
     paths:

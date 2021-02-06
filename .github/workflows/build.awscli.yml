@@ -1,4 +1,4 @@
-name: awscli-build
+name: build-awscli
 on:
   push:
     paths:

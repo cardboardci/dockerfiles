@@ -1,4 +1,4 @@
-name: base-build
+name: build-base
 on:
   push:
     paths:

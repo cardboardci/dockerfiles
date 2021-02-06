@@ -1,4 +1,4 @@
-name: rubocop-build
+name: build-rubocop
 on:
   push:
     paths:

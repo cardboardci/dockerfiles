@@ -1,4 +1,4 @@
-name: markdownlint-build
+name: build-markdownlint
 on:
   push:
     paths:

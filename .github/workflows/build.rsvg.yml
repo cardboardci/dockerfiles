@@ -1,4 +1,4 @@
-name: rsvg-build
+name: build-rsvg
 on:
   push:
     paths:

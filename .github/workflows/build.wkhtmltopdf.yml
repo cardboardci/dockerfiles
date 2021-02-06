@@ -1,4 +1,4 @@
-name: wkhtmltopdf-build
+name: build-wkhtmltopdf
 on:
   push:
     paths:

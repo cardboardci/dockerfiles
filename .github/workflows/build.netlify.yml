@@ -1,4 +1,4 @@
-name: netlify-build
+name: build-netlify
 on:
   push:
     paths:

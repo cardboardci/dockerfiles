@@ -1,4 +1,4 @@
-name: cppcheck-build
+name: build-cppcheck
 on:
   push:
     paths:

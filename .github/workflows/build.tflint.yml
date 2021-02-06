@@ -1,4 +1,4 @@
-name: tflint-build
+name: build-tflint
 on:
   push:
     paths:

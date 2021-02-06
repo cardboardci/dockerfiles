@@ -1,4 +1,4 @@
-name: pdf2htmlex-build
+name: build-pdf2htmlex
 on:
   push:
     paths:

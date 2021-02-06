@@ -1,4 +1,4 @@
-name: pylint-build
+name: build-pylint
 on:
   push:
     paths:

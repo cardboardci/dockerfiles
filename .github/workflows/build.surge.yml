@@ -1,4 +1,4 @@
-name: surge-build
+name: build-surge
 on:
   push:
     paths:

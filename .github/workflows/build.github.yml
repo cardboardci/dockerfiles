@@ -1,4 +1,4 @@
-name: github-build
+name: build-github
 on:
   push:
     paths:

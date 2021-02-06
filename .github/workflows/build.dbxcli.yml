@@ -1,4 +1,4 @@
-name: dbxcli-build
+name: build-dbxcli
 on:
   push:
     paths:

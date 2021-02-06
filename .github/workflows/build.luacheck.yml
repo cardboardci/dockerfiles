@@ -1,4 +1,4 @@
-name: luacheck-build
+name: build-luacheck
 on:
   push:
     paths:

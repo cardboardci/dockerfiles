@@ -1,4 +1,4 @@
-name: stylelint-build
+name: build-stylelint
 on:
   push:
     paths:

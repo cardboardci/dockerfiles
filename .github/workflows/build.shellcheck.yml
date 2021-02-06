@@ -1,4 +1,4 @@
-name: shellcheck-build
+name: build-shellcheck
 on:
   push:
     paths:

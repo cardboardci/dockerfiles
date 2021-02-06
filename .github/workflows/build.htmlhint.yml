@@ -1,4 +1,4 @@
-name: htmlhint-build
+name: build-htmlhint
 on:
   push:
     paths:
