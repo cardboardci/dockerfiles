@@ -42,17 +42,21 @@ jobs:
           email: jonathan@jrbeverly.me
           branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
       - name: Buildozer to edit digest
-        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
           set -x
-          tmp="temporarydir"
-          mkdir -p "$tmp"
-          touch "$tmp/WORKSPACE"
-          cp WORKSPACE "$tmp/BUILD"
-          ./buildozer -root_dir="$tmp" 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "//:ubuntu"
-          cat "$tmp/BUILD"
-          rm -rf "$tmp"
-          cat WORKSPACE
+          echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
+          cat WORKSPACE.tmp
+        # # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        # run: |
+        #   set -x
+        #   tmp="temporarydir"
+        #   mkdir -p "$tmp"
+        #   touch "$tmp/WORKSPACE"
+        #   cp WORKSPACE "$tmp/BUILD"
+        #   ./buildozer -root_dir="$tmp" 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "//:ubuntu"
+        #   cat "$tmp/BUILD"
+        #   rm -rf "$tmp"
+        #   cat WORKSPACE
       # - name: Commit all of the dependencies
       #   uses: ./.github/actions/git-commit
       #   if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
