@@ -39,4 +39,4 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-          docker push ${{ steps.image.outputs.image }}
+          docker push ${{ steps.image.outputs.fullname}}
