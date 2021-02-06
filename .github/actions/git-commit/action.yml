@@ -21,6 +21,6 @@ runs:
       run: |
         git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"
         if [ $? -eq 0 ]; then
-          git push -u github HEAD
-          #hub pull-request -m "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ inputs.options }} --assign "${{ inputs.username }}"
+          git push -u github --force HEAD
+          #hub pull-request -m "${{ inputs.title }}" --body "${{ inputs.body }}" --assign "${{ inputs.username }}" ${{ inputs.options }}
         fi

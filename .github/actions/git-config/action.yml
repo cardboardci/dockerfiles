@@ -1,5 +1,8 @@
 name: 'git-config'
 description: 'Configure git for commits from GitHub Actions.'
+branding:
+  icon: "git-commit"
+  color: "blue"
 inputs:
   username:
     description: 'Username of the GitHub actor'
