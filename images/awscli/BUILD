@@ -3,19 +3,11 @@ load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "instal
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 load("@cardboardci//rules:wrappers.bzl", "CARDBOARDCI_GID", "CARDBOARDCI_UID")
-load("@cardboardci//rules:packages.bzl", "package_json")
 
 download_pkgs(
     name = "apt_get_download",
     image_tar = "//images/base:image.tar",
     packages = ["awscli"],
-)
-
-package_json(
-    name = "apt_get_awscli",
-    package = "awscli",
-    version = "x.y.z",
-    sum = "123123"
 )
 
 install_pkgs(
