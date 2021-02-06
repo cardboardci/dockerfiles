@@ -13,9 +13,6 @@ inputs:
   branch:
     description: 'The name of the branch to checkout'
     required: true
-  token:
-    description: 'GitHub Token used in remote setup'
-    required: true
 runs:
   using: "composite"
   steps:
@@ -24,5 +21,4 @@ runs:
       run: |
         git config --global user.name "${{ inputs.username }}"
         git config --global user.email "${{ inputs.email }}"
-        git remote add github "https://${{ inputs.username }}:${{ inputs.token }}@github.com/${GITHUB_REPOSITORY}.git"
         git checkout "${{ inputs.branch }}" || git checkout -b "${{ inputs.branch }}"

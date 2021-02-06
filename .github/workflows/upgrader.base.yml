@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
       - name: Install buildozer
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
-          curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier > buildifier
           chmod +x buildozer
-          chmod +x buildifier
       - name: Get the docker image sha
         id: dockerhub
         uses: ./.github/actions/docker-image-digest
@@ -54,6 +54,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
-          options: "--label dependencies"
-          body: "Bumps the base image to `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
+          username: jrbeverly
           title: "Bump base image to ${{ steps.dockerhub.outputs.image-tag }} tag"
+          body: "Bumps the base image to `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
+          options: "--label dependencies"
