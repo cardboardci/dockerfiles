@@ -51,7 +51,7 @@ jobs:
           git add -f WORKSPACE
       - name: Commit all of the dependencies
         uses: ./.github/actions/git-commit
-        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
