@@ -42,7 +42,7 @@ jobs:
           email: jonathan@jrbeverly.me
           branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
       - name: Buildozer to edit digest
-        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
           set -x
           cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "-:ubuntu" | tee WORKSPACE.tmp
