@@ -18,8 +18,8 @@ jobs:
         id: dockerhub
         uses: ./.github/actions/docker-image-digest
         with:
-          url: index.docker.io
-          image: ubuntu
+          url: registry.hub.docker.com
+          image: library/ubuntu
           tag: focal
       - name: Determine the current image digest
         id: source
