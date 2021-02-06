@@ -10,8 +10,8 @@ theme:
   logo: assets/logo.png
   language: 'en'
   palette:
-    primary: 'white'
-    accent: 'indigo'
+    primary: 'indigo'
+    accent: 'white'
 extra:
   search:
     language: 'en'
