@@ -44,6 +44,7 @@ jobs:
       - name: Buildozer to edit digest
         # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
+          set -x
           tmp="$(mktemp -d)"
           touch "$tmp/WORKSPACE"
           ln WORKSPACE "$tmp/BUILD"
