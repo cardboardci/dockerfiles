@@ -30,16 +30,6 @@ jobs:
         run: |
           echo DockerHub digest ${{ steps.dockerhub.outputs.image-digest }}
           echo Source digest ${{ steps.source.outputs.image-digest }}
-      - name: Changes to the environment
-        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
-        run: |
-          echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
-          rm WORKSPACE
-          mv WORKSPACE.tmp WORKSPACE
-          echo "# ensure always commits" >> WORKSPACE
-          cat WORKSPACE
-          git add WORKSPACE
-          # Add a line here to git status if any changes
       - name: Configure git
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         uses: ./.github/actions/git-config
@@ -49,6 +39,14 @@ jobs:
           username: jrbeverly
           email: jonathan@jrbeverly.me
           branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
+      - name: Changes to the environment
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        run: |
+          echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
+          rm WORKSPACE
+          mv WORKSPACE.tmp WORKSPACE
+          cat WORKSPACE
+          git add WORKSPACE
       - name: Commit all of the dependencies
         uses: ./.github/actions/commit
         # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}

@@ -1,11 +1,14 @@
-name: 'DockerHub Image Digest'
-description: 'Retrieve the image digest associated with a tag.'
+name: 'git-commit'
+description: 'Commit changes and raise a pull request.'
 inputs:
   title:
-    description: 'Temporary'
+    description: 'Title of the pull request'
+    required: true
+  body:
+    description: 'Body of the pull request'
     required: true
   options:
-    description: 'Temporary'
+    description: 'Options supplied to the pull request'
     required: true
 runs:
   using: "composite"
@@ -17,7 +20,7 @@ runs:
         echo "::set-output name=success::$success"
     - id: pull-request
       shell: bash
-      # if: ${{ steps.action.outputs.success }}
+      if: ${{ steps.action.outputs.success }}
       run: |        
         git push -u github HEAD
         #hub pull-request -m "${{ inputs.title }}" ${{ inputs.options }} --assign "${{ inputs.username }}"
