@@ -35,12 +35,11 @@ jobs:
       - name: Configure git
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         uses: ./.github/actions/git-config
-        env:
-          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
           username: jrbeverly
           email: jonathan@jrbeverly.me
           branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
+          token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
       - name: Buildozer to edit digest
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
@@ -56,5 +55,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
           options: "--label dependencies"
-          body: "Automated upgrading of the base image ubuntu to tag `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces digest at digest `${{ steps.source.outputs.image-digest }}` to the digest of tag `${{ steps.dockerhub.outputs.image-tag }}` (`${{ steps.dockerhub.outputs.image-digest }}`)"
-          title: "Bump base ubuntu image to ${{ steps.dockerhub.outputs.image-tag }} tag"
+          body: "Bumps the base image to `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
+          title: "Bump base image to ${{ steps.dockerhub.outputs.image-tag }} tag"
