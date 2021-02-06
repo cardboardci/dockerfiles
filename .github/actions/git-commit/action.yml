@@ -19,7 +19,7 @@ runs:
     - id: git-commit
       shell: bash
       run: |
-        if [[ `git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"` ]]; then
+        if [[ ! `git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"` ]]; then
           git push -u github HEAD
           #hub pull-request -m "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ inputs.options }} --assign "${{ inputs.username }}"
         fi
