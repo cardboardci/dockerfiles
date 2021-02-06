@@ -42,32 +42,19 @@ jobs:
           email: jonathan@jrbeverly.me
           branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
       - name: Buildozer to edit digest
+        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
           set -x
           cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "-:ubuntu" | tee WORKSPACE.tmp
-          cat WORKSPACE.tmp
-
-        # rm WORKSPACE
-        # mv WORKSPACE.tmp WORKSPACE
-        # ./buildifier
-        # cat WORKSPACE
-        # # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
-        # run: |
-        #   set -x
-        #   tmp="temporarydir"
-        #   mkdir -p "$tmp"
-        #   touch "$tmp/WORKSPACE"
-        #   cp WORKSPACE "$tmp/BUILD"
-        #   ./buildozer -root_dir="$tmp" 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "//:ubuntu"
-        #   cat "$tmp/BUILD"
-        #   rm -rf "$tmp"
-        #   cat WORKSPACE
-      # - name: Commit all of the dependencies
-      #   uses: ./.github/actions/git-commit
-      #   if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
-      #   with:
-      #     options: "--label dependencies"
-      #     body: "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"
-      #     title: "Bump ubuntu image to ${{ steps.dockerhub.outputs.image-tag }} tag"
+          rm WORKSPACE
+          mv WORKSPACE.tmp WORKSPACE
+          git add -f WORKSPACE
+      - name: Commit all of the dependencies
+        uses: ./.github/actions/git-commit
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+        with:
+          options: "--label dependencies"
+          body: "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"
+          title: "Bump ubuntu image to ${{ steps.dockerhub.outputs.image-tag }} tag"
