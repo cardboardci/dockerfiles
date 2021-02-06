@@ -18,9 +18,7 @@ jobs:
       - name: Install buildozer
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
-          curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier > buildifier
           chmod +x buildozer
-          chmod +x buildifier
       - name: Get the docker image sha
         id: dockerhub
         uses: ./.github/actions/docker-image-digest

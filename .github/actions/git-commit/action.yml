@@ -4,9 +4,6 @@ branding:
   icon: "git-commit"
   color: "green"
 inputs:
-  username:
-    description: 'Username of the GitHub actor'
-    required: true
   title:
     description: "Title of the pull request"
     required: true
