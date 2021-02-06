@@ -29,6 +29,7 @@ jobs:
         id: image
         uses: ./.github/actions/image-tag
         with:
+          image: markdownlint
           repository: $GITHUB_REPOSITORY
 
       - name: Tag Image
