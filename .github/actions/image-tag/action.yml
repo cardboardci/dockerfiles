@@ -7,6 +7,9 @@ inputs:
   repository:
     description: 'Repository name with owner. For example, cardboardci/dockerfiles'
     required: true
+  image:
+    description: 'Image name. For example, ubuntu'
+    required: true
 outputs:
   owner:
     description: "The ghcr.io repository owner. For example, cardboardci"
@@ -28,6 +31,6 @@ runs:
       run: |
         owner=`echo "${{ inputs.repository }}" | cut -d'/' -f1`
         echo ::set-output name=owner::${owner}
-        echo ::set-output name=image::ghcr.io/${owner}/bats
+        echo ::set-output name=image::ghcr.io/${owner}/${{ inputs.image }}
         echo ::set-output name=tag::$(date -u +'%Y%m%d')
         echo ::set-output name=fullname::ghcr.io/${owner}/bats:$(date -u +'%Y%m%d')
