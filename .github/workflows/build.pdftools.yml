@@ -28,9 +28,6 @@ jobs:
       - name: Set image variables
         id: vars
         run: |
-          echo ::set-output name=docker_path::images/pdftools
-          echo ::set-output name=dockerfile::images/pdftools/Dockerfile
-          echo ::set-output name=dockerdir::images/pdftools/.
           echo ::set-output name=docker_image::ghcr.io/cardboardci/pdftools
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

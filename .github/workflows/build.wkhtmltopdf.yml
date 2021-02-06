@@ -28,9 +28,6 @@ jobs:
       - name: Set image variables
         id: vars
         run: |
-          echo ::set-output name=docker_path::images/wkhtmltopdf
-          echo ::set-output name=dockerfile::images/wkhtmltopdf/Dockerfile
-          echo ::set-output name=dockerdir::images/wkhtmltopdf/.
           echo ::set-output name=docker_image::ghcr.io/cardboardci/wkhtmltopdf
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

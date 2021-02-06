@@ -28,9 +28,6 @@ jobs:
       - name: Set image variables
         id: vars
         run: |
-          echo ::set-output name=docker_path::images/stylelint
-          echo ::set-output name=dockerfile::images/stylelint/Dockerfile
-          echo ::set-output name=dockerdir::images/stylelint/.
           echo ::set-output name=docker_image::ghcr.io/cardboardci/stylelint
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

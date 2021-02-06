@@ -28,9 +28,6 @@ jobs:
       - name: Set image variables
         id: vars
         run: |
-          echo ::set-output name=docker_path::images/pylint
-          echo ::set-output name=dockerfile::images/pylint/Dockerfile
-          echo ::set-output name=dockerdir::images/pylint/.
           echo ::set-output name=docker_image::ghcr.io/cardboardci/pylint
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

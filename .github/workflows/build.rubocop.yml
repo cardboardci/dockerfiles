@@ -28,9 +28,6 @@ jobs:
       - name: Set image variables
         id: vars
         run: |
-          echo ::set-output name=docker_path::images/rubocop
-          echo ::set-output name=dockerfile::images/rubocop/Dockerfile
-          echo ::set-output name=dockerdir::images/rubocop/.
           echo ::set-output name=docker_image::ghcr.io/cardboardci/rubocop
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 

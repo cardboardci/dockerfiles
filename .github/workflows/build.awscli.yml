@@ -28,10 +28,8 @@ jobs:
       - name: Set image variables
         id: vars
         run: |
-          echo ::set-output name=docker_path::images/awscli
-          echo ::set-output name=dockerfile::images/awscli/Dockerfile
-          echo ::set-output name=dockerdir::images/awscli/.
-          echo ::set-output name=docker_image::ghcr.io/cardboardci/awscli
+          owner=`echo ${GITHUB_REPOSITORY} | cut -d'/' -f1`
+          echo ::set-output name=docker_image::ghcr.io/${owner}/awscli
           echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
 
       - name: Tag Image
