@@ -38,7 +38,7 @@ jobs:
           docker tag bazel/images/awscli:image ${{ steps.image.outputs.fullname }}
 
       - name: Push to GitHub Packages
-        if: github.ref == 'refs/heads/master'
+        # if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
           docker push ${{ steps.image.outputs.fullname}}
