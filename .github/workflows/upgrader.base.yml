@@ -39,6 +39,7 @@ jobs:
           username: jrbeverly
           email: jonathan@jrbeverly.me
           branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
+          token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
       - name: Buildozer to edit digest
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
