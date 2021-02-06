@@ -43,7 +43,7 @@ jobs:
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
           cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu > WORKSPACE.tmp
-          rm WORKSPACE.tmp
+          rm WORKSPACE
           mv WORKSPACE.tmp WORKSPACE
           cat WORKSPACE
           git add WORKSPACE
