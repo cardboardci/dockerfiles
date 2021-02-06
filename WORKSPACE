@@ -25,7 +25,6 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 
 pip_deps()
 
-
 container_pull(
     name = "ubuntu",
     digest = "sha256:3093096ee188f8ff4531949b8f6115af4747ec1c58858c091c8cb4579c39cc4e",
