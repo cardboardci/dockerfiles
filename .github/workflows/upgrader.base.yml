@@ -16,13 +16,21 @@ jobs:
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
           chmod +x buildozer
+      - name: Find the latest docker tag
+        id: tag
+        uses: ./.github/actions/docker-image-tag
+        with:
+          url: registry.hub.docker.com
+          image: library/ubuntu
+          query: focal-
       - name: Get the docker image sha
-        id: dockerhub
+        id: digest
         uses: ./.github/actions/docker-image-digest
         with:
           url: registry.hub.docker.com
           image: library/ubuntu
-          tag: focal-
+          architecture: amd64
+          tag: ${{ steps.tag.outputs.image-tag }}
       - name: Determine the current image digest
         id: source
         run: |
@@ -30,31 +38,31 @@ jobs:
           echo "::set-output name=image-digest::$image_digest"
       - name: Print the determined image digests
         run: |
-          echo DockerHub digest ${{ steps.dockerhub.outputs.image-digest }}
+          echo DockerHub digest ${{ steps.digest.outputs.image-digest }}
           echo Source digest ${{ steps.source.outputs.image-digest }}
       - name: Configure git
-        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        if: ${{ steps.digest.outputs.image-digest != steps.source.outputs.image-digest }}
         uses: ./.github/actions/git-config
         with:
           username: jrbeverly
           email: jonathan@jrbeverly.me
-          branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
+          branch: 'base-image-to-${{ steps.tag.outputs.image-tag }}'
           token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
       - name: Buildozer to edit digest
-        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        if: ${{ steps.digest.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
           set -x
-          cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "-:ubuntu" | tee WORKSPACE.tmp
+          cat WORKSPACE | ./buildozer 'set digest "${{ steps.digest.outputs.image-digest }}"' "-:ubuntu" | tee WORKSPACE.tmp
           rm WORKSPACE
           mv WORKSPACE.tmp WORKSPACE
           git add -f WORKSPACE
       - name: Commit all of the dependencies
         uses: ./.github/actions/git-commit
-        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+        if: ${{ steps.digest.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
           username: jrbeverly
-          title: "Bump base image to ${{ steps.dockerhub.outputs.image-tag }} tag"
-          body: "Bumps the base image to `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
+          title: "Bump base image to ${{ steps.tag.outputs.image-tag }} tag"
+          body: "Bumps the base image to `${{ steps.tag.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
           options: "--label dependencies"
