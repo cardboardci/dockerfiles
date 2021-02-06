@@ -16,7 +16,7 @@ outputs:
     value: ${{ steps.action.outputs.image-digest }}
   image-tag:
     description: "The image tag"
-    value: ${{ steps.action.outputs.image-digest }}
+    value: ${{ steps.action.outputs.image-tag }}
 runs:
   using: "composite"
   steps:
