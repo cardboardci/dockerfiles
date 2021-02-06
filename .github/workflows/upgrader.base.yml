@@ -44,7 +44,6 @@ jobs:
           username: jrbeverly
           email: jonathan@jrbeverly.me
           branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
-          token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
       - name: Buildozer to edit digest
         # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
@@ -53,12 +52,12 @@ jobs:
           rm WORKSPACE
           mv WORKSPACE.tmp WORKSPACE
           git add -f WORKSPACE
-      # - name: Commit all of the dependencies
-      #   uses: ./.github/actions/git-commit
-      #   # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
-      #   with:
-      #     options: "--label dependencies"
-      #     body: "Bumps the base image to `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
-      #     title: "Bump base image to ${{ steps.dockerhub.outputs.image-tag }} tag"
+      - name: Commit all of the dependencies
+        uses: ./.github/actions/git-commit
+        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+        with:
+          options: "--label dependencies"
+          body: "Bumps the base image to `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
+          title: "Bump base image to ${{ steps.dockerhub.outputs.image-tag }} tag"
