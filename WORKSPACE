@@ -28,7 +28,7 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 
 container_pull(
     name = "ubuntu",
-    digest = "sha256:703218c0465075f4425e58fac086e09e1de5c340b12976ab9eb8ad26615c3715",
+    digest = "sha256:3093096ee188f8ff4531949b8f6115af4747ec1c58858c091c8cb4579c39cc4e",
     registry = "index.docker.io",
     repository = "library/ubuntu",
 )
