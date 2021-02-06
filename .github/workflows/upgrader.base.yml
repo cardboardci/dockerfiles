@@ -53,7 +53,7 @@ jobs:
         uses: ./.github/actions/git-commit
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
           options: "--label dependencies"
           body: "Automated upgrading of the base image ubuntu to tag `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces digest at digest `${{ steps.source.outputs.image-digest }}` to the digest of tag `${{ steps.dockerhub.outputs.image-tag }}` (`${{ steps.dockerhub.outputs.image-digest }}`)"
