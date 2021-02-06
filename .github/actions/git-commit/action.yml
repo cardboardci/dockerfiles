@@ -25,5 +25,4 @@ runs:
         git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"
         if [ $? -eq 0 ]; then
           git push -u origin HEAD
-          #gh pr create --title '${{ inputs.title }}' --body '${{ inputs.body }}' --assignee '${{ inputs.username }}' ${{ inputs.options }}
         fi
