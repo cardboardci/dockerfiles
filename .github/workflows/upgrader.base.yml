@@ -45,8 +45,7 @@ jobs:
           cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu > WORKSPACE.tmp
           rm WORKSPACE
           mv WORKSPACE.tmp WORKSPACE
-          cat WORKSPACE
-          git add WORKSPACE
+          git add -f WORKSPACE
       - name: Commit all of the dependencies
         uses: ./.github/actions/git-commit
         # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
