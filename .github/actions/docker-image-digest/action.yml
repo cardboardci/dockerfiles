@@ -27,6 +27,6 @@ runs:
           echo "Request: ${request_url}"
           latest=$(wget -q "${request_url}" -O - | tr -d '[]" ' | tr '}' '\n' | awk -F: '{print $3}' | grep '${{ inputs.tag }}' | sort -rn | head -n1)
           docker pull ${{ inputs.image }}:${latest}
-          image_digest=`docker inspect --format='{{index .RepoDigests 0}}' ${{ inputs.image }}:${{ inputs.tag }} | cut -d'@' -f2`
+          image_digest=`docker inspect --format='{{index .RepoDigests 0}}' ${{ inputs.image }}:${latest} | cut -d'@' -f2`
           echo "::set-output name=image-digest::$image_digest"
           echo "::set-output name=image-tag::$latest"
