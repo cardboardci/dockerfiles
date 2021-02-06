@@ -4,6 +4,9 @@ branding:
   icon: "git-commit"
   color: "green"
 inputs:
+  username:
+    description: 'Username of the GitHub actor'
+    required: true
   title:
     description: "Title of the pull request"
     required: true
@@ -22,4 +25,5 @@ runs:
         git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"
         if [ $? -eq 0 ]; then
           git push -u origin HEAD
+          gh pr create --title '${{ inputs.title }}' --body '${{ inputs.body }}' --assignee '${{ inputs.username }}' ${{ inputs.options }}
         fi

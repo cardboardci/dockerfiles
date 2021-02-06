@@ -12,9 +12,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
-      - name: Test remotes
-        run: |
-          git remote -v
       - name: Install buildozer
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
@@ -43,7 +40,7 @@ jobs:
           email: jonathan@jrbeverly.me
           branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
       - name: Buildozer to edit digest
-        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
           set -x
           cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "-:ubuntu" | tee WORKSPACE.tmp
@@ -52,10 +49,11 @@ jobs:
           git add -f WORKSPACE
       - name: Commit all of the dependencies
         uses: ./.github/actions/git-commit
-        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
-          options: "--label dependencies"
-          body: "Bumps the base image to `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
+          username: jrbeverly
           title: "Bump base image to ${{ steps.dockerhub.outputs.image-tag }} tag"
+          body: "Bumps the base image to `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.dockerhub.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.dockerhub.outputs.image-digest }}`"
+          options: "--label dependencies"
