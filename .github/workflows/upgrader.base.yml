@@ -1,8 +1,8 @@
-name: dependecy-imagebase
+name: dependency-imagebase
 
 on:
   schedule:
-    - cron: "30 4 * * *"
+    - cron: "30 4 * * 4"
   workflow_dispatch:
 
 jobs:
@@ -13,14 +13,16 @@ jobs:
       - name: Install buildozer
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
+          curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier > buildifier
           chmod +x buildozer
+          chmod +x buildifier
       - name: Get the docker image sha
         id: dockerhub
         uses: ./.github/actions/docker-image-digest
         with:
-          url: index.docker.io
-          image: ubuntu
-          tag: focal
+          url: registry.hub.docker.com
+          image: library/ubuntu
+          tag: focal-
       - name: Determine the current image digest
         id: source
         run: |
@@ -30,18 +32,29 @@ jobs:
         run: |
           echo DockerHub digest ${{ steps.dockerhub.outputs.image-digest }}
           echo Source digest ${{ steps.source.outputs.image-digest }}
-      - name: Changes to the environment
+      - name: Configure git
+        if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
+        uses: ./.github/actions/git-config
+        env:
+          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+        with:
+          username: jrbeverly
+          email: jonathan@jrbeverly.me
+          branch: 'base-image-to-${{ steps.dockerhub.outputs.image-tag }}'
+      - name: Buildozer to edit digest
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
-          echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
+          set -x
+          cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "-:ubuntu" | tee WORKSPACE.tmp
           rm WORKSPACE
           mv WORKSPACE.tmp WORKSPACE
-          cat WORKSPACE
+          git add -f WORKSPACE
       - name: Commit all of the dependencies
-        uses: ./.github/actions/auto-commit
+        uses: ./.github/actions/git-commit
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
-          BRANCH: '/baseimg'
-          MESSAGE: 'Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}'
-          PULL_REQUEST_TITLE: 'Bump ubuntu image to latest version of focal'
+        with:
+          options: "--label dependencies"
+          body: "Automated upgrading of the base image ubuntu to tag `${{ steps.dockerhub.outputs.image-tag }}`.\n\nReplaces digest at digest `${{ steps.source.outputs.image-digest }}` to the digest of tag `${{ steps.dockerhub.outputs.image-tag }}` (`${{ steps.dockerhub.outputs.image-digest }}`)"
+          title: "Bump base ubuntu image to ${{ steps.dockerhub.outputs.image-tag }} tag"

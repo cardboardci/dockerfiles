@@ -1,4 +1,4 @@
-name: 'Docker Image Digest'
+name: 'DockerHub Image Digest'
 description: 'Retrieve the image digest associated with a tag.'
 inputs:
   url:
@@ -14,14 +14,19 @@ outputs:
   image-digest:
     description: "The image digest"
     value: ${{ steps.action.outputs.image-digest }}
+  image-tag:
+    description: "The image tag"
+    value: ${{ steps.action.outputs.image-tag }}
 runs:
   using: "composite"
   steps:
     - id: action
       shell: bash
       run: |
-          echo "Pulling from ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }}"
-          docker pull ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }}
-          docker inspect ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }}
-          image_digest=`docker inspect --format='{{index .RepoDigests 0}}' ${{ inputs.url }}/${{ inputs.image }}:${{ inputs.tag }} | cut -d'@' -f2`
+          request_url="https://${{ inputs.url }}/v1/repositories/${{ inputs.image }}/tags"
+          echo "Request: ${request_url}"
+          latest=$(wget -q "${request_url}" -O - | tr -d '[]" ' | tr '}' '\n' | awk -F: '{print $3}' | grep '${{ inputs.tag }}' | sort -rn | head -n1)
+          docker pull ${{ inputs.image }}:${latest}
+          image_digest=`docker inspect --format='{{index .RepoDigests 0}}' ${{ inputs.image }}:${latest} | cut -d'@' -f2`
           echo "::set-output name=image-digest::$image_digest"
+          echo "::set-output name=image-tag::$latest"

@@ -1,0 +1,25 @@
+name: 'git-config'
+description: 'Configure git for commits from GitHub Actions.'
+branding:
+  icon: "git-commit"
+  color: "blue"
+inputs:
+  username:
+    description: 'Username of the GitHub actor'
+    required: true
+  email:
+    description: 'Email of the GitHub actor'
+    required: true
+  branch:
+    description: 'Temporary'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - id: git-config
+      shell: bash
+      run: |
+        git config --global user.name "${{ inputs.username }}"
+        git config --global user.email "${{ inputs.email }}"
+        git remote add github "https://${{ inputs.username }}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        git checkout "${{ inputs.branch }}" || git checkout -b "${{ inputs.branch }}"
