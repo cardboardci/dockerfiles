@@ -33,4 +33,4 @@ runs:
         echo ::set-output name=owner::${owner}
         echo ::set-output name=image::ghcr.io/${owner}/${{ inputs.image }}
         echo ::set-output name=tag::$(date -u +'%Y%m%d')
-        echo ::set-output name=fullname::ghcr.io/${owner}/bats:$(date -u +'%Y%m%d')
+        echo ::set-output name=fullname::ghcr.io/${owner}/${{ inputs.image }}:$(date -u +'%Y%m%d')
