@@ -8,6 +8,7 @@ docs_dir: www
 theme:
   name: 'material'
   logo: assets/logo.png
+  favicon: assets/favicon.png
   language: 'en'
   palette:
     primary: 'blue'
