@@ -28,6 +28,7 @@ jobs:
         id: image
         uses: ./.github/actions/image-tag
         with:
+          image: pdf2htmlex
           repository: $GITHUB_REPOSITORY
 
       - name: Tag Image
