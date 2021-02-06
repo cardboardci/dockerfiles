@@ -25,16 +25,16 @@ jobs:
         run: |
           bazel test //images/hadolint:test
 
-      - name: Set image variables
-        id: vars
-        run: |
-          echo ::set-output name=docker_image::ghcr.io/cardboardci/hadolint
-          echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
+      - name: Determine tag for image
+        id: image
+        uses: ./.github/actions/image-tag
+        with:
+          repository: $GITHUB_REPOSITORY
 
       - name: Tag Image
         run: |
           bazel run //images/hadolint:image
-          docker tag bazel/images/hadolint:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
+          docker tag bazel/images/hadolint:image ${{ steps.image.outputs.fullname }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
