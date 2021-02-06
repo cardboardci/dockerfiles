@@ -7,11 +7,11 @@ docs_dir: www
 
 theme:
   name: 'material'
+  logo: assets/logo.png
   language: 'en'
   palette:
     primary: 'white'
     accent: 'indigo'
-
 extra:
   search:
     language: 'en'
