@@ -55,4 +55,4 @@ jobs:
         with:
           options: ""
           body: "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"
-          title: "Bump ubuntu image to latest version of focal"
+          title: "Bump ubuntu image to ${{ steps.dockerhub.outputs.image-tag }} tag"
