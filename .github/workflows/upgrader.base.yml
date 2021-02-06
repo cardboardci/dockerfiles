@@ -13,7 +13,9 @@ jobs:
       - name: Install buildozer
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
+          curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier > buildifier
           chmod +x buildozer
+          chmod +x buildifier
       - name: Get the docker image sha
         id: dockerhub
         uses: ./.github/actions/docker-image-digest
@@ -42,7 +44,10 @@ jobs:
       - name: Changes to the environment
         # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
-          cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu > WORKSPACE.tmp
+          echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "-:ubuntu") > WORKSPACE.tmp
+          cat WORKSPACE.tmp
+          ./buildifier WORKSPACE.tmp
+          cat WORKSPACE.tmp
       # - name: Commit all of the dependencies
       #   uses: ./.github/actions/git-commit
       #   if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
