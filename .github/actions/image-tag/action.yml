@@ -26,7 +26,7 @@ runs:
     - id: vars
       shell: bash
       run: |
-        owner=`echo "${{ inputs.username }}" | cut -d'/' -f1`
+        owner=`echo "${{ inputs.repository }}" | cut -d'/' -f1`
         echo ::set-output name=owner::${owner}
         echo ::set-output name=image::ghcr.io/${owner}/bats
         echo ::set-output name=tag::$(date -u +'%Y%m%d')
