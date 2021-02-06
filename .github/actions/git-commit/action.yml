@@ -22,5 +22,5 @@ runs:
         git commit -m "GitHub Actions commit by ${GITHUB_WORKFLOW}"
         if [ $? -eq 0 ]; then
           git push -u github --force HEAD
-          gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" --assign "${{ inputs.username }}" ${{ inputs.options }}
+          gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" --assignee "${{ inputs.username }}" ${{ inputs.options }}
         fi
