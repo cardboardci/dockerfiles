@@ -19,4 +19,4 @@ runs:
         git config --global user.name "${{ inputs.username }}"
         git config --global user.email "${{ inputs.email }}"
         git remote add github "https://${{ inputs.username }}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-        git checkout github/"${{ inputs.branch }}" || git checkout -b "${{ inputs.branch }}"
+        git checkout "${{ inputs.branch }}" || git checkout -b "${{ inputs.branch }}"
