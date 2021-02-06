@@ -10,7 +10,7 @@ theme:
   logo: assets/logo.png
   language: 'en'
   palette:
-    primary: 'indigo'
+    primary: 'blue'
     accent: 'white'
 extra:
   search:
