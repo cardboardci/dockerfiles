@@ -7,7 +7,7 @@ docs_dir: www
 
 theme:
   name: 'material'
-  logo: assets/logo.png
+  logo: assets/icon.png
   favicon: assets/favicon.png
   language: 'en'
   palette:
