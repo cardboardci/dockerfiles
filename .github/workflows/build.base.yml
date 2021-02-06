@@ -1,4 +1,4 @@
-name: base-build
+name: build-base
 on:
   push:
     paths:
@@ -23,19 +23,19 @@ jobs:
         run: |
           bazel test //images/base:test
 
-      - name: Set image variables
-        id: vars
-        run: |
-          echo ::set-output name=docker_image::ghcr.io/cardboardci/base
-          echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
+      - name: Determine tag for image
+        id: image
+        uses: ./.github/actions/image-tag
+        with:
+          repository: $GITHUB_REPOSITORY
 
       - name: Tag Image
         run: |
           bazel run //images/base:image
-          docker tag bazel/images/base:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
+          docker tag bazel/images/base:image ${{ steps.image.outputs.fullname }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-          docker push ${{ steps.vars.outputs.docker_image }}
+          docker push ${{ steps.image.outputs.name }}

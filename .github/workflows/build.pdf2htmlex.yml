@@ -1,4 +1,4 @@
-name: pdf2htmlex-build
+name: build-pdf2htmlex
 on:
   push:
     paths:
@@ -24,22 +24,19 @@ jobs:
         run: |
           bazel test //images/pdf2htmlex:test
 
-      - name: Set image variables
-        id: vars
-        run: |
-          echo ::set-output name=docker_path::images/pdf2htmlex
-          echo ::set-output name=dockerfile::images/pdf2htmlex/Dockerfile
-          echo ::set-output name=dockerdir::images/pdf2htmlex/.
-          echo ::set-output name=docker_image::ghcr.io/cardboardci/pdf2htmlex
-          echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
+      - name: Determine tag for image
+        id: image
+        uses: ./.github/actions/image-tag
+        with:
+          repository: $GITHUB_REPOSITORY
 
       - name: Tag Image
         run: |
           bazel run //images/pdf2htmlex:image
-          docker tag bazel/images/pdf2htmlex:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
+          docker tag bazel/images/pdf2htmlex:image ${{ steps.image.outputs.fullname }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-          docker push ${{ steps.vars.outputs.docker_image }}
+          docker push ${{ steps.image.outputs.name }}

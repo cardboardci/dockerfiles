@@ -1,4 +1,4 @@
-name: awscli-build
+name: build-awscli
 on:
   push:
     paths:
@@ -25,22 +25,19 @@ jobs:
         run: |
           bazel test //images/awscli:test
 
-      - name: Set image variables
-        id: vars
-        run: |
-          echo ::set-output name=docker_path::images/awscli
-          echo ::set-output name=dockerfile::images/awscli/Dockerfile
-          echo ::set-output name=dockerdir::images/awscli/.
-          echo ::set-output name=docker_image::ghcr.io/cardboardci/awscli
-          echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
+      - name: Determine tag for image
+        id: image
+        uses: ./.github/actions/image-tag
+        with:
+          repository: $GITHUB_REPOSITORY
 
       - name: Tag Image
         run: |
           bazel run //images/awscli:image
-          docker tag bazel/images/awscli:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
+          docker tag bazel/images/awscli:image ${{ steps.image.outputs.fullname }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-          docker push ${{ steps.vars.outputs.docker_image }}
+          docker push ${{ steps.image.outputs.name }}

@@ -1,4 +1,4 @@
-name: cppcheck-build
+name: build-cppcheck
 on:
   push:
     paths:
@@ -25,22 +25,19 @@ jobs:
         run: |
           bazel test //images/cppcheck:test
 
-      - name: Set image variables
-        id: vars
-        run: |
-          echo ::set-output name=docker_path::images/cppcheck
-          echo ::set-output name=dockerfile::images/cppcheck/Dockerfile
-          echo ::set-output name=dockerdir::images/cppcheck/.
-          echo ::set-output name=docker_image::ghcr.io/cardboardci/cppcheck
-          echo ::set-output name=docker_tag::$(date -u +'%Y%m%d')
+      - name: Determine tag for image
+        id: image
+        uses: ./.github/actions/image-tag
+        with:
+          repository: $GITHUB_REPOSITORY
 
       - name: Tag Image
         run: |
           bazel run //images/cppcheck:image
-          docker tag bazel/images/cppcheck:image ${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.docker_tag }}
+          docker tag bazel/images/cppcheck:image ${{ steps.image.outputs.fullname }}
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-          docker push ${{ steps.vars.outputs.docker_image }}
+          docker push ${{ steps.image.outputs.name }}

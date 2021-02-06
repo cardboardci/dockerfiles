@@ -1,0 +1,33 @@
+name: 'image-tag'
+description: 'Compute the image tag for the repository'
+branding:
+  icon: "git-commit"
+  color: "red"
+inputs:
+  repository:
+    description: 'Repository name with owner. For example, cardboardci/dockerfiles'
+    required: true
+outputs:
+  owner:
+    description: "The ghcr.io repository owner. For example, cardboardci"
+    value: ${{ steps.vars.outputs.owner }}
+  image:
+    description: "The name of the image. For example, ghcr.io/project/ubuntu"
+    value: ${{ steps.vars.outputs.image }}
+  tag:
+    description: "The name of the tag. For example, 20210206"
+    value: ${{ steps.vars.outputs.tag }}
+  fullname:
+    description: "The full name of the image. For example, ghcr.io/project/ubuntu:20210206"
+    value: ${{ steps.vars.outputs.fullname }}
+runs:
+  using: "composite"
+  steps:
+    - id: vars
+      shell: bash
+      run: |
+        owner=`echo "${{ inputs.repository }}" | cut -d'/' -f1`
+        echo ::set-output name=owner::${owner}
+        echo ::set-output name=image::ghcr.io/${owner}/bats
+        echo ::set-output name=tag::$(date -u +'%Y%m%d')
+        echo ::set-output name=fullname::ghcr.io/${owner}/bats:$(date -u +'%Y%m%d')
