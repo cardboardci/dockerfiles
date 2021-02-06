@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.base.yml
+      - .github/actions/image-tag/*
       - images/base/image_data/**/*
       - images/base/test_configs/**/*
       - images/base/BUILD

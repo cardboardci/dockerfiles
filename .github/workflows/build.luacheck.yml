@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.luacheck.yml
+      - .github/actions/image-tag/*
       - images/luacheck/image_data/**/*
       - images/luacheck/test_configs/**/*
       - images/luacheck/BUILD

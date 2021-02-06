@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.gitlab.yml
+      - .github/actions/image-tag/*
       - images/gitlab/image_data/**/*
       - images/gitlab/test_configs/**/*
       - images/gitlab/BUILD

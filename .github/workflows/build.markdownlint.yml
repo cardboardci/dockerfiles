@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.markdownlint.yml
+      - .github/actions/image-tag/*
       - images/markdownlint/image_data/**/*
       - images/markdownlint/test_configs/**/*
       - images/markdownlint/BUILD

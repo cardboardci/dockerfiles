@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.rubocop.yml
+      - .github/actions/image-tag/*
       - images/rubocop/image_data/**/*
       - images/rubocop/test_configs/**/*
       - images/rubocop/BUILD

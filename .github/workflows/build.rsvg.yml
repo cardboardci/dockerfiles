@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.rsvg.yml
+      - .github/actions/image-tag/*
       - images/rsvg/image_data/**/*
       - images/rsvg/test_configs/**/*
       - images/rsvg/BUILD

@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.bats.yml
+      - .github/actions/image-tag/*
       - images/bats/image_data/**/*
       - images/bats/test_configs/**/*
       - images/bats/BUILD

@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.pdftools.yml
+      - .github/actions/image-tag/*
       - images/pdftools/image_data/**/*
       - images/pdftools/test_configs/**/*
       - images/pdftools/BUILD

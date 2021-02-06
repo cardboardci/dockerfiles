@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.awscli.yml
+      - .github/actions/image-tag/*
       - images/awscli/image_data/**/*
       - images/awscli/test_configs/**/*
       - images/awscli/BUILD

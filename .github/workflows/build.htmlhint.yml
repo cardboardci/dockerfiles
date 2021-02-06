@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.htmlhint.yml
+      - .github/actions/image-tag/*
       - images/htmlhint/image_data/**/*
       - images/htmlhint/test_configs/**/*
       - images/htmlhint/BUILD

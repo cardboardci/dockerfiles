@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.stylelint.yml
+      - .github/actions/image-tag/*
       - images/stylelint/image_data/**/*
       - images/stylelint/test_configs/**/*
       - images/stylelint/BUILD

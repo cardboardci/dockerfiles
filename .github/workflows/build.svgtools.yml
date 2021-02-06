@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.svgtools.yml
+      - .github/actions/image-tag/*
       - images/svgtools/image_data/**/*
       - images/svgtools/test_configs/**/*
       - images/svgtools/BUILD

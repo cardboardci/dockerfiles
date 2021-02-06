@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.surge.yml
+      - .github/actions/image-tag/*
       - images/surge/image_data/**/*
       - images/surge/test_configs/**/*
       - images/surge/BUILD

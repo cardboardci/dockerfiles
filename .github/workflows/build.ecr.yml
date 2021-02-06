@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.ecr.yml
+      - .github/actions/image-tag/*
       - images/ecr/image_data/**/*
       - images/ecr/test_configs/**/*
       - images/ecr/BUILD

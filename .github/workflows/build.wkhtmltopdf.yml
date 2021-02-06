@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.wkhtmltopdf.yml
+      - .github/actions/image-tag/*
       - images/wkhtmltopdf/image_data/**/*
       - images/wkhtmltopdf/test_configs/**/*
       - images/wkhtmltopdf/BUILD

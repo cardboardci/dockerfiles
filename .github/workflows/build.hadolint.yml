@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.hadolint.yml
+      - .github/actions/image-tag/*
       - images/hadolint/image_data/**/*
       - images/hadolint/test_configs/**/*
       - images/hadolint/BUILD

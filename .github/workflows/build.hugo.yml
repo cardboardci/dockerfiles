@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.hugo.yml
+      - .github/actions/image-tag/*
       - images/hugo/image_data/**/*
       - images/hugo/test_configs/**/*
       - images/hugo/BUILD

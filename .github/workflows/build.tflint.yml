@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.tflint.yml
+      - .github/actions/image-tag/*
       - images/tflint/image_data/**/*
       - images/tflint/test_configs/**/*
       - images/tflint/BUILD

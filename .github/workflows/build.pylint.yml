@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.pylint.yml
+      - .github/actions/image-tag/*
       - images/pylint/image_data/**/*
       - images/pylint/test_configs/**/*
       - images/pylint/BUILD

@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.netlify.yml
+      - .github/actions/image-tag/*
       - images/netlify/image_data/**/*
       - images/netlify/test_configs/**/*
       - images/netlify/BUILD

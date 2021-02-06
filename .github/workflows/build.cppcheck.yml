@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.cppcheck.yml
+      - .github/actions/image-tag/*
       - images/cppcheck/image_data/**/*
       - images/cppcheck/test_configs/**/*
       - images/cppcheck/BUILD
