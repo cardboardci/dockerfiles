@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.dbxcli.yml
+      - .github/actions/image-tag/*
       - images/dbxcli/image_data/**/*
       - images/dbxcli/test_configs/**/*
       - images/dbxcli/BUILD
@@ -41,4 +42,4 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-          docker push ${{ steps.image.outputs.image }}
+          docker push ${{ steps.image.outputs.fullname}}

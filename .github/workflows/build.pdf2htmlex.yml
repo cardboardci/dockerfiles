@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/build.pdf2htmlex.yml
+      - .github/actions/image-tag/*
       - images/pdf2htmlex/image_data/**/*
       - images/pdf2htmlex/test_configs/**/*
       - images/pdf2htmlex/BUILD
@@ -40,4 +41,4 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-          docker push ${{ steps.image.outputs.image }}
+          docker push ${{ steps.image.outputs.fullname}}
