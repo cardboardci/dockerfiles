@@ -45,7 +45,8 @@ jobs:
         # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
           set -x
-          tmp="$(mktemp -d)"
+          tmp="temporarydir"
+          mkdir -p "$tmp"
           touch "$tmp/WORKSPACE"
           ln WORKSPACE "$tmp/BUILD"
           ./buildozer -root_dir="$tmp" 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "//:ubuntu"
