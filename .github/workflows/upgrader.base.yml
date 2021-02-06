@@ -43,15 +43,12 @@ jobs:
         if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
           cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu > WORKSPACE.tmp
-          rm WORKSPACE
-          mv WORKSPACE.tmp WORKSPACE
-          git add -f WORKSPACE
-      - name: Commit all of the dependencies
-        uses: ./.github/actions/git-commit
-        # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
-        with:
-          options: "--label dependencies"
-          body: "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"
-          title: "Bump ubuntu image to ${{ steps.dockerhub.outputs.image-tag }} tag"
+      # - name: Commit all of the dependencies
+      #   uses: ./.github/actions/git-commit
+      #   if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+      #   with:
+      #     options: "--label dependencies"
+      #     body: "Automated upgrading of the base image ubuntu from ${{ steps.source.outputs.image-digest }} image to ${{ steps.dockerhub.outputs.image-digest }}"
+      #     title: "Bump ubuntu image to ${{ steps.dockerhub.outputs.image-tag }} tag"
