@@ -3,6 +3,7 @@ Rules for representing package from package managers.
 """
 
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
+
 _PACKAGE_JSON_TEMPLATE = "\"package\": \"{package}\", \"version\": \"{version}\", \"sum\": \"{sum}\""
 
 def _package_json_impl(ctx):
@@ -25,12 +26,3 @@ package_json = rule(
     },
     outputs = {"manifest": "%{name}.json"},
 )
-
-# # Each of these is for something
-# def luacheck_download_and_install(name, image, packages):
-#     commands = ["luarocks install %s" % p for p in packages]
-#     container_run_and_commit(
-#         name = name,
-#         commands = commands,
-#         image = image,
-#     )
