@@ -1,6 +1,6 @@
 # Sum Verified Rules Investigation
 
-Below is an outline of the design idea for checking the integrity of all packages installed into the docker image, to ensure that the installed package is as expected.
+Below is an outline of the design idea for checking the integrity of all packages installed into the docker image, to ensure that the installed package is as expected. This is a design idea and not implemented into the code at this time.
 
 ```skylark
 # Define a package file that is used for download/integrity checks
