@@ -44,12 +44,13 @@ jobs:
       - name: Buildozer to edit digest
         run: |
           set -x
-          echo $(cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' -:ubuntu) > WORKSPACE.tmp
+          cat WORKSPACE | ./buildozer 'set digest "${{ steps.dockerhub.outputs.image-digest }}"' "-:ubuntu" | tee WORKSPACE.tmp
           cat WORKSPACE.tmp
-          rm WORKSPACE
-          mv WORKSPACE.tmp WORKSPACE
-          ./buildifier
-          cat WORKSPACE
+
+        # rm WORKSPACE
+        # mv WORKSPACE.tmp WORKSPACE
+        # ./buildifier
+        # cat WORKSPACE
         # # if: ${{ steps.dockerhub.outputs.image-digest != steps.source.outputs.image-digest }}
         # run: |
         #   set -x
