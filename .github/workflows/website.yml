@@ -5,6 +5,7 @@ on:
       - .github/workflows/website.yml
       - docs/*
       - docs/**/*
+      - images/**/*.md
 
 jobs:
   build-and-deploy:
