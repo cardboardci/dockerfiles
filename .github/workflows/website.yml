@@ -5,6 +5,7 @@ on:
       - .github/workflows/website.yml
       - docs/*
       - docs/**/*
+      - images/**/*.md
 
 jobs:
   build-and-deploy:
@@ -12,13 +13,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Copy to docs directory
+        working-directory: images/
+        run: |
+          for x in *; do cp ${x}/README.md ${GITHUB_WORKSPACE}/docs/www/images/${x}.md ; done
       - name: Mkdocs
         uses: docker://squidfunk/mkdocs-material@sha256:5282540ecb411db49a2ae3ccea3b00a0ab1f55ecd8151e2941cf0ccad69d2beb
         with:
           args: "build --config-file docs/mkdocs.yml --site-dir public"
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
-        # if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages

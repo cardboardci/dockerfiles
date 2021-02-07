@@ -7,11 +7,12 @@ docs_dir: www
 
 theme:
   name: 'material'
+  logo: assets/icon.png
+  favicon: assets/favicon.png
   language: 'en'
   palette:
-    primary: 'white'
-    accent: 'indigo'
-
+    primary: 'blue'
+    accent: 'white'
 extra:
   search:
     language: 'en'
