@@ -25,7 +25,6 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 
 pip_deps()
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "rules_pkg",
     url = "https://github.com/bazelbuild/rules_pkg/releases/download/0.3.0/rules_pkg-0.3.0.tar.gz",
