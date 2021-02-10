@@ -7,15 +7,18 @@ docs_dir: www
 
 theme:
   name: 'material'
-  logo: assets/icon.png
+  # icon: 
+  #   logo: assets/icon.png
   favicon: assets/favicon.png
   language: 'en'
   palette:
     primary: 'blue'
     accent: 'white'
-extra:
-  search:
-    language: 'en'
-  social:
-    - type: 'github'
-      link: 'https://github.com/cardboardci'
+
+# extra:
+#   search:
+#     lang:
+#       - en
+#   social:
+#     - icon: 'github'
+#       link: 'https://github.com/cardboardci'
