@@ -34,7 +34,7 @@ container_image(
 #     output_image_name = "apt_get_installed",
 # )
 
-container_run_and_extract(
+container_run_and_extract( 
     name = "website",
     commands = [
         "mkdocs build --config-file /mkdocs.yml --site-dir /public",
