@@ -7,18 +7,21 @@ docs_dir: www
 
 theme:
   name: 'material'
-  # icon: 
-  #   logo: assets/icon.png
+  logo: assets/logo.png
   favicon: assets/favicon.png
   language: 'en'
   palette:
     primary: 'blue'
     accent: 'white'
 
-# extra:
-#   search:
-#     lang:
-#       - en
-#   social:
-#     - icon: 'github'
-#       link: 'https://github.com/cardboardci'
+plugins:
+  - search:
+      lang: en
+
+extra:
+  search:
+    lang:
+      - en
+  social:
+    - icon: 'fontawesome/brands/github'
+      link: 'https://github.com/cardboardci'
