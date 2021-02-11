@@ -24,7 +24,6 @@ jobs:
         run: |
           cp bazel-bin/docs/website/website.tar .
           tar -xf website.tar
-          ls public/
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
