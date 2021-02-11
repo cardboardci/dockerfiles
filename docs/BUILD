@@ -4,19 +4,22 @@ load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 pkg_tar(
     name = "website_contents",
-    srcs = ["mkdocs.yml"] + glob(["www/**/*", "public/**/*"]),
+    srcs = ["mkdocs.yml"] + glob([
+        "www/**/*",
+        "public/**/*",
+    ]),
     strip_prefix = ".",
 )
 
 container_image(
     name = "packaged_mkdocs",
     base = "@mkdocs//image",
-    tars = [":website_contents"],
     cmd = ["/bin/bash"],
     entrypoint = "",
+    tars = [":website_contents"],
 )
 
-container_run_and_extract( 
+container_run_and_extract(
     name = "website",
     commands = [
         "mkdocs build --config-file /mkdocs.yml --site-dir /public",
