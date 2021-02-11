@@ -13,9 +13,15 @@ theme:
   palette:
     primary: 'blue'
     accent: 'white'
+
+plugins:
+  - search:
+      lang: en
+
 extra:
   search:
-    language: 'en'
+    lang:
+      - en
   social:
-    - type: 'github'
+    - icon: 'fontawesome/brands/github'
       link: 'https://github.com/cardboardci'
