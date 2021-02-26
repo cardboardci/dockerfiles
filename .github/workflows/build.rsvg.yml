@@ -37,6 +37,7 @@ jobs:
         run: |
           bazel run //images/rsvg:image
           docker tag bazel/images/rsvg:image ${{ steps.image.outputs.fullname }}
+          docker tag bazel/images/rsvg:image ${{ steps.image.outputs.image }}:edge
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
