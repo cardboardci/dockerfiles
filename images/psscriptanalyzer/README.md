@@ -1,83 +1,50 @@
-# Docker image for PSScriptAnalyzer
+# cardboardci/psscriptanalyzer
+
+cardboardci/psscriptanalyzer is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for static analysis of PowerShell.
 
 PSScriptAnalyzer is a static code checker for Windows PowerShell modules and scripts. PSScriptAnalyzer checks the quality of Windows PowerShell code by running a set of rules. The rules are based on PowerShell best practices identified by PowerShell Team and the community. It generates DiagnosticResults (errors and warnings) to inform users about potential code defects and suggests possible solutions for improvements.
 
 You can see the cli reference [here](https://github.com/PowerShell/PSScriptAnalyzer).
 
-## Usage
+## Getting Started
 
-You can run awscli to manage your AWS services.
+This image can be used with the docker type for different types of continuous integration platforms. For example:
 
-```bash
-aws iam list-users
-aws s3 cp /tmp/foo/ s3://bucket/ --recursive --exclude "*" --include "*.jpg"
-aws sts assume-role --role-arn arn:aws:iam::123456789012:role/xaccounts3access --role-session-name s3-access-example
+```yml
+# GitHub Actions
+jobs:
+    my_first_job:
+        steps:
+            - name: My first step
+              uses: docker://ghcr.io/cardboardci/psscriptanalyzer:edge
+              with:
+                  args: "PSFormatter"
 ```
 
 ### Pull latest image
 
+The edge or latest version of the image is available with the tag `edge`. This isn't intended to long term use, but for working with the latest version of the image. To pull the latest image, run the following:
+
 ```bash
-docker pull cardboardci/psscriptanalyzer
+docker pull ghcr.io/cardboardci/psscriptanalyzer:edge
 ```
 
 ### Test interactively
 
+Sometimes it can be useful to run the image in an interactive shell for experimentation. To shell into an image, run the following:
+
 ```bash
-docker run -it cardboardci/psscriptanalyzer pwsh
+docker run -it ghcr.io/cardboardci/psscriptanalyzer:edge /bin/bash
 ```
 
-### Test interactively with Bash
+### Run a basic command
+
+To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it cardboardci/psscriptanalyzer bash
-```
-
-### Emit version table
-
-```bash
-docker run -it cardboardci/psscriptanalyzer pwsh -Command '$PSVersionTable'
-```
-
-### Emit versions of installed modules
-
-```bash
-docker run -it cardboardci/psscriptanalyzer pwsh -Command 'Get-InstalledModule'
-```
-
-### Run format invocation
-
-```bash
-docker run -it -v "$(pwd)":/workspace cardboardci/psscriptanalyzer pwsh -Command 'Invoke-Formatter -ScriptDefinition (Get-Content -Path 'File.ps1' -Raw)'
-```
-
-### Continuous Integration Services
-
-For each of the following services, you can see an example of this image in that environment:
-
-* [CircleCI](usages/circleci)
-* [GitHub Actions](usages/github)
-* [GitLabCI](usages/gitlabci)
-* [JenkinsFile](usages/jenkins)
-* [TravisCI](usages/travisci)
-* [Codeship](usages/codeship)
-
-## Tagging Strategy
-
-Every new release of the image includes three tags: version, date and `latest`. These tags can be described as such:
-
-* `latest`: The most-recently released version of an image. (`cardboardci/psscriptanalyzer:latest`)
-* `<version>`: The most-recently released version of an image for that version of the tool. (`cardboardci/psscriptanalyzer:1.0.0`)
-* `<version-date>`: The version of the tool released on a specific date (`cardboarci/awscli:1.0.0-20190101`)
-
-We recommend using the digest for the docker image, or pinning to the version-date tag. If you are unsure how to get the digest, you can retrieve it for any image with the following command:
-
-```bash
-docker pull cardboardci/psscriptanalyzer:latest
-docker inspect --format='{{index .RepoDigests 0}}' cardboardci/psscriptanalyzer:latest
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/psscriptanalyzer:edge aws --version
 ```
 
 ## Fundamentals
 
-All images in the CardboardCI namespace are built from [cardboardci/ci-core](https://hub.docker.com/r/cardboardci/ci-core). This image ensures that the base environment for every image is always up to date. The [common base image](https://cardboardci.jrbeverly.dev/core/) provides dependencies that are often used building and deploying software.
-
-By having a common base, it means that each image is able to focus on providing the optimal tooling for each development workflow.
+All images in the CardboardCI namespace are built from cardboardci/base. This image is intended to provide a common set of dependencies and expectations about how the images will behave. The image will always be built from the base image, to ensure any changes seen in the base are included in the downstream image.
