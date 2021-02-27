@@ -8,6 +8,7 @@ on:
       - images/ecr/test_configs/**/*
       - images/ecr/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

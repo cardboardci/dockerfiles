@@ -8,6 +8,7 @@ on:
       - images/hugo/test_configs/**/*
       - images/hugo/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

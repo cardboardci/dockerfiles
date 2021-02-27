@@ -8,6 +8,7 @@ on:
       - images/rubocop/test_configs/**/*
       - images/rubocop/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

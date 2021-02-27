@@ -8,6 +8,7 @@ on:
       - images/markdownlint/test_configs/**/*
       - images/markdownlint/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

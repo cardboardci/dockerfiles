@@ -8,6 +8,7 @@ on:
       - images/cppcheck/test_configs/**/*
       - images/cppcheck/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

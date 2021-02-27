@@ -8,6 +8,7 @@ on:
       - images/awscli/test_configs/**/*
       - images/awscli/BUILD
       - WORKSPACE
+      - rules/*.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

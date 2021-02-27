@@ -8,6 +8,7 @@ on:
       - images/hadolint/test_configs/**/*
       - images/hadolint/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

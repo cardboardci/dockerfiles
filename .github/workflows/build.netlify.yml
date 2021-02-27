@@ -8,6 +8,7 @@ on:
       - images/netlify/test_configs/**/*
       - images/netlify/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

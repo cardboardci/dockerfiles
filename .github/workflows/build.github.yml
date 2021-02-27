@@ -8,6 +8,7 @@ on:
       - images/github/test_configs/**/*
       - images/github/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

@@ -8,6 +8,7 @@ on:
       - images/gitlab/test_configs/**/*
       - images/gitlab/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml
