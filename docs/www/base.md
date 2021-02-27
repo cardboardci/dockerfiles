@@ -1,23 +1,37 @@
-# cardboardci/base
+# Common Base Image
 
-cardboardci/base is an Ubuntu Docker image created with reproducability in mind. This image serves as a base image for other CardboardCI images. The image is intended to supply all common dependencies for continuous integration images.
+cardboardci/base is an Ubuntu Docker image created with reproducibility in mind. This image serves as a base image for other CardboardCI images, supplying common dependencies and expected standards. This helps ensure that all images behave similar when chained together or executed in sequence.
 
-This image should be used as a base image for all CardboardCI images to avoid unique image configurations that do not work as expected.
+Any image developed should use this as a base image to avoid unique image configurations that do not work as expected.
 
 # Getting Started
 
-This image can be used with the docker type for different types of continuous integration platforms. For example:
+This image is intended to be inherited by other images, either with a Dockerfile or through Bazel builds. The following is a Dockerfile example:
 
-```yml
-# GitHub Actions
-jobs:
-    my_first_job:
-        steps:
-            - name: My first step
-              uses: docker://ghcr.io/cardboardci/base:20210211
+```dockerfile
+FROM ghcr.io/cardboardci/base:20210211
+USER root
+
+RUN apt-get update && apt-get install -y ...
 ```
 
-In the above example, the CircleCI Base Docker image is used for the primary container. More specifically, the tag 2021.02 indicates the dated version of the base image. See how tags work below for more information.
+And the following is an example using Bazel:
+
+```starlark
+download_pkgs(
+    name = "apt_get_download",
+    image_tar = "//images/base:image.tar",
+    packages = [ ... ],
+)
+
+install_pkgs(
+    name = "apt_get_installed",
+    image_tar = "//images/base:image.tar",
+    installables_tar = ":apt_get_download.tar",
+    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
+    output_image_name = "apt_get_installed",
+)
+```
 
 # How This Image Works
 
@@ -29,7 +43,7 @@ This image contains the Ubuntu Linux operating system and everything that is con
 -   SSH
 -   jq
 
-The full list can be seen in the `images/base` definition.
+The full list can be seen in the `images/base` definition. All images are expected to have these configured and running in the environments.
 
 # Tagging Scheme
 
@@ -37,13 +51,11 @@ This image has the following tagging scheme:
 
 ```
 cardboardci/base:edge[-version]
-cardboardci/base:<YYYY.MM>[-version]
+cardboardci/base:<YYYYMMDD>[-version]
 ```
 
-edge - This image tag points to the latest version of the Base image. This tag is built from the HEAD of the master branch. The edge tag is intended to be used as a testing version of the image with the most recent changes however not guaranteed to be all that stable. This tag is not recommended for production software.
+edge - This image tag points to the latest version of the Base image. This tag is built from the HEAD of the master branch. The edge tag is intended to be used as a reference version of the image before referencing by either tag or sha. This tag should not be used in continuous integration settings unless experimenting.
 
-stable - This image tag points to the latest, production ready base image. This image should be used by projects that want a decent level of stability but would like to get occasional software updates. It is typically updated once a month.
+<YYYYMMDD> - This image tag is a build of the image, referred to by the 4 digit year, a 2 digit month, and the 2 digit day. For example 20210919 would be the build from September 19th 2021. This tag is intended for cases where image usages are frequently updated.
 
-<YYYY.MM> - This image tag is a monthly snapshot of the image, referred to by the 4 digit year, dot, and a 2 digit month. For example 2019.09 would be the monthly snapshot tag from September 2019. This tag is intended for projects that are highly sensitive to changes and want the most deterministic builds possible.
-
--version - This is an optional extension to the tag to specify the version of Ubuntu to use. There can be up to two options, the current LTS and the previous LTS. As of this writing, those options would be 18.04 or 20.04. When leaving the version out, suggested, the default version will be used. The default Ubuntu version is the newest LTS version, after it has been out for 2 months. For example, Ubuntu 20.04 came out in April 2020, so it became the default version for this image in June 2020. The previous LTS version will be supported for a year after it drops out of the default slot.
+-version - This is an optional extension to the tag to specify variants of the image.
