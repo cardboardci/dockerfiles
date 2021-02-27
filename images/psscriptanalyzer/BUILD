@@ -2,7 +2,6 @@ load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "downl
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
-load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 load("@cardboardci//rules:images.bzl", "cardboardci_image", "cardboardci_test")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
