@@ -8,6 +8,7 @@ on:
       - images/psscriptanalyzer/test_configs/**/*
       - images/psscriptanalyzer/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

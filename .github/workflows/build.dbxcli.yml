@@ -8,6 +8,7 @@ on:
       - images/dbxcli/test_configs/**/*
       - images/dbxcli/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

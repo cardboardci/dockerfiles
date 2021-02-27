@@ -8,6 +8,7 @@ on:
       - images/pdftools/test_configs/**/*
       - images/pdftools/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

@@ -8,6 +8,7 @@ on:
       - images/rsvg/test_configs/**/*
       - images/rsvg/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

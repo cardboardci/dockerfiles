@@ -8,6 +8,7 @@ on:
       - images/pylint/test_configs/**/*
       - images/pylint/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

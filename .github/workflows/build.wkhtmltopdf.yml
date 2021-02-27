@@ -8,6 +8,7 @@ on:
       - images/wkhtmltopdf/test_configs/**/*
       - images/wkhtmltopdf/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

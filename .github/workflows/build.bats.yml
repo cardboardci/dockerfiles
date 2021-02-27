@@ -8,6 +8,7 @@ on:
       - images/bats/test_configs/**/*
       - images/bats/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

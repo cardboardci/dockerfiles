@@ -8,6 +8,7 @@ on:
       - images/base/test_configs/**/*
       - images/base/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - tests/*.yaml
 
 jobs:

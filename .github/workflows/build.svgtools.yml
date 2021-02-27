@@ -8,6 +8,7 @@ on:
       - images/svgtools/test_configs/**/*
       - images/svgtools/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml

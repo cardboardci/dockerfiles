@@ -8,6 +8,7 @@ on:
       - images/stylelint/test_configs/**/*
       - images/stylelint/BUILD
       - WORKSPACE
+      - rules/images.bzl
       - images/base/*
       - images/base/**/*
       - tests/*.yaml
