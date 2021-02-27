@@ -1,7 +1,8 @@
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
-load("@cardboardci//rules:wrappers.bzl", "binary_download_and_install", "cardboardci_image")
+load("@cardboardci//rules:wrappers.bzl", "binary_download_and_install")
+load("@cardboardci//rules:images.bzl", "cardboardci_image")
 
 download_pkgs(
     name = "apt_get_download",
