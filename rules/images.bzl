@@ -28,7 +28,7 @@ def cardboardci_image(name, base, labels, tars = []):
             "org.opencontainers.image.summary": labels["org.opencontainers.image.summary"],
             "org.opencontainers.image.description": labels["org.opencontainers.image.description"],
             "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/%s" % (labels["org.opencontainers.image.title"]),
-            "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/tree/master/images/%s" % (labels["org.opencontainers.image.title"]),
+            "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/tree/main/images/%s" % (labels["org.opencontainers.image.title"]),
             "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
             "org.cardboardci.image.user": "cardboardci",
             "org.cardboardci.image.group": "cardboardci",

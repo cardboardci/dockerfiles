@@ -46,7 +46,7 @@ jobs:
         with:
           username: jrbeverly
           email: jonathan@jrbeverly.me
-          branch: 'base-image-to-${{ steps.tag.outputs.image-tag }}'
+          branch: "base-image-to-${{ steps.tag.outputs.image-tag }}"
           token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
       - name: Buildozer to edit digest
         if: ${{ steps.digest.outputs.image-digest != steps.source.outputs.image-digest }}
@@ -58,7 +58,7 @@ jobs:
           git add -f WORKSPACE
       - name: Commit all of the dependencies
         uses: ./.github/actions/git-commit
-        if: ${{ steps.digest.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/master' }}
+        if: ${{ steps.digest.outputs.image-digest != steps.source.outputs.image-digest && github.ref == 'refs/heads/main' }}
         env:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
