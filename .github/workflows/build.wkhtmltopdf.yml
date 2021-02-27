@@ -9,8 +9,9 @@ on:
       - images/wkhtmltopdf/BUILD
       - WORKSPACE
       - rules/images.bzl
-      - images/base/*
-      - images/base/**/*
+      - images/base/image_data/**/*
+      - images/base/test_configs/**/*
+      - images/base/BUILD
       - tests/*.yaml
 
 jobs:
