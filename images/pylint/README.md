@@ -1,4 +1,6 @@
-# Docker image for PyLint
+# cardboardci/pylint
+
+cardboardci/pylint is a Docker image built with continuous integration builds in mind. Each tag contains an Pylint version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
 
 Pylint is a Python static code analysis tool which looks for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions.
 
@@ -6,68 +8,45 @@ It's highly configurable, having special pragmas to control its errors and warni
 
 You can see the cli reference [here](https://github.com/PyCQA/pylint/).
 
-## Usage
+## Getting Started
 
-You can run awscli to manage your AWS services.
+This image can be used with the docker type for different types of continuous integration platforms. For example:
 
-```bash
-aws iam list-users
-aws s3 cp /tmp/foo/ s3://bucket/ --recursive --exclude "*" --include "*.jpg"
-aws sts assume-role --role-arn arn:aws:iam::123456789012:role/xaccounts3access --role-session-name s3-access-example
+```yml
+# GitHub Actions
+jobs:
+    my_first_job:
+        steps:
+            - name: My first step
+              uses: docker://ghcr.io/cardboardci/pylint:edge
+              with:
+                  args: "pylint --version"
 ```
 
 ### Pull latest image
 
+The edge or latest version of the image is available with the tag `edge`. This isn't intended to long term use, but for working with the latest version of the image. To pull the latest image, run the following:
+
 ```bash
-docker pull cardboardci/pylint
+docker pull ghcr.io/cardboardci/pylint:edge
 ```
 
 ### Test interactively
 
+Sometimes it can be useful to run the image in an interactive shell for experimentation. To shell into an image, run the following:
+
 ```bash
-docker run -it cardboardci/pylint /bin/bash
+docker run -it ghcr.io/cardboardci/pylint:edge /bin/bash
 ```
 
 ### Run basic AWS command
 
-```bash
-docker run -it -v "$(pwd)":/workspace cardboardci/pylint aws s3 cp file.txt s3://bucket/file.txt
-```
-
-### Run AWS CLI with custom profile
+To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v "$(pwd)":/workspace -v "~/.aws/":/cardboardci/.aws/ cardboardci/pylint aws s3 cp file.txt s3://bucket/file.txt
-```
-
-### Continuous Integration Services
-
-For each of the following services, you can see an example of this image in that environment:
-
-* [CircleCI](usages/circleci)
-* [GitHub Actions](usages/github)
-* [GitLabCI](usages/gitlabci)
-* [JenkinsFile](usages/jenkins)
-* [TravisCI](usages/travisci)
-* [Codeship](usages/codeship)
-
-## Tagging Strategy
-
-Every new release of the image includes three tags: version, date and `latest`. These tags can be described as such:
-
-* `latest`: The most-recently released version of an image. (`cardboardci/pylint:latest`)
-* `<version>`: The most-recently released version of an image for that version of the tool. (`cardboardci/pylint:1.0.0`)
-* `<version-date>`: The version of the tool released on a specific date (`cardboarci/awscli:1.0.0-20190101`)
-
-We recommend using the digest for the docker image, or pinning to the version-date tag. If you are unsure how to get the digest, you can retrieve it for any image with the following command:
-
-```bash
-docker pull cardboardci/pylint:latest
-docker inspect --format='{{index .RepoDigests 0}}' cardboardci/pylint:latest
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/pylint:edge aws --version
 ```
 
 ## Fundamentals
 
-All images in the CardboardCI namespace are built from [cardboardci/ci-core](https://hub.docker.com/r/cardboardci/ci-core). This image ensures that the base environment for every image is always up to date. The [common base image](https://cardboardci.jrbeverly.dev/core/) provides dependencies that are often used building and deploying software.
-
-By having a common base, it means that each image is able to focus on providing the optimal tooling for each development workflow.
+All images in the CardboardCI namespace are built from cardboardci/base. This image is intended to provide a common set of dependencies and expectations about how the images will behave. The image will always be built from the base image, to ensure any changes seen in the base are included in the downstream image.
