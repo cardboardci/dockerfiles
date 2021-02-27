@@ -40,3 +40,14 @@ def cardboardci_image(name, base, labels, tars = []):
         ],
         workdir = "/workspace",
     )
+
+def cardboardci_test(name, image, configs = []):
+    container_test(
+        name = name,
+        configs = [
+            "//tests:limited_user.yaml",
+            "//tests:metadata.yaml",
+            "//tests:essentials.yaml",
+        ] + configs,
+        image = image,
+    )
