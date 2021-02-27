@@ -33,7 +33,7 @@ Or the image:
 docker inspect -f '{{ index .Config.Labels "org.cardboardci.image.<property>" }}' ghcr.io/cardboardci/<image_name>
 ```
 
-# Checking the user
+## Checking the user
 
 If you are experiencing issues with one of the containers, it can be useful to check if the issue is due to permissions. Running the container with the root flag (`--user root`) or interactively debugging can be helpful.
 
