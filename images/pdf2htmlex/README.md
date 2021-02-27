@@ -1,15 +1,15 @@
 # cardboardci/pdf2htmlex
 
-cardboardci/pdf2htmlex is a Docker image built with continuous integration builds in mind. Each tag contains an pdf2htmlEX version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/pdf2htmlex is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for converting PDFs to HTML.
 
 pdf2htmlEX renders PDF files in HTML, utilizing modern Web technologies. Academic papers with lots of formulas and figures? Magazines with complicated layouts? No problem!
 
 Features:
 
-* Native HTML text with precise font and location.
-* Flexible output: all-in-one HTML or on demand page loading (needs JavaScript).
-* Moderate file size, sometimes even smaller than PDF.
-* Supporting links, outlines (bookmarks), printing, SVG background, Type 3 fonts and more.
+-   Native HTML text with precise font and location.
+-   Flexible output: all-in-one HTML or on demand page loading (needs JavaScript).
+-   Moderate file size, sometimes even smaller than PDF.
+-   Supporting links, outlines (bookmarks), printing, SVG background, Type 3 fonts and more.
 
 You can see the cli reference [here](https://github.com/coolwanglu/pdf2htmlEX).
 
@@ -44,7 +44,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/pdf2htmlex:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

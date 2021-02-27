@@ -1,6 +1,6 @@
 # cardboardci/markdownlint
 
-cardboardci/markdownlint is a Docker image built with continuous integration builds in mind. Each tag contains an markdownlint version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/markdownlint is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for static analysis of Markdown.
 
 A tool to check markdown files and flag style issues. To have markdownlint check your markdown files, simply run mdl with the filenames as a parameter:
 
@@ -47,7 +47,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/markdownlint:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

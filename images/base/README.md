@@ -1,8 +1,8 @@
 # cardboardci/base
 
-cardboardci/base is a Docker image built with continuous integration builds in mind. Each tag contains an AWSCLI version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/base is a Docker image built with continuous integration builds in mind. This image serves as a base image for all CardboardCI images. The image is intended to supply all common dependencies for continuous integration images.
 
-The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
+This image should be used as a base image for all CardboardCI images to avoid unique image configurations that do not work as expected.
 
 ## Getting Started
 
@@ -35,14 +35,10 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/base:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 
 ```bash
 docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/base:edge aws --version
 ```
-
-## Fundamentals
-
-All images in the CardboardCI namespace are built from cardboardci/base. This image is intended to provide a common set of dependencies and expectations about how the images will behave. The image will always be built from the base image, to ensure any changes seen in the base are included in the downstream image.

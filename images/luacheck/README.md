@@ -1,6 +1,6 @@
 # cardboardci/luacheck
 
-cardboardci/luacheck is a Docker image built with continuous integration builds in mind. Each tag contains an Luacheck version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/luacheck is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for static analysis of Lua.
 
 Luacheck is a static analyzer and a linter for Lua. Luacheck detects various issues such as usage of undefined global variables, unused variables and values, accessing uninitialized variables, unreachable code and more. Most aspects of checking are configurable: there are options for defining custom project-related globals, for selecting set of standard globals (version of Lua standard library), for filtering warnings by type and name of related variable, etc. The options can be used on the command line, put into a config or directly into checked files as Lua comments.
 
@@ -37,7 +37,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/luacheck:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

@@ -1,6 +1,6 @@
 # cardboardci/wkhtmltopdf
 
-cardboardci/wkhtmltopdf is a Docker image built with continuous integration builds in mind. Each tag contains an wkhtmltopdf version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/wkhtmltopdf is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for converting from HTML to PDF.
 
 wkhtmltopdf and wkhtmltoimage are open source (LGPLv3) command line tools to render HTML into PDF and various image formats using the Qt WebKit rendering engine. These run entirely "headless" and do not require a display or display service.
 
@@ -37,7 +37,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/wkhtmltopdf:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

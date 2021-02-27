@@ -1,13 +1,13 @@
 # cardboardci/gitlab
 
-cardboardci/gitlab is a Docker image built with continuous integration builds in mind. Each tag contains an GitLabCLI version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/gitlab is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for interacting with GitLab.
 
 What is GitLabCLI ?
 
-* It's a cross platform GitLab command line tool to quickly & naturally perform frequent tasks on GitLab project.
-* It does not force you to hand craft json or use other unnatural ways (for example ids, concatenating of strings) like other CLI's to interact with GitLab.
-* It does not have any dependencies.
-* It's self contained .NET core application - you don't need to have .NET installed for it to work.
+-   It's a cross platform GitLab command line tool to quickly & naturally perform frequent tasks on GitLab project.
+-   It does not force you to hand craft json or use other unnatural ways (for example ids, concatenating of strings) like other CLI's to interact with GitLab.
+-   It does not have any dependencies.
+-   It's self contained .NET core application - you don't need to have .NET installed for it to work.
 
 You can see the source repository [here](https://github.com/nmklotas/GitLabCLI).
 
@@ -42,7 +42,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/gitlab:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

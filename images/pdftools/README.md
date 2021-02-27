@@ -1,6 +1,6 @@
 # cardboardci/pdftools
 
-cardboardci/pdftools is a Docker image built with continuous integration builds in mind. Each tag contains an pdftools version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/pdftools is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for working with PDFs.
 
 Scientific articles are typically locked away in PDF format, a format designed primarily for printing but not so great for searching or indexing. The new pdftools package allows for extracting text and metadata from pdf files in R. From the extracted plain-text one could find articles discussing a particular drug or species name, without having to rely on publishers providing metadata, or pay-walled search engines.
 
@@ -37,7 +37,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/pdftools:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

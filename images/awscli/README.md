@@ -1,6 +1,6 @@
 # cardboardci/awscli
 
-cardboardci/awscli is a Docker image built with continuous integration builds in mind. Each tag contains an AWSCLI version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/awscli is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities fpr interacting with Amazon Web Services (AWS).
 
 The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
 
@@ -35,7 +35,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/awscli:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

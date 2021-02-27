@@ -1,6 +1,6 @@
 # cardboardci/psscriptanalyzer
 
-cardboardci/psscriptanalyzer is a Docker image built with continuous integration builds in mind. Each tag contains an PSScriptAnalyzer version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/psscriptanalyzer is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for static analysis of PowerShell.
 
 PSScriptAnalyzer is a static code checker for Windows PowerShell modules and scripts. PSScriptAnalyzer checks the quality of Windows PowerShell code by running a set of rules. The rules are based on PowerShell best practices identified by PowerShell Team and the community. It generates DiagnosticResults (errors and warnings) to inform users about potential code defects and suggests possible solutions for improvements.
 
@@ -37,7 +37,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/psscriptanalyzer:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

@@ -1,6 +1,6 @@
 # cardboardci/netlify
 
-cardboardci/netlify is a Docker image built with continuous integration builds in mind. Each tag contains an NetlifyCLI version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/netlify is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for deploying to netlify.
 
 The Netlify CLI facilitates the deployment of websites to Netlify, to improve the site building experience.
 
@@ -37,7 +37,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/netlify:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

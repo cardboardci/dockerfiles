@@ -1,6 +1,6 @@
 # cardboardci/hugo
 
-cardboardci/hugo is a Docker image built with continuous integration builds in mind. Each tag contains an Hugo version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/hugo is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for generating static websites with Hugo.
 
 Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.
 
@@ -37,7 +37,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/hugo:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

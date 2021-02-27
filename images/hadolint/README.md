@@ -1,6 +1,6 @@
 # cardboardci/hadolint
 
-cardboardci/hadolint is a Docker image built with continuous integration builds in mind. Each tag contains an Hadolint version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/hadolint is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for static analysis of Dockerfiles.
 
 A smarter Dockerfile linter that helps you build best practice Docker images. The linter is parsing the Dockerfile into an AST and performs rules on top of the AST. It is standing on the shoulders of ShellCheck to lint the Bash code inside RUN instructions.
 
@@ -37,7 +37,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/hadolint:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

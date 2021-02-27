@@ -1,6 +1,6 @@
 # cardboardci/rubocop
 
-cardboardci/rubocop is a Docker image built with continuous integration builds in mind. Each tag contains an RuboCop version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/rubocop is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for static analysis of Ruby.
 
 RuboCop is a Ruby static code analyzer and code formatter. Out of the box it will enforce many of the guidelines outlined in the community Ruby Style Guide.
 
@@ -39,7 +39,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/rubocop:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

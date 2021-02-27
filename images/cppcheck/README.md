@@ -1,6 +1,6 @@
 # cardboardci/cppcheck
 
-cardboardci/cppcheck is a Docker image built with continuous integration builds in mind. Each tag contains an Cppcheck version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/cppcheck is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for static analysis of C++.
 
 Cppcheck is an analysis tool for C/C++ code. It provides unique code analysis
 to detect bugs and focuses on detecting undefined behaviour and dangerous
@@ -40,7 +40,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/cppcheck:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

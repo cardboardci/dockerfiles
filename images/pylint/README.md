@@ -1,6 +1,6 @@
 # cardboardci/pylint
 
-cardboardci/pylint is a Docker image built with continuous integration builds in mind. Each tag contains an Pylint version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/pylint is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for linting of Python.
 
 Pylint is a Python static code analysis tool which looks for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions.
 
@@ -39,7 +39,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/pylint:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 

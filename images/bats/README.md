@@ -1,6 +1,6 @@
 # cardboardci/bats
 
-cardboardci/bats is a Docker image built with continuous integration builds in mind. Each tag contains an Bats version and any binaries and tools that are required for builds to complete successfully in a continuous integration environment.
+cardboardci/bats is a Docker image built with continuous integration builds in mind. Each tag contains any binaries and tools that are required for builds to complete successfully in a continuous integration environment. This includes `jq`, `curl`, `bash` and utilities for orchestrating Bash testing.
 
 Bats is a TAP-compliant testing framework for Bash. It provides a simple way to verify that the UNIX programs you write behave as expected.
 
@@ -53,7 +53,7 @@ Sometimes it can be useful to run the image in an interactive shell for experime
 docker run -it ghcr.io/cardboardci/bats:edge /bin/bash
 ```
 
-### Run basic AWS command
+### Run a basic command
 
 To run a single command from the context of the docker image, run the following:
 
