@@ -1,6 +1,6 @@
 # Understanding the User and Group
 
-Docker images often are configured to run in the `root` user domain of an image. This kind of elevated access for processes inside the container is not necessary. The common scenario for these images is to run as command working off the contents of a mounted volume.
+Docker images often are configured to run in the `root` user domain of an image. This kind of elevated access for processes inside the container is not necessary. The common scenario for these images is to run a command working off the contents of a mounted volume.
 
 Continuous integration services will often make use of the `--user` flag to use a reduced permission level for clusters. When running locally, the `--user` flag may not always be specified. In these cases, the cardboardci user acts as a user with minimum permissions to work with the `/workspace` directory.
 
@@ -14,12 +14,12 @@ docker run cardboardi/<image>:edge id
 
 ## Labels
 
-Properties of the default user for every image are made available with the label namespace `org.cardboardci.image.`. The following are properties that exist within this namespace:
+Properties of the default user for every image are made available with the label namespace `org.cardboardci.image.`. The following are user properties that exist within this namespace:
 
 -   `user` - The name of the default user
--   `uid` - The User identifier of the default user
+-   `uid` - The identifier of the default user
 -   `group` - The name of the default user group
--   `gid` - The Group identifier of the default user
+-   `gid` - The identifier of the default user group
 
 To obtain any of the properties listed above, you can run this for the container:
 
@@ -46,5 +46,5 @@ docker exec --user 'cardboardci' -it <container_name> /bin/bash
 Or as the root user:
 
 ```bash
-docker exec --user 'cardboardci' -it <container_name> /bin/bash
+docker exec --user 'root' -it <container_name> /bin/bash
 ```

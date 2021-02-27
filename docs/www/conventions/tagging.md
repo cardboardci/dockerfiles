@@ -15,4 +15,16 @@ cardboardci/<name>:<YYYYMMDD>[-version]
 
 The recommended usage is to use the SHA of the image with the tag included as a comment nearby. This uses the most precise version of the image, and includes a reference date for evaluating the age of the image itself.
 
-For cases where the image is updated frequently due to automation or source scanning, it is fine to make use of the tag.
+```yml
+# GitHub Actions
+jobs:
+    my_first_job:
+        steps:
+            - name: My first step
+              # 20210227
+              uses: docker://ghcr.io/cardboardci/basE@sha256:e99aef505e9e3a5026a9a2873f2a5e3b029adb5c8f70327672f3a9a7aef2c73a
+              with:
+                  args: "echo hello"
+```
+
+If the image is frequently updated due to automation, then using just the tag is a valid usage.
