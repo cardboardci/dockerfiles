@@ -35,6 +35,7 @@ jobs:
         run: |
           bazel run //images/base:image
           docker tag bazel/images/base:image ${{ steps.image.outputs.fullname }}
+          docker tag bazel/images/base:image ${{ steps.image.outputs.image }}:edge
 
       - name: Push to GitHub Packages
         if: github.ref == 'refs/heads/master'
