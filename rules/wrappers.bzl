@@ -8,7 +8,7 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 CARDBOARDCI_UID = "180000"
 CARDBOARDCI_GID = "180000"
 
-def cardboardci_image(name, base, labels):
+def cardboardci_image(name, base, labels, tars = []):
     container_image(
         name = name,
         base = base,
@@ -17,6 +17,7 @@ def cardboardci_image(name, base, labels):
         env = {
             "CARDBOARDCI_WORKSPACE": "/workspace",
         },
+        tars = tars,
         files = native.glob(["image_data/*"]),
         labels = {
             "maintainer": "CardboardCI",

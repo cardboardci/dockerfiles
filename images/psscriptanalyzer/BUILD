@@ -3,7 +3,8 @@ load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "instal
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
-load("@cardboardci//rules:wrappers.bzl", "CARDBOARDCI_GID", "CARDBOARDCI_UID")
+load("@cardboardci//rules:wrappers.bzl", "cardboardci_image")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 download_pkgs(
     name = "apt_get_download",
@@ -54,37 +55,22 @@ container_run_and_commit(
     image = ":apt_get_done.tar",
 )
 
-container_image(
+pkg_tar(
+    name = "scripts",
+    srcs = glob(["image_scripts/*"]),
+    mode = "0755",
+    package_dir = "/usr/bin/",
+)
+
+cardboardci_image(
     name = "image",
     base = ":bin_install_commit.tar",
-    cmd = ["/bin/bash"],
-    directory = "/usr/bin/",
-    entrypoint = "",
-    env = {
-        "CARDBOARDCI_WORKSPACE": "/workspace",
-    },
-    files = glob(["image_data/usr/bin/*"]),
     labels = {
-        "maintainer": "CardboardCI",
         "org.opencontainers.image.title": "psscriptanalyzer",
-        "org.opencontainers.image.release": "CardboardCI version:0.0.0",
-        "org.opencontainers.image.vendor": "cardboardci",
-        "org.opencontainers.image.architecture": "amd64",
         "org.opencontainers.image.summary": "Powershell linter",
         "org.opencontainers.image.description": "PSScriptAnalyzer is a static code checker for Windows PowerShell modules and scripts",
-        "org.opencontainers.image.source": "https://github.com/cardboardci/dockerfiles/images/psscriptanalyzer",
-        "org.opencontainers.image.url": "https://github.com/cardboardci/dockerfiles/psscriptanalyzer",
-        "org.opencontainers.image.documentation": "https://cardboardci.jrbeverly.me",
-        "org.cardboardci.image.user": "cardboardci",
-        "org.cardboardci.image.uid": CARDBOARDCI_UID,
-        "org.cardboardci.image.group": "cardboardci",
-        "org.cardboardci.image.gid": CARDBOARDCI_GID,
     },
-    user = "cardboardci",
-    volumes = [
-        "/workspace",
-    ],
-    workdir = "/workspace",
+    tars = [":scripts"],
 )
 
 container_test(
