@@ -39,12 +39,10 @@ cardboardci_image(
     },
 )
 
-container_test(
+cardboardci_test(
     name = "test",
     configs = [
         "//images/surge/test_configs:command.yaml",
-        "//tests:limited_user.yaml",
-        "//tests:metadata.yaml",
     ],
     image = ":image",
 )

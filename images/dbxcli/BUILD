@@ -2,7 +2,7 @@ load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "downl
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 load("@cardboardci//rules:wrappers.bzl", "binary_download_and_install")
-load("@cardboardci//rules:images.bzl", "cardboardci_image")
+load("@cardboardci//rules:images.bzl", "cardboardci_image", "cardboardci_test")
 
 download_pkgs(
     name = "apt_get_download",
@@ -35,12 +35,10 @@ cardboardci_image(
     },
 )
 
-container_test(
+cardboardci_test(
     name = "test",
     configs = [
         "//images/dbxcli/test_configs:command.yaml",
-        "//tests:limited_user.yaml",
-        "//tests:metadata.yaml",
     ],
     image = ":image",
 )
