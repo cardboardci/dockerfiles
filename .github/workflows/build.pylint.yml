@@ -42,7 +42,7 @@ jobs:
           docker tag bazel/images/pylint:image ${{ steps.image.outputs.image }}:edge
 
       - name: Push to GitHub Packages
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: |
           echo ${{ secrets.GHCR_PAT  }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
           docker push ${{ steps.image.outputs.fullname}}
