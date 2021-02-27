@@ -3,6 +3,7 @@ Definitions for the image to ensure consistency.
 """
 
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 CARDBOARDCI_UID = "180000"
 CARDBOARDCI_GID = "180000"
@@ -39,4 +40,15 @@ def cardboardci_image(name, base, labels, tars = []):
             "/workspace",
         ],
         workdir = "/workspace",
+    )
+
+def cardboardci_test(name, image, configs = []):
+    container_test(
+        name = name,
+        configs = [
+            "//tests:limited_user.yaml",
+            "//tests:metadata.yaml",
+            "//tests:essentials.yaml",
+        ] + configs,
+        image = image,
     )
