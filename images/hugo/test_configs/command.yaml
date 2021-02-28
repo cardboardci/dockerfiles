@@ -4,4 +4,4 @@ commandTests:
     - name: "hugo_test"
       command: "hugo"
       args: ["version"]
-      expectedOutput: ["version \\d+\\..*"]
+      expectedOutput: ["Hugo Static Site Generator v\\d+\\..*"]
