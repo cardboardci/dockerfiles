@@ -5,6 +5,10 @@ commandTests:
       command: "jq"
       args: ["--version"]
       expectedOutput: ["jq-\\d+\\..*"]
+    - name: "grep"
+      command: "grep"
+      args: ["--version"]
+      expectedOutput: ["grep \\(GNU grep\\) \\d+\\..*"]
     - name: "bash"
       command: "bash"
       args: ["--version"]
