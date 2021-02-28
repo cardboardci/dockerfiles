@@ -22,8 +22,9 @@ container_image(
 container_run_and_extract(
     name = "website",
     commands = [
-        "mkdocs build --config-file /mkdocs.yml --site-dir /public",
-        "tar -cvf /website.tar /public/.",
+        "mkdocs build --config-file /mkdocs.yml --site-dir /dist",
+        "cp -R /public/. /dist/",
+        "tar -cvf /website.tar /dist/.",
     ],
     docker_run_flags = [
         "-u",
