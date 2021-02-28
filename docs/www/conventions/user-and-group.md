@@ -2,7 +2,7 @@
 
 Docker images often are configured to run in the `root` user domain of an image. This kind of elevated access for processes inside the container is not necessary. The common scenario for these images is to run a command working off the contents of a mounted volume.
 
-Continuous integration services will often make use of the `--user` flag to use a reduced permission level for clusters. When running locally, the `--user` flag may not always be specified. In these cases, the cardboardci user acts as a user with minimum permissions to work with the `/workspace` directory.
+Continuous integration services will often make use of the `--user` flag to use a reduced permission level for execution. When running locally, the `--user` flag may not always be specified. In these cases, the cardboardci user acts as a user with minimum permissions to work with the `/workspace` directory.
 
 ## Verify the user
 

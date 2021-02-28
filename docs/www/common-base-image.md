@@ -2,7 +2,7 @@
 
 cardboardci/base is an Ubuntu Docker image created with reproducibility in mind. This image serves as a base image for other CardboardCI images, supplying common dependencies and expected standards. This helps ensure that all images behave similar when chained together or executed in sequence.
 
-Any image developed should use this as a base image to avoid unique image configurations that do not work as expected.
+Any image developed should use this as a base image to avoid unique image configurations.
 
 ## Getting Started
 

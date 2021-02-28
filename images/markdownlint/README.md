@@ -52,7 +52,7 @@ docker run -it ghcr.io/cardboardci/markdownlint:edge /bin/bash
 To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/markdownlint:edge aws --version
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/markdownlint:edge markdownlint --version
 ```
 
 ## Fundamentals

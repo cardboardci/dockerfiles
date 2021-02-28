@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+    - name: "shellcheck_test"
+      command: "shellcheck"
+      args: ["--version"]
+      expectedOutput: ["((.|\n)*)version: \\d+\\..*"]

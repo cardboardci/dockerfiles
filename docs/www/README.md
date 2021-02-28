@@ -1,6 +1,6 @@
 # Introduction
 
-CardboardCI is a collection of several Docker images intended to be used for continuous integration. All of the images are pre-built and made available through the GitHub Container Registry, but built with the intentions to be usable to with any registry. These images are intended to upgrade automatically and enforce a series of constraints to ensure that they all behave similarly.
+CardboardCI is a collection of Docker images intended to be used for continuous integration. All of the images are pre-built and made available through the GitHub Container Registry. These images are intended to upgrade automatically and enforce a series of constraints to ensure consistent behaviour.
 
 ## Intentions
 

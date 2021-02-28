@@ -24,7 +24,7 @@ jobs:
             - name: My first step
               uses: docker://ghcr.io/cardboardci/dbxcli:edge
               with:
-                  args: "dbxcli --version"
+                  args: "dbxcli"
 ```
 
 ### Pull latest image
@@ -48,7 +48,7 @@ docker run -it ghcr.io/cardboardci/dbxcli:edge /bin/bash
 To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/dbxcli:edge aws --version
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/dbxcli:edge dbxcli
 ```
 
 ## Fundamentals

@@ -31,7 +31,7 @@ deb_download_and_install(
 
 cardboardci_image(
     name = "image",
-    base = ":apt_get_installed.tar",
+    base = ":bin_install_commit.tar",
     labels = {
         "org.opencontainers.image.title": "hugo",
         "org.opencontainers.image.summary": "Hugo static site generator",

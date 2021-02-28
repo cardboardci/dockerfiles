@@ -18,7 +18,7 @@ jobs:
             - name: My first step
               uses: docker://ghcr.io/cardboardci/psscriptanalyzer:edge
               with:
-                  args: "PSFormatter"
+                  args: "PSFormatter ..."
 ```
 
 ### Pull latest image
@@ -42,7 +42,7 @@ docker run -it ghcr.io/cardboardci/psscriptanalyzer:edge /bin/bash
 To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/psscriptanalyzer:edge aws --version
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/psscriptanalyzer:edge PSFormatter -ScriptDefinition "\"     Write-Output 'hello world'\""
 ```
 
 ## Fundamentals

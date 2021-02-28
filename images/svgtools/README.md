@@ -18,7 +18,7 @@ jobs:
             - name: My first step
               uses: docker://ghcr.io/cardboardci/svgtools:edge
               with:
-                  args: "rsvg --version"
+                  args: "rsvg-convert --version"
 ```
 
 ### Pull latest image
@@ -42,7 +42,7 @@ docker run -it ghcr.io/cardboardci/svgtools:edge /bin/bash
 To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/svgtools:edge aws --version
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/svgtools:edge rsvg-convert --version
 ```
 
 ## Fundamentals

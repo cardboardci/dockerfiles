@@ -47,7 +47,7 @@ docker run -it ghcr.io/cardboardci/gitlab:edge /bin/bash
 To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/gitlab:edge aws --version
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/gitlab:edge lab --version
 ```
 
 ## Fundamentals
