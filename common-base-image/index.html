@@ -273,8 +273,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../usages/" class="md-nav__link">
-        Using the containers
+      <a href="../using-the-images/" class="md-nav__link">
+        Using the images
       </a>
     </li>
   
@@ -793,7 +793,7 @@
                 
                 <h1 id="common-base-image">Common Base Image</h1>
 <p>cardboardci/base is an Ubuntu Docker image created with reproducibility in mind. This image serves as a base image for other CardboardCI images, supplying common dependencies and expected standards. This helps ensure that all images behave similar when chained together or executed in sequence.</p>
-<p>Any image developed should use this as a base image to avoid unique image configurations that do not work as expected.</p>
+<p>Any image developed should use this as a base image to avoid unique image configurations.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>This image is intended to be inherited by other images, either with a Dockerfile or through Bazel builds. The following is a Dockerfile example:</p>
 <pre><code class="language-dockerfile">FROM ghcr.io/cardboardci/base:20210211

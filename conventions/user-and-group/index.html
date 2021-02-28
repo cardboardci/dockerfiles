@@ -221,8 +221,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../usages/" class="md-nav__link">
-        Using the containers
+      <a href="../../using-the-images/" class="md-nav__link">
+        Using the images
       </a>
     </li>
   
@@ -795,7 +795,7 @@
                 
                 <h1 id="understanding-the-user-and-group">Understanding the User and Group</h1>
 <p>Docker images often are configured to run in the <code>root</code> user domain of an image. This kind of elevated access for processes inside the container is not necessary. The common scenario for these images is to run a command working off the contents of a mounted volume.</p>
-<p>Continuous integration services will often make use of the <code>--user</code> flag to use a reduced permission level for clusters. When running locally, the <code>--user</code> flag may not always be specified. In these cases, the cardboardci user acts as a user with minimum permissions to work with the <code>/workspace</code> directory.</p>
+<p>Continuous integration services will often make use of the <code>--user</code> flag to use a reduced permission level for execution. When running locally, the <code>--user</code> flag may not always be specified. In these cases, the cardboardci user acts as a user with minimum permissions to work with the <code>/workspace</code> directory.</p>
 <h2 id="verify-the-user">Verify the user</h2>
 <p>You can see the properties of the default user by running <code>id</code> on the image:</p>
 <pre><code class="language-bash">docker run cardboardi/&lt;image&gt;:edge id

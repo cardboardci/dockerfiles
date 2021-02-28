@@ -266,8 +266,8 @@
   
   
     <li class="md-nav__item">
-      <a href="usages/" class="md-nav__link">
-        Using the containers
+      <a href="using-the-images/" class="md-nav__link">
+        Using the images
       </a>
     </li>
   
@@ -778,7 +778,7 @@
                 
                 
                 <h1 id="introduction">Introduction</h1>
-<p>CardboardCI is a collection of several Docker images intended to be used for continuous integration. All of the images are pre-built and made available through the GitHub Container Registry, but built with the intentions to be usable to with any registry. These images are intended to upgrade automatically and enforce a series of constraints to ensure that they all behave similarly.</p>
+<p>CardboardCI is a collection of Docker images intended to be used for continuous integration. All of the images are pre-built and made available through the GitHub Container Registry. These images are intended to upgrade automatically and enforce a series of constraints to ensure consistent behaviour.</p>
 <h2 id="intentions">Intentions</h2>
 <p>The images in this organization were built with efficiency, caching and determinism in mind. They are built using Bazel, with a base image responsible for ensuring core depdendencies are included in all images. The images are intended to be upgraded automatically when dependency upgrades are detected. These will raise a pull request, and automatically merge if the pull request successfully completes the checks.</p>
 <h2 id="images">Images</h2>
