@@ -2,6 +2,6 @@ schemaVersion: 2.0.0
 
 commandTests:
     - name: "rsvg_test"
-      command: "rsvg"
+      command: "rsvg-convert"
       args: ["--version"]
-      expectedOutput: ["rsvg version \\d+\\..*"]
+      expectedOutput: ["rsvg-convert version \\d+\\..*"]

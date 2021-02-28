@@ -4,4 +4,4 @@ commandTests:
     - name: "surge_test"
       command: "surge"
       args: ["--version"]
-      expectedOutput: ["version \\d+\\..*"]
+      expectedOutput: ["v\\d+\\..*"]

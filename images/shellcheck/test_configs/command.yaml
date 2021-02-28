@@ -4,4 +4,5 @@ commandTests:
     - name: "shellcheck_test"
       command: "shellcheck"
       args: ["--version"]
-      expectedOutput: ["version \\d+\\..*"]
+      expectedOutput:
+          ["ShellCheck - shell script analysis tool\nversion:  \\d+\\..*"]

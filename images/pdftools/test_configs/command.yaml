@@ -1,7 +1,16 @@
 schemaVersion: 2.0.0
 
 commandTests:
-    - name: "pdftools_test"
-      command: "pdftools"
-      args: ["--version"]
-      expectedOutput: ["pdftools version \\d+\\..*"]
+    - name: "pdfdetach_test"
+      command: "pdfdetach"
+      args: ["-v"]
+      exitCode: 99
+      expectedError: ["pdfdetach version \\d+\\..*"]
+    - name: "pdfinfo_test"
+      command: "pdfinfo"
+      args: ["-v"]
+      expectedError: ["pdfinfo version \\d+\\..*"]
+    - name: "pdftohtml_test"
+      command: "pdftohtml"
+      args: ["-v"]
+      expectedError: ["pdftohtml version \\d+\\..*"]

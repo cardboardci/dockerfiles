@@ -4,4 +4,4 @@ commandTests:
     - name: "markdownlint_test"
       command: "markdownlint"
       args: ["--version"]
-      expectedOutput: ["version \\d+\\..*"]
+      expectedOutput: ["\\d+\\..*"]

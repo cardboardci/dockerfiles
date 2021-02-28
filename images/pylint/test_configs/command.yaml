@@ -4,4 +4,4 @@ commandTests:
     - name: "pylint_test"
       command: "pylint"
       args: ["--version"]
-      expectedOutput: ["pylint version \\d+\\..*"]
+      expectedOutput: ["pylint \\d+\\..*"]

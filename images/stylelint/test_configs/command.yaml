@@ -4,4 +4,4 @@ commandTests:
     - name: "stylelint_test"
       command: "stylelint"
       args: ["--version"]
-      expectedOutput: ["version \\d+\\..*"]
+      expectedOutput: ["\\d+\\..*"]

@@ -4,4 +4,4 @@ commandTests:
     - name: "hadolint_test"
       command: "hadolint"
       args: ["--version"]
-      expectedOutput: ["hadolint \\d+\\..*"]
+      expectedOutput: ["Haskell Dockerfile Linter v\\d+\\..*"]

@@ -4,4 +4,4 @@ commandTests:
     - name: "bats_test"
       command: "bats"
       args: ["--version"]
-      expectedOutput: ["bats version \\d+\\..*"]
+      expectedOutput: ["Bats \\d+\\..*"]
