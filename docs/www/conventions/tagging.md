@@ -22,7 +22,7 @@ jobs:
         steps:
             - name: My first step
               # 20210227
-              uses: docker://ghcr.io/cardboardci/basE@sha256:e99aef505e9e3a5026a9a2873f2a5e3b029adb5c8f70327672f3a9a7aef2c73a
+              uses: docker://ghcr.io/cardboardci/base@sha256:e99aef505e9e3a5026a9a2873f2a5e3b029adb5c8f70327672f3a9a7aef2c73a
               with:
                   args: "echo hello"
 ```

@@ -1,6 +1,4 @@
-# Using the containers
-
-## Intro
+# Using the images
 
 Continuous Integration services typically offer the ability to run commands in docker containers, with the exact image specified through YAML configurations. You can see this with services like GitHub Actions, CircleCI, or GitLabCI.
 

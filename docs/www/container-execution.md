@@ -20,7 +20,7 @@ All images have `bash` installed.
 
 ## Checking the build version
 
-If you are experiencing issues with a container, it can be useful to determine the image digest. As each image is deterministic, the digest should map to specific versions.
+If you are experiencing issues with a container, it can be useful to determine the image digest. As each image is deterministic, the installed versions will be pinned.
 
 To obtain the build version for the container:
 
