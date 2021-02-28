@@ -1,18 +1,17 @@
-# Project information
-site_name: 'CardboardCI'
-site_description: 'Temporary website for CardboardCI.'
-site_author: 'Jonathan Beverly'
-site_dir: public
+site_name: "CardboardCI"
+site_description: "Website of CardboardCI"
+site_author: "Jonathan Beverly"
+site_dir: dist
 docs_dir: www
 
 theme:
-  name: 'material'
+  name: "material"
   logo: assets/icon.png
   favicon: assets/favicon.png
-  language: 'en'
+  language: "en"
   palette:
-    primary: 'blue'
-    accent: 'white'
+    primary: "blue"
+    accent: "white"
 
 plugins:
   - search:
@@ -23,5 +22,5 @@ extra:
     lang:
       - en
   social:
-    - icon: 'fontawesome/brands/github'
-      link: 'https://github.com/cardboardci'
+    - icon: "fontawesome/brands/github"
+      link: "https://github.com/cardboardci"
