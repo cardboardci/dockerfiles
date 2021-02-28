@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+    - name: "markdownlint_test"
+      command: "markdownlint"
+      args: ["--version"]
+      expectedOutput: ["version \\d+\\..*"]

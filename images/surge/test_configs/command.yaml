@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+    - name: "surge_test"
+      command: "surge"
+      args: ["--version"]
+      expectedOutput: ["version \\d+\\..*"]

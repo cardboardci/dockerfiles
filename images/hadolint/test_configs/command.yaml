@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+    - name: "hadolint_test"
+      command: "hadolint"
+      args: ["--version"]
+      expectedOutput: ["hadolint \\d+\\..*"]

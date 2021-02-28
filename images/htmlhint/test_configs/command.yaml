@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+    - name: "htmlhint_test"
+      command: "htmlhint"
+      args: ["--version"]
+      expectedOutput: ["\\d+\\..*"]

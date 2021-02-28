@@ -42,7 +42,7 @@ docker run -it ghcr.io/cardboardci/luacheck:edge /bin/bash
 To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/luacheck:edge aws --version
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/luacheck:edge luacheck --version
 ```
 
 ## Fundamentals

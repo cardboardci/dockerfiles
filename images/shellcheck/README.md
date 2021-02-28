@@ -48,7 +48,7 @@ docker run -it ghcr.io/cardboardci/shellcheck:edge /bin/bash
 To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/shellcheck:edge aws --version
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/shellcheck:edge shellcheck --version
 ```
 
 ## Fundamentals

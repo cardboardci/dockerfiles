@@ -18,7 +18,7 @@ jobs:
             - name: My first step
               uses: docker://ghcr.io/cardboardci/tflint:edge
               with:
-                  args: "awscli --version"
+                  args: "tflint --version"
 ```
 
 ### Pull latest image
@@ -42,7 +42,7 @@ docker run -it ghcr.io/cardboardci/tflint:edge /bin/bash
 To run a single command from the context of the docker image, run the following:
 
 ```bash
-docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/tflint:edge aws --version
+docker run -it -v `pwd`:/workspace ghcr.io/cardboardci/tflint:edge tflint --version
 ```
 
 ## Fundamentals

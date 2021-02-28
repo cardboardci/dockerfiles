@@ -1,1 +1,7 @@
 schemaVersion: 2.0.0
+
+commandTests:
+    - name: "stylelint_test"
+      command: "stylelint"
+      args: ["--version"]
+      expectedOutput: ["version \\d+\\..*"]
