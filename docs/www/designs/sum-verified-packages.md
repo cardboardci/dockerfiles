@@ -6,7 +6,7 @@ Dependencies that are installed onto images built by Bazel are not sum verified.
 
 ## Proposal
 
-This proposes the itnroduction of rules based on each type of package, that would declare the necessary parameter to download the package from its authoritative source. Each rule would be of the form `container_*_package`, that would at minimum ensure a `name`, `version` and `sum`. This rule would not be responsible for downloading the package itself, as to make it easier to vendor the dependencies into internal data stores. The responsibility of downloading and installing packages would be handled by other macros that would handle downloading and sum verification.
+This proposes the introduction of rules based on each type of package, that would declare the necessary parameter to download the package from its authoritative source. Each rule would be of the form `container_*_package`, that would at minimum ensure a `name`, `version` and `sum`. This rule would not be responsible for downloading the package itself, as to make it easier to vendor the dependencies into internal data stores. The responsibility of downloading and installing packages would be handled by other macros that would handle downloading and sum verification.
 
 An example of the rule can be seen for `lua` as such:
 
