@@ -325,6 +325,18 @@
             
   
   
+  
+    <li class="md-nav__item">
+      <a href="../images-built-by-bazel/" class="md-nav__link">
+        Image built by Bazel
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
     
   
   
@@ -335,9 +347,65 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Sum Verified Rules Investigation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Sum Verified Rules Investigation
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposal" class="md-nav__link">
+    Proposal
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    Verification
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-example" class="md-nav__link">
+    Full Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -710,6 +778,48 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposal" class="md-nav__link">
+    Proposal
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    Verification
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-example" class="md-nav__link">
+    Full Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -722,10 +832,59 @@
                 
                 
                 <h1 id="sum-verified-rules-investigation">Sum Verified Rules Investigation</h1>
-<p>Below is an outline of the design idea for checking the integrity of all packages installed into the docker image, to ensure that the installed package is as expected. This is a design idea and not implemented into the code at this time.</p>
+<h2 id="abstract">Abstract</h2>
+<p>Dependencies that are installed onto images built by Bazel are not sum verified. This design proposes a mechanism for in-bazel sum verification of dependencies based on the packages downloaded from the associated package managers.</p>
+<h2 id="proposal">Proposal</h2>
+<p>This proposes the introduction of rules based on each type of package, that would declare the necessary parameter to download the package from its authoritative source. Each rule would be of the form <code>container_*_package</code>, that would at minimum ensure a <code>name</code>, <code>version</code> and <code>sum</code>. This rule would not be responsible for downloading the package itself, as to make it easier to vendor the dependencies into internal data stores. The responsibility of downloading and installing packages would be handled by other macros that would handle downloading and sum verification.</p>
+<p>An example of the rule can be seen for <code>lua</code> as such:</p>
 <pre><code class="language-starlark"># Define a package file that is used for download/integrity checks
-container_luarocks_package(
-    name = &quot;luarocks_luacheck&quot;,
+container_lua_package(
+    name = &quot;lua_luacheck&quot;,
+    package = &quot;luacheck&quot;,
+    version = &quot;1.23.0&quot;,
+    sum = &quot;4521794f0fba2e20f3bf15846ab5e01d5332e587e9ce81629c7f96c793bb7036&quot;,
+)
+</code></pre>
+<p>The <code>container_*_package</code> rule would yield an output file that is used by the <code>container_*_download</code> macro for downloading the packages from an authoritative source. This file is intended to be re-usable, so that it can be used to retrieve the dependencies internal data stores instead of the authoritative source.</p>
+<p>An example of the macro can be seen for <code>lua</code> as such:</p>
+<pre><code class="language-starlark"># This outputs a tar, csv and build script
+container_lua_download(
+    name = &quot;lua_download&quot;,
+    image_tar = &quot;//images/downloader:image.tar&quot;,
+    packages = [
+        &quot;:lua_luacheck&quot;,
+        # other dependencies can be added here
+    ]
+)
+</code></pre>
+<p>When the download is completed, a tar file is available with all of the dependencies downloaded by the macro. Each dependency has its sum generated that placed into a package lock csv file. This CSV file is supplied to an internal verification rule to ensure the dependencies are as expected. The CSV file would be of the format: <code>package,file,version,sum</code>. This file would be supplied to the installation rule.</p>
+<h3 id="verification">Verification</h3>
+<p>Verification of the downloaded dependencies would be handled by <code>container_pkg_check</code>. This rule would be used internally by the <code>container_*_download</code> macros to assist with caching the downloaded files. Multiple package lock csv files can be provided to the rule, which allow checking sums for</p>
+<p>An example of the macro can be seen for <code>lua</code> as such:</p>
+<pre><code class="language-starlark"># This outputs a tar, csv and build script
+container_pkg_check(
+    name = &quot;image_integrity&quot;,
+    tar = [
+        &quot;:lua_download.csv&quot;,
+        &quot;:npm_download.csv&quot;,
+        # A type of install that requires a custom `image_tar`
+        &quot;:npm_special_download.csv&quot;,
+        # other package dependencies can be added here
+    ],
+    packages = [
+        &quot;:lua_luacheck&quot;,
+        &quot;:npm_bazel&quot;,
+        &quot;:npm_specialdependency&quot;,
+        # other dependencies can be added here
+    ]
+)
+</code></pre>
+<p>Splitting verification into its own rule enables for it to be leveraged by custom/freeform mechanisms of retrieving dependencies outside of the common package managers. The retrieved files can be checked as long as the package lock csv file format is met.</p>
+<h2 id="full-example">Full Example</h2>
+<p>Below is an outline of the design for checking the integrity of all packages installed into the docker image, to ensure that the installed package is as expected. This is a design idea and not implemented into the code at this time.</p>
+<pre><code class="language-starlark"># Define a package file that is used for download/integrity checks
+container_lua_package(
+    name = &quot;lua_luacheck&quot;,
     package = &quot;luacheck&quot;,
     version = &quot;1.23.0&quot;,
     sum = &quot;4521794f0fba2e20f3bf15846ab5e01d5332e587e9ce81629c7f96c793bb7036&quot;,
@@ -733,15 +892,15 @@ container_luarocks_package(
 
 # Download the luarock packages, with the necessary data to perform
 # integrity checks on the data. The output csv can be used with the
-# json sums to ensure integrity of the downloaded files. Failing on 
+# json sums to ensure integrity of the downloaded files. Failing on
 # an integrity check will just be a pain point
 #
 # This outputs a tar, csv and build script
-container_luarocks_download(
-    name = &quot;luarocks_download&quot;,
+container_lua_download(
+    name = &quot;lua_download&quot;,
     image_tar = &quot;//images/downloader:image.tar&quot;,
     packages = [
-        &quot;:luarocks_luacheck&quot;,
+        &quot;:lua_luacheck&quot;,
         # other dependencies can be added here
     ]
 )
@@ -751,22 +910,22 @@ container_luarocks_download(
 container_package_integrity(
     name = &quot;integrity&quot;,
     packages = [
-        &quot;:luarocks_luacheck&quot;,
+        &quot;:lua_luacheck&quot;,
         # ... and other json files
     ],
     results = [
-        &quot;:luarocks_download.csv&quot;,
+        &quot;:lua_download.csv&quot;,
     ]
 )
 
 # The tar file is then installed using the existing package manager
-container_luarocks_install(
-    name = &quot;luarocks_installed&quot;,
+container_lua_install(
+    name = &quot;lua_installed&quot;,
     image_tar = &quot;//images/base:image.tar&quot;,
-    installables_tar = &quot;:luarocks_download.tar&quot;,
+    installables_tar = &quot;:lua_download.tar&quot;,
     installation_pre_commands = &quot;&quot;,
     installation_post_commands = &quot;&quot;,
-    output_image_name = &quot;luarocks_installed&quot;,
+    output_image_name = &quot;lua_installed&quot;,
 )
 </code></pre>
                 
@@ -787,7 +946,7 @@ container_luarocks_install(
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../conventions/user-and-group/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../images-built-by-bazel/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -796,7 +955,7 @@ container_luarocks_install(
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Understanding the User and Group
+                Image built by Bazel
               </div>
             </div>
           </a>
