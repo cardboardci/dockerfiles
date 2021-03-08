@@ -63,6 +63,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
         with:
           username: jrbeverly
-          title: "Bump base image to ${{ steps.tag.outputs.image-tag }} tag"
+          title: "deps(ubuntu): Bump base image to ${{ steps.tag.outputs.image-tag }} tag"
           body: "Bumps the base image to `${{ steps.tag.outputs.image-tag }}`.\n\nReplaces the old ubuntu image digest with the latest digest for tag `${{ steps.tag.outputs.image-tag }}`.\n - source-digest: `${{ steps.source.outputs.image-digest }}`\n - tag-digest: `${{ steps.digest.outputs.image-digest }}`"
           options: "--label dependencies"
