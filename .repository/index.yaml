@@ -1,0 +1,16 @@
+slug: dockerfiles
+description: Dockerfiles for CardboardCI images
+project: cardboardci
+namespace:
+status: archived
+icon: icon.svg
+license:
+  type: MIT
+  content: Jonathan Beverly <jrbeverly>
+  year: 2020
+topics: |-
+  [
+    "docker",
+    "dockerfile",
+    "cardboardci-images"
+  ]
