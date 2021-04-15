@@ -30,6 +30,5 @@
     { "name": "duplicate", "color": "#7F8C8D", "description": "No action needed or possible. The issue is either fixed, or addressed better by other issues." }, 
     { "name": "on-hold", "color": "#7F8C8D", "description": "No action needed or possible. The issue is to be addressed at a later date." }, 
     { "name": "invalid", "color": "#7F8C8D", "description": "No action needed or possible. The issue is deemed out of scope." }, 
-    { "name": "wont-fix", "color": "#7F8C8D", "description": "No action needed or possible. The issue is out of product scope or deemed unnecessary." },
-    { "name": "dependencies", "color": "#2D4E80", "description": "Upgrade of dependency. Typically handled by automated tooling." }
+    { "name": "wont-fix", "color": "#7F8C8D", "description": "No action needed or possible. The issue is out of product scope or deemed unnecessary." }
 ]
