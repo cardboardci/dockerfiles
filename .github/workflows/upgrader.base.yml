@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+          token: ${{ secrets.GHCR_PAT }}
       - name: Install buildozer
         run: |
           curl -sSL https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildozer > buildozer
@@ -47,7 +47,7 @@ jobs:
           username: jrbeverly
           email: jonathan@jrbeverly.me
           branch: "base-image-to-${{ steps.tag.outputs.image-tag }}"
-          token: ${{ secrets.CARDBOARDCI_PAT_TOKEN }}
+          token: ${{ secrets.GHCR_PAT }}
       - name: Buildozer to edit digest
         if: ${{ steps.digest.outputs.image-digest != steps.source.outputs.image-digest }}
         run: |
