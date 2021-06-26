@@ -37,7 +37,7 @@ rules_pkg_dependencies()
 
 container_pull(
     name = "ubuntu",
-    digest = "sha256:86ac87f73641c920fb42cc9612d4fb57b5626b56ea2a19b894d0673fd5b4f2e9",
+    digest = "sha256:376209074d481dca0a9cf4282710cd30a9e7ff402dea8261acdaaf57a18971dd",
     registry = "index.docker.io",
     repository = "library/ubuntu",
 )
